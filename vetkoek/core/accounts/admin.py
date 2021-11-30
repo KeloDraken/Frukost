@@ -4,11 +4,11 @@ from core.accounts.models import User
 
 
 class UserAdmin(admin.ModelAdmin):
-    """
-    User model admin manager
-    """
-
-    pass
+    search_fields = ("email",)
+    list_display = (
+        "email",
+        "date_joined",
+    )
 
 
 admin.site.register(User, UserAdmin)

@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en-ZA">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" value="Samkelo Kgosiemang-Drakensberg">
+    <link href="{% static 'css/tailwind.min.css' %}" rel="stylesheet">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://www.foxstraat.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Foxstraat">
+    <meta property="og:image" content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="foxstraat.com">
+    <meta property="twitter:url" content="https://www.foxstraat.com/">
+    <meta name="twitter:title" content="Foxstraat">
+    <meta name="twitter:image" content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg">
+
+    <!-- Google fonts begin -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif+Caption&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    {% block styles %}{% endblock %}
+    <style>
+        * {
+            font-family: 'PT Serif Caption', serif;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'components/navbar.html' %}
+    {% block body %}{% endblock %}
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>
