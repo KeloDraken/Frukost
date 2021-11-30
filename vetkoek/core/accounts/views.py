@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.core.paginator import Paginator
 from django.http.request import HttpRequest
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 
 from core.forms import FormWithCaptcha
@@ -12,7 +13,7 @@ from core.accounts.forms import UserLoginForm, UserRegistrationForm
 from core.accounts.models import User
 
 
-def explore_users(request: HttpRequest):
+def explore_users(request: HttpRequest) -> HttpResponse:
     user_objects = User.objects.all().order_by("-datetime_joined")
     paginator = Paginator(user_objects, 20)
 
@@ -27,7 +28,7 @@ def explore_users(request: HttpRequest):
     return render(request, "public/frontpage/explore_users.html", context)
 
 
-def check_captcha(request: HttpRequest):
+def check_captcha(request: HttpRequest) -> bool:
     """
     Checks if request object has valid captcha
     """
@@ -37,7 +38,7 @@ def check_captcha(request: HttpRequest):
     return False
 
 
-def login_user_on_register(request: HttpRequest):
+def login_user_on_register(request: HttpRequest) -> HttpResponseRedirect:
     """
     Logs user in on successful `User` instance creation
     """
@@ -54,7 +55,7 @@ def login_user_on_register(request: HttpRequest):
         messages.error(request, "Something went wrong")
 
 
-def user_registration(request: HttpRequest):
+def user_registration(request: HttpRequest) -> HttpResponse:
     if request.user.is_authenticated:
         return redirect("accounts:user-dashboard")
     else:
@@ -87,40 +88,40 @@ user_login = UserLoginView.as_view()
 
 
 @login_required
-def user_logout(request: HttpRequest):
+def user_logout(request: HttpRequest) -> HttpResponseRedirect:
     logout(request)
     return redirect("accounts:user-login")
 
 
-def change_web_url(user: User, website: str):
+def change_web_url(user: User, website: str) -> None:
     if not len(website) <= 0 and not website == None:
         user.website = website
     else:
         user.website = None
 
 
-def change_twitter_handle(user: User, twitter: str):
+def change_twitter_handle(user: User, twitter: str) -> None:
     if not len(twitter) <= 0 and not twitter == None:
         user.twitter = twitter
     else:
         user.twitter = None
 
 
-def change_instagram_handle(user: User, instagram: str):
+def change_instagram_handle(user: User, instagram: str) -> None:
     if not len(instagram) <= 0 and not instagram == None:
         user.instagram = instagram
     else:
         user.instagram = None
 
 
-def change_display_name(user: User, display_name: str):
+def change_display_name(user: User, display_name: str) -> None:
     if not len(display_name) <= 0 and not display_name == None:
         user.display_name = display_name
     else:
         pass
 
 
-def change_bio(request: HttpRequest, user: User, bio: str):
+def change_bio(request: HttpRequest, user: User, bio: str) -> None:
     if len(bio) > 220:
         messages.error(
             request, "Your bio is too long. Please keep it at 220 characters of less"
@@ -129,12 +130,12 @@ def change_bio(request: HttpRequest, user: User, bio: str):
         user.bio = bio
 
 
-def update_profile_pic(request: HttpRequest, user: User):
+def update_profile_pic(request: HttpRequest, user: User) -> None:
     if request.FILES.get("profile_pic"):
         user.profile_pic = request.FILES.get("profile_pic")
 
 
-def save_profile(request: HttpRequest):
+def save_profile(request: HttpRequest) -> None:
     """
     Continues to save other fields in Edit Profile
     """
@@ -163,7 +164,7 @@ def save_profile(request: HttpRequest):
 
 
 @login_required
-def edit_user_profile(request: HttpRequest):
+def edit_user_profile(request: HttpRequest) -> HttpRequest:
     if request.method == "POST":
         return save_profile(request)
 
@@ -174,7 +175,7 @@ def edit_user_profile(request: HttpRequest):
 
 
 @login_required
-def delete_account(request: HttpRequest):
+def delete_account(request: HttpRequest) -> HttpResponseRedirect:
     if request.user.is_superuser:
         messages.error(
             request, "Admins need to use the admin site to delete their accounts"
