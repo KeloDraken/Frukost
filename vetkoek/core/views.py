@@ -1,11 +1,12 @@
 from django.contrib import messages
+from django.http.request import HttpRequest
 from django.shortcuts import redirect, render
 
 from utils.helpers import object_id_generator
 from core.models import Feedback, News, Privacy, Rules, Terms
 
 
-def add_feedback(request):
+def add_feedback(request: HttpRequest):
     if request.method == "POST":
         feedback = request.POST.get("feedback")
 
@@ -25,34 +26,34 @@ def add_feedback(request):
             return redirect("about")
 
 
-def index(request):
+def index(request: HttpRequest):
     return render(request, "public/index.html")
 
 
-def news(request):
+def news(request: HttpRequest):
     news_ = News.objects.all().order_by("-datetime_created")
     context = {"heading": "Foxstraat News", "news": news_}
     return render(request, "views/blog/news.html", context)
 
 
-def about(request):
+def about(request: HttpRequest):
     add_feedback(request)
     return render(request, "views/index.html", context={"page": "about"})
 
 
-def terms(request):
+def terms(request: HttpRequest):
     news_ = Terms.objects.all()
     context = {"heading": "Terms of Service", "news": news_}
     return render(request, "views/blog/news.html", context)
 
 
-def privacy(request):
+def privacy(request: HttpRequest):
     news_ = Privacy.objects.all()
     context = {"heading": "Privacy Policy", "news": news_}
     return render(request, "views/blog/news.html", context)
 
 
-def rules(request):
+def rules(request: HttpRequest):
     news_ = Rules.objects.all()
     context = {"heading": "Foxstraat Rules", "news": news_}
     return render(request, "views/blog/news.html", context)

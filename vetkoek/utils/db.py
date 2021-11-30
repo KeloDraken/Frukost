@@ -1,13 +1,14 @@
 from datetime import datetime
 from math import log
 
+from django.db.models import Model
 from django.http import HttpResponseBadRequest
-from django.http.response import HttpResponse
-
-from core.models import ForbiddenWebsites
 
 
 def epoch_seconds(date):
+    """
+    Calculates the time past since unix epoch
+    """
     epoch = datetime(1970, 1, 1)
     min_time = datetime.min.time()
     td = datetime.combine(date, min_time) - epoch
@@ -15,6 +16,9 @@ def epoch_seconds(date):
 
 
 def score(ups, downs):
+    """
+    Sums upvotes and downvotes
+    """
     return ups + downs
 
 
@@ -26,66 +30,65 @@ def hot(ups, downs, date):
     return round(sign * order + seconds / 45000, 7)
 
 
-def check_has_user_voted(model, user, bulletin):
+def check_has_user_voted(model: Model, user, post):
     try:
-        model.objects.get(user=user, bulletin=bulletin)
+        model.objects.get(user=user, post=post)
         return True
-
     except model.DoesNotExist:
         return False
 
 
-def cast_vote(bulletin, vote_value, vote):
+def cast_vote(post, vote_value: int, vote):
     vote.has_voted = True
     # Upvote
     if vote_value == 1:
         vote.value = vote_value
-        bulletin.upvotes = bulletin.upvotes + 1
+        post.upvotes = post.upvotes + 1
 
         # Calculate score
-        age = bulletin.date_created
-        score = hot(ups=bulletin.upvotes, downs=bulletin.downvotes, date=age)
-        bulletin.score = bulletin.score + score
-        bulletin.save()
+        age = post.date_created
+        score = hot(ups=post.upvotes, downs=post.downvotes, date=age)
+        post.score = post.score + score
+        post.save()
         vote.save()
     # Downvote
     elif vote_value == -1:
         vote.value = vote_value
-        bulletin.downvotes = bulletin.downvotes + 1
+        post.downvotes = post.downvotes + 1
 
         # Calculate score
-        age = bulletin.date_created
-        score = hot(ups=bulletin.upvotes, downs=bulletin.downvotes, date=age)
-        bulletin.score = bulletin.score - score
+        age = post.date_created
+        score = hot(ups=post.upvotes, downs=post.downvotes, date=age)
+        post.score = post.score - score
 
-        bulletin.save()
+        post.save()
         vote.save()
     # Cancel vote
     elif vote_value == 0:
         # If user previously downvoted the post
         if vote.value == -1:
             vote.value = 0
-            bulletin.downvotes = bulletin.downvotes - 1
+            post.downvotes = post.downvotes - 1
 
             # Calculate score
-            age = bulletin.date_created
-            score = hot(ups=bulletin.upvotes, downs=bulletin.downvotes, date=age)
-            bulletin.score = bulletin.score - score
+            age = post.date_created
+            score = hot(ups=post.upvotes, downs=post.downvotes, date=age)
+            post.score = post.score - score
 
-            bulletin.save()
+            post.save()
             vote.save()
 
         # If user previously upvoted the post
         elif vote.value == 1:
             vote.value = 0
-            bulletin.upvotes = bulletin.upvotes - 1
+            post.upvotes = post.upvotes - 1
 
             # Calculate score
-            age = bulletin.date_created
-            score = hot(ups=bulletin.upvotes, downs=bulletin.downvotes, date=age)
-            bulletin.score = bulletin.score - score
+            age = post.date_created
+            score = hot(ups=post.upvotes, downs=post.downvotes, date=age)
+            post.score = post.score - score
 
-            bulletin.save()
+            post.save()
             vote.save()
         elif vote.value == 0:
             pass

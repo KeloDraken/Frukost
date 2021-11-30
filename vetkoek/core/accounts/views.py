@@ -4,6 +4,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
 
 from django.core.paginator import Paginator
+from django.http.request import HttpRequest
 from django.shortcuts import redirect, render
 
 from core.forms import FormWithCaptcha
@@ -11,7 +12,7 @@ from core.accounts.forms import UserLoginForm, UserRegistrationForm
 from core.accounts.models import User
 
 
-def explore_users(request):
+def explore_users(request: HttpRequest):
     user_objects = User.objects.all().order_by("-datetime_joined")
     paginator = Paginator(user_objects, 20)
 
@@ -26,7 +27,7 @@ def explore_users(request):
     return render(request, "public/frontpage/explore_users.html", context)
 
 
-def check_captcha(request):
+def check_captcha(request: HttpRequest):
     """
     Checks if request object has valid captcha
     """
@@ -36,7 +37,7 @@ def check_captcha(request):
     return False
 
 
-def login_user_on_register(request):
+def login_user_on_register(request: HttpRequest):
     """
     Logs user in on successful `User` instance creation
     """
@@ -53,7 +54,7 @@ def login_user_on_register(request):
         messages.error(request, "Something went wrong")
 
 
-def user_registration(request):
+def user_registration(request: HttpRequest):
     if request.user.is_authenticated:
         return redirect("accounts:user-dashboard")
     else:
@@ -86,40 +87,40 @@ user_login = UserLoginView.as_view()
 
 
 @login_required
-def user_logout(request):
+def user_logout(request: HttpRequest):
     logout(request)
     return redirect("accounts:user-login")
 
 
-def change_web_url(user, website):
+def change_web_url(user: User, website: str):
     if not len(website) <= 0 and not website == None:
         user.website = website
     else:
         user.website = None
 
 
-def change_twitter_handle(user, twitter):
+def change_twitter_handle(user: User, twitter: str):
     if not len(twitter) <= 0 and not twitter == None:
         user.twitter = twitter
     else:
         user.twitter = None
 
 
-def change_instagram_handle(user, instagram):
+def change_instagram_handle(user: User, instagram: str):
     if not len(instagram) <= 0 and not instagram == None:
         user.instagram = instagram
     else:
         user.instagram = None
 
 
-def change_display_name(user, display_name):
+def change_display_name(user: User, display_name: str):
     if not len(display_name) <= 0 and not display_name == None:
         user.display_name = display_name
     else:
         pass
 
 
-def change_bio(request, user, bio):
+def change_bio(request: HttpRequest, user: User, bio: str):
     if len(bio) > 220:
         messages.error(
             request, "Your bio is too long. Please keep it at 220 characters of less"
@@ -128,12 +129,12 @@ def change_bio(request, user, bio):
         user.bio = bio
 
 
-def update_profile_pic(request, user):
+def update_profile_pic(request: HttpRequest, user: User):
     if request.FILES.get("profile_pic"):
         user.profile_pic = request.FILES.get("profile_pic")
 
 
-def save_profile(request, custom_styles):
+def save_profile(request: HttpRequest):
     """
     Continues to save other fields in Edit Profile
     """
@@ -162,7 +163,7 @@ def save_profile(request, custom_styles):
 
 
 @login_required
-def edit_user_profile(request):
+def edit_user_profile(request: HttpRequest):
     if request.method == "POST":
         return save_profile(request)
 
@@ -173,7 +174,7 @@ def edit_user_profile(request):
 
 
 @login_required
-def delete_account(request):
+def delete_account(request: HttpRequest):
     if request.user.is_superuser:
         messages.error(
             request, "Admins need to use the admin site to delete their accounts"
