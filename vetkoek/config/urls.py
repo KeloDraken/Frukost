@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.urls import path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
 ]
 
 admin.site.site_header = "ChafPozi Admin Site"
