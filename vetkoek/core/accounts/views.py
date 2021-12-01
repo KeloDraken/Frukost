@@ -28,12 +28,12 @@ def explore_users(request: HttpRequest) -> HttpResponse:
     return render(request, "public/frontpage/explore_users.html", context)
 
 
-def check_captcha(request: HttpRequest) -> bool:
+def request_has_valid_captcha(request: HttpRequest) -> bool:
     """
     Checks if request object has valid captcha
     """
     captcha_data = request.POST["g-recaptcha-response"]
-    if not captcha_data == "" and not captcha_data == None:
+    if not captcha_data == "" and captcha_data is not None:
         return True
     return False
 
