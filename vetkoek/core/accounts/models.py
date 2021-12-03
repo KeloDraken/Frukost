@@ -60,7 +60,7 @@ class User(AbstractUser):
         null=True,
         blank=True,
     )
-    bio = models.TextField(null=True, blank=True, max_length=3000)
+    bio = models.TextField(null=True, blank=True, max_length=300)
     subscribers = models.PositiveBigIntegerField(default=1)
     upvotes = models.PositiveBigIntegerField(default=0)
     # User social media links

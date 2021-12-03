@@ -36,9 +36,10 @@ def create_post(request: HttpRequest) -> HttpResponse:
 
             if request.FILES.get("image"):
                 post_form.image = request.FILES.get("image")
-                post_form.is_bulletin = False
             else:
-                pass
+                messages.error(request, "Couldn't create post because no image was found.")
+                return redirect("post:create-post")
+                
             object_id = object_id_generator(11, Post)
             post_form.object_id = object_id
 

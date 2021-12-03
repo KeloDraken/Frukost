@@ -5,10 +5,11 @@ from django.contrib.auth.decorators import login_required
 
 from django.core.paginator import Paginator
 from django.http.request import HttpRequest
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.http.response import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 
 from core.forms import FormWithCaptcha
+from core.posts.models import Post
 from core.accounts.forms import UserLoginForm, UserRegistrationForm
 from core.accounts.models import User
 
@@ -55,7 +56,7 @@ def login_user_on_register(request: HttpRequest) -> HttpResponseRedirect:
         messages.error(request, "Something went wrong")
 
 
-def user_registration(request: HttpRequest) -> HttpResponse:
+def user_registration(request: HttpRequest):
     if request.user.is_authenticated:
         messages.error(
             request, "You can't create a new account while you're signed in."
@@ -166,13 +167,15 @@ def save_profile(request: HttpRequest) -> None:
     messages.success(request, "Profile successfully updated")
 
 
-def get_user_profile(request: HttpRequest, username: str):
+def get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
     try:
         user = User.objects.get(username=username)
     except User.DoesNotExist:
-        return render(request, "public/404.html")
+        raise Http404
 
-    context = {"user": user}
+    posts = Post.objects.filter(user=user)
+
+    context = {"user": user, "posts": posts}
     return render(request, "public/user_profile.html", context)
 
 

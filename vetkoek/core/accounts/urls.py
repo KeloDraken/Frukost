@@ -13,11 +13,11 @@ from core.accounts.views import (
 app_name = "accounts"
 
 urlpatterns = [
-    path("<username>/", get_user_profile, name="get-user-profile"),
     path("register/", user_registration, name="user-register"),
     path("login/", user_login, name="user-login"),
     path("logout/", user_logout, name="user-logout"),
     path("edit/", edit_user_profile, name="edit-user-profile"),
     path("explore/", explore_users, name="explore-users"),
     path("delete/", delete_account, name="delete-user"),
+    path("<username>/", get_user_profile, name="get-user-profile"),
 ]

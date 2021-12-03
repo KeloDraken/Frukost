@@ -8,12 +8,12 @@
     <title>{{user.display_name}}</title>
     <style>
         /*
-            Main Foxstraat Stylesheet
+            Main Foxstraat user profile Stylesheet
             (c) 2020-2021 Samkelo Rocks (Pty) Ltd
         */
 
         :root {
-            font-size: 10px;
+            font-size: .8em;
         }
 
         *,
@@ -26,7 +26,7 @@
             font-family: "Open Sans", Arial, sans-serif;
             min-height: 100vh;
             background-color: #fafafa;
-            color: #262626;
+            color: #000;
             padding-bottom: 3rem;
         }
 
@@ -50,20 +50,7 @@
             cursor: pointer;
         }
 
-        .btn:focus {
-            outline: 0.5rem auto #4d90fe;
-        }
-
-        .visually-hidden {
-            position: absolute !important;
-            height: 1px;
-            width: 1px;
-            overflow: hidden;
-            clip: rect(1px, 1px, 1px, 1px);
-        }
-
         /* Profile Section */
-
         .profile {
             padding: 5rem 0;
         }
@@ -87,24 +74,17 @@
             border-radius: 50%;
         }
 
-        .profile-user-settings,
-        .profile-stats,
-        .profile-bio {
-            float: left;
-            width: calc(66.666% - 2rem);
-        }
-
         .profile-user-settings {
             margin-top: 1.1rem;
         }
 
         .profile-user-name {
             display: inline-block;
-            font-size: 3.2rem;
+            font-size: 2rem;
             font-weight: 300;
         }
 
-        .profile-edit-btn {
+        .profile-btn {
             font-size: 1.4rem;
             line-height: 1.8;
             border: 0.1rem solid #dbdbdb;
@@ -143,7 +123,7 @@
 
         .profile-real-name,
         .profile-stat-count,
-        .profile-edit-btn {
+        .profile-btn {
             font-weight: 600;
         }
 
@@ -163,6 +143,10 @@
             color: #fff;
             cursor: pointer;
         }
+        .gallery-item-link {
+            color: #fff;
+            text-decoration: none;
+        }
 
         .gallery-item:hover .gallery-item-info,
         .gallery-item:focus .gallery-item-info {
@@ -173,7 +157,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: rgba(0, 0, 0, 0.7);
         }
 
         .gallery-item-info {
@@ -254,14 +238,14 @@
                     grid-gap: 1rem;
                 }
 
-                .profile-edit-btn,
+                .profile-btn,
                 .profile-stats,
                 .profile-bio {
                     grid-column: 1 / -1;
                 }
 
                 .profile-user-settings,
-                .profile-edit-btn,
+                .profile-btn,
                 .profile-settings-btn,
                 .profile-bio,
                 .profile-stats {
@@ -273,6 +257,7 @@
 </head>
 
 <body>
+    {% include 'components/logo.html' %}
     <header>
 
         <div class="container">

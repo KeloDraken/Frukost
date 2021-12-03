@@ -1,35 +1,36 @@
 <div class="profile">
 
     <div class="profile-image">
-
         <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces"
-            alt="user profile photo" />
-
+            alt="user profile photo" 
+        />
     </div>
 
     <div class="profile-user-settings">
-
-        <h1 class="profile-user-name">janedoe_</h1>
-
-        <button class="btn profile-edit-btn">Edit Profile</button>
-
-        <button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog"
-                aria-hidden="true"></i></button>
-
+        <h1 class="profile-user-name">{{user.username}}</h1>
+        {% if request.user.username == user.username %}
+        <button class="btn profile-btn">Edit Profile</button>
+        {% endif %}
     </div>
 
+    {% if request.user.username == user.username %}
     <div class="profile-stats">
         <ul>
-            <li><span class="profile-stat-count">164</span> posts</li>
-            <li><span class="profile-stat-count">188</span> friends</li>
+            <li><span class="profile-stat-count">{{user.num_posts}}</span> post{{user.num_posts|pluralize}}</li>
+            <li><span class="profile-stat-count">{{ user.subscribers }}</span> friend{{ user.subscribers|pluralize }}</li>
         </ul>
     </div>
+    {% endif %}
 
     <div class="profile-bio">
         <p>
-            <span class="profile-real-name">Jane Doe</span> <br>
-            Lorem ipsum dolor sit, amet consectetur
-            adipisicing elit 📷✈️🏕️
+            {% if user.display_name %}
+            <span class="profile-real-name">{{user.display_name}}</span> <br>
+            {% endif %}
+
+            {% if user.bio %}
+            {{user.bio}}
+            {% endif %}
         </p>
     </div>
 
