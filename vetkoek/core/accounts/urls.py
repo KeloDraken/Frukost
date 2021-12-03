@@ -3,6 +3,7 @@ from django.urls import path
 from core.accounts.views import (
     delete_account,
     explore_users,
+    get_user_profile,
     user_registration,
     user_login,
     user_logout,
@@ -12,6 +13,7 @@ from core.accounts.views import (
 app_name = "accounts"
 
 urlpatterns = [
+    path("<username>/", get_user_profile, name="get-user-profile"),
     path("register/", user_registration, name="user-register"),
     path("login/", user_login, name="user-login"),
     path("logout/", user_logout, name="user-logout"),

@@ -5,18 +5,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.views.generic.base import TemplateView
-from django.urls import include, path, re_path
+from django.urls import include, path
 
 from core.views import (
     about,
-    handle_404,
     index,
     news,
     privacy,
     rules,
     terms,
 )
-from core.accounts.views import get_user_profile
 
 
 urlpatterns = (
@@ -35,8 +33,6 @@ urlpatterns = (
         path("terms/", terms, name="terms"),
         # Accounts urls
         path("u/", include("core.accounts.urls", namespace="accounts")),
-        path("<username>/", get_user_profile, name="get-user-profile"),
-
         # Post urls
         path("f/", include("core.posts.urls", namespace="posts")),
     ]
