@@ -9,6 +9,9 @@
 Icon
 
 
+media_root/
+static_root/
+
 # Thumbnails
 ._*
 
