@@ -1,41 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %}Foxstraat - Sign in{% endblock %}
+{% block title %}{{post.title}}{% endblock %}
 
 {% block body %}
-<div class="w-full justify-center mx-auto px-44">
-    <h1 class="text-3xl text-center mt-16 mb-0 font-bold">Sign In</h1>
-    <div class="flex justify-center mb-10">
-
-        <form action="{% url 'accounts:user-login' %}" class="mt-7" method="post">
-            {% include 'components/messages.html' %}
-
-
-            {% if form.errors %}
-            <div class="mb-5">
-                <span class="text-red-600">{{form.error_messages.invalid_login}}
-                </span>
-            </div>
-            {% endif %}
-
-            {% csrf_token %}
-            {% for field in form %}
-            <label for="{{field.auto_id}}" class="text-black font-bold capitalize">
-                {{ field.html_name }}
-            </label>
-
-            <p>{{field}}</p>
-            {% endfor %}
-            <div class="flex flex-row">
-                <button class="bg-black text-white text-normal rounded font-extrabold px-5 py-2 mr-1" type="submit">Sign
-                    in</button>
-                <a href="{% url 'accounts:user-register' %}" class="text-black text-normal px-2 py-2 mr-1">or
-                    create
-                    account instead</a>
-            </div>
-            {% include 'components/footer.html' %}
-        </form>
-
+<div class="w-full justify-center mx-auto px-60">
+    <h1 class="text-3xl text-center mt-16 mb-7 font-bold">{{post.title}}</h1>
+    {% if not post.is_bulletin %}
+    <div class="flex justify-center mb-5">
+        <img src="{{ post.image.url }}" class="object-contain" />
     </div>
+    {% endif %}
+    <h1 class="text-normal mb-4">
+        submitted by 
+        <a class="font-bold underline" href="{% url 'get-user-profile' username=post.user.username %}">
+            {{post.user.username}}
+        </a>
+    </h1>
+    <div class="mb-10">
+        <pre class="text-black text-lg font-bold whitespace-pre-wrap">{{ post.caption }}</pre>
+    </div>
+    {% include 'components/footer.html' %}
 </div>
 {% endblock %}
