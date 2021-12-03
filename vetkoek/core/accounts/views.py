@@ -163,6 +163,15 @@ def save_profile(request: HttpRequest) -> None:
     messages.success(request, "Profile successfully updated")
 
 
+def get_user_profile(request: HttpRequest, username: str):
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return render(request, "public/404.html")
+
+    
+
+
 @login_required
 def edit_user_profile(request: HttpRequest) -> HttpRequest:
     if request.method == "POST":
