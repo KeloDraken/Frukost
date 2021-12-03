@@ -7,7 +7,7 @@
     <h1 class="text-3xl text-center mt-10 mb-0 font-bold">Create Post</h1>
     <div class="flex justify-center mb-10">
 
-        <form action="{% url 'posts:create-post' %}" class="mt-7" method="post">
+        <form action="{% url 'posts:create-post' %}" class="mt-7" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {% include 'components/messages.html' %}
 
