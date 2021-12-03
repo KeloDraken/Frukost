@@ -10,8 +10,8 @@ from core.accounts.models import User
 
 
 class UserRegistrationForm(UserCreationForm):
-    email = forms.EmailField(
-        max_length=300,
+    username = forms.CharField(
+        max_length=30,
         label="",
         widget=forms.TextInput(
             attrs={
@@ -51,21 +51,20 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ("email", "password1", "password2")
+        fields = ("username", "password1", "password2")
 
     def save(self, commit=True):
         user = super(UserRegistrationForm, self).save(commit=False)
-        email = self.cleaned_data["email"]
-        user.username = email
-        user.display_name = email
+        username =self.cleaned_data["username"]
+        user.display_name = username
         if commit:
             user.save()
         return user
 
 
 class UserLoginForm(AuthenticationForm):
-    username = forms.EmailField(
-        max_length=300,
+    username = forms.CharField(
+        max_length=30,
         label="",
         widget=forms.TextInput(
             attrs={

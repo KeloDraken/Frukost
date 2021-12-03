@@ -32,19 +32,19 @@ class User(AbstractUser):
     is_verified = models.BooleanField(default=False)
     gelt = models.IntegerField(default=500)
     num_posts = models.PositiveIntegerField(default=0)
-    email = LowercaseCharField(
+    username = LowercaseCharField(
         # Copying this from AbstractUser code
-        _("email address"),
+        _("username"),
         max_length=300,
         unique=True,
         help_text=_(
             "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
         ),
-        validators=[
-            UnicodeEmailValidator(),
-        ],
+        # validators=[
+        #     UnicodeEmailValidator(),
+        # ],
         error_messages={
-            "unique": _("This email address already has an account associated with it"),
+            "unique": _("This username is not available, please try another one."),
         },
     )
     display_name = models.CharField(max_length=100, null=True, blank=True)

@@ -7,6 +7,11 @@ from utils.helpers import object_id_generator
 from core.models import Feedback, News, Privacy, Rules, Terms
 
 
+
+def handle_404(request: HttpRequest) -> HttpResponse:
+    return render(request, "public/404.html")
+
+  
 def add_feedback(request: HttpRequest) -> HttpResponseRedirect:
     if request.method == "POST":
         feedback = request.POST.get("feedback")
