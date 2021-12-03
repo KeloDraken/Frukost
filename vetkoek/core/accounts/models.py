@@ -27,6 +27,10 @@ class LowercaseCharField(models.CharField):
 
 
 class User(AbstractUser):
+    """
+    Users, within the ChafPozi authentication system, are represented by this
+    model.
+    """
     object_id = models.CharField(max_length=20, null=True, blank=True)
     is_fake_profile = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
