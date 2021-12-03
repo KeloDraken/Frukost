@@ -57,7 +57,9 @@ def login_user_on_register(request: HttpRequest) -> HttpResponseRedirect:
 
 def user_registration(request: HttpRequest) -> HttpResponse:
     if request.user.is_authenticated:
-        messages.error(request, "You can't create a new account while you're signed in.")
+        messages.error(
+            request, "You can't create a new account while you're signed in."
+        )
         return redirect("posts:frontpage")
     else:
         captcha = FormWithCaptcha
@@ -169,6 +171,9 @@ def get_user_profile(request: HttpRequest, username: str):
         user = User.objects.get(username=username)
     except User.DoesNotExist:
         return render(request, "public/404.html")
+
+    context = {"user": user}
+    return render(request, "public/user_profile.html", context)
 
 
 @login_required
