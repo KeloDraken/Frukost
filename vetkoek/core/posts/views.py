@@ -10,65 +10,63 @@ from django.http.request import HttpRequest
 from django.http.response import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 
-from utils.helpers import object_id_generator
+from utils.helpers import extract_hashtags, link_tags_to_post, object_id_generator
 
-from core.forms import FormWithCaptcha
+# from core.forms import FormWithCaptcha
 from core.posts.forms import CreatePostForm
 from core.posts.models import Post
-from vetkoek.utils.helpers import extract_hashtags, link_tags_to_post
 
 
 @login_required
 def create_post(request: HttpRequest) -> HttpResponse:
-    captcha = FormWithCaptcha()
+    # captcha = FormWithCaptcha()
 
     if request.method == "POST":
         post_form = CreatePostForm(request.POST)
         # TODO: remove this try/catch in production
-        try:
-            captcha_data = request.POST["g-recaptcha-response"]
-        except:
-            captcha_data = "..."
+        # try:
+        #     captcha_data = request.POST["g-recaptcha-response"]
+        # except:
+        #     captcha_data = "..."
 
-            # if not captcha_data == "" and not captcha_data == None:
-            if post_form.is_valid():
-                post_form = post_form.save(commit=False)
-                post_form.user = request.user
+        # if not captcha_data == "" and not captcha_data == None:
+        if post_form.is_valid():
+            post_form = post_form.save(commit=False)
+            post_form.user = request.user
 
-                if request.FILES.get("image"):
-                    post_form.image = request.FILES.get("image")
-                else:
-                    messages.error(request, "Post wasn't created. No image was found")
-                    return redirect("post:create-post")
-
-                object_id = object_id_generator(11, Post)
-                post_form.object_id = object_id
-
-                caption = request.POST["caption"]
-
-                hashtags = extract_hashtags(text=caption)
-
-                request.user.num_posts = request.user.num_posts + 1
-                request.user.save()
-
-                post_form.save()
-
-                link_tags_to_post(post_id=object_id, tags=hashtags)
-
-                return redirect("post:get-post", post_id=object_id)
-
+            if request.FILES.get("image"):
+                post_form.image = request.FILES.get("image")
             else:
-                messages.error(request, "Post creation failed")
+                messages.error(request, "Post wasn't created. No image was found")
+                return redirect("posts:create-post")
+
+            object_id = object_id_generator(11, Post)
+            post_form.object_id = object_id
+
+            caption = request.POST["caption"]
+
+            hashtags = extract_hashtags(text=caption)
+
+            request.user.num_posts = request.user.num_posts + 1
+            request.user.save()
+
+            post_form.save()
+
+            link_tags_to_post(post_id=object_id, tags=hashtags)
+
+            return redirect("posts:get-post", post_id=object_id)
+
         else:
-            messages.error(request, "Please confirm that you're not a robot")
+            messages.error(request, "Post creation failed")
+        # else:
+        #     messages.error(request, "Please confirm that you're not a robot")
     else:
         post_form = CreatePostForm()
 
     context = {
         "post_form": post_form,
-        "captcha": captcha,
     }
-    return render(request, "views/post/create_post.html", context)
+    return render(request, "private/submit_post.html", context)
 
 
 def get_post(request: HttpRequest, post_id: str) -> HttpResponse:
@@ -114,4 +112,4 @@ def delete_post(request: HttpRequest, post_id: str) -> HttpResponseRedirect:
     else:
         post.delete()
         messages.success(request, "Your post has been deleted")
-        return redirect("post:manage-posts")
+        return redirect("/")

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}Foxstraat - Submit{% endblock %}
+
+{% block body %}
+<div class="w-full justify-center mx-auto px-44">
+    <h1 class="text-3xl text-center mt-10 mb-0 font-bold">Create Post</h1>
+    <div class="flex justify-center mb-10">
+
+        <form action="{% url 'posts:create-post' %}" class="mt-7" method="post">
+            {% csrf_token %}
+            {% include 'components/messages.html' %}
+
+            {% if form.errors %}
+            <div class="mb-5">
+                <span class="text-red-600">{{form.error_messages.invalid_login}}
+                </span>
+            </div>
+            {% endif %}
+
+            {% for hidden in post_form.hidden_fields %}
+            {{ hidden }}
+            {% endfor %}
+
+            {% for field in post_form %}
+
+            <label for="{{field.auto_id}}" class="text-black font-bold capitalize">
+                {% if not field.html_name == "image" %}
+                {{ field.html_name }}
+                {% else %}
+                Your post image
+                {% endif %}
+            </label>
+
+            <p>{{field}}</p>
+            {% endfor %}
+
+            
+            <div class="flex flex-row mt-10">
+                <button class="bg-black text-white text-normal rounded font-extrabold px-5 py-2 mr-1" type="submit">Submit post</button>
+                <span class="text-black text-normal px-2 py-2 mr-1">make sure you've read and understood the rules before posting</span>
+            </div>
+        </form>
+        <div class="mt-14 ml-7 ">
+            <img style="display: none;" id="input" alt="Preview container" />
+            <img id="output" class="mb-3" alt="image preview" />
+            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script>
+            <script
+            type='text/javascript'>kofiwidget2.init('Support Me', '#000000', 'Y8Y31URML'); kofiwidget2.draw();</script>
+        </small>
+    </div>
+</div>
+{% include 'components/footer.html' %}
+</div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+    function processImage() {
+        const selectedFile = document.querySelector('#selected-image').files[0];
+        if (!selectedFile) return;
+
+        const reader = new FileReader();
+        reader.readAsDataURL(selectedFile);
+
+        reader.onload = function (event) {
+            const imageElement = document.createElement('img');
+            imageElement.src = event.target.result;
+
+            imageElement.onload = function (e) {
+                const canvas = document.createElement('canvas');
+                const MAX_WIDTH = 300;
+                const scaleSize = MAX_WIDTH / e.target.width;
+
+                canvas.width = MAX_WIDTH;
+                canvas.height = e.target.height * scaleSize;
+                console.log(e.target);
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(e.target, 0, 0, canvas.width, canvas.height);
+
+                const sourceEncoded = ctx.canvas.toDataURL(e.target, 'image/jpeg');
+
+                document.querySelector('#output').src = sourceEncoded;
+            }
+        }
+    }
+</script>
+{% endblock %}

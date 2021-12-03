@@ -37,8 +37,8 @@ urlpatterns = (
         path("u/", include("core.accounts.urls", namespace="accounts")),
         path("<username>/", get_user_profile, name="get-user-profile"),
 
-        # 404
-        # re_path((r"^(\d+)/(\d+)$", handle_404),
+        # Post urls
+        path("f/", include("core.posts.urls", namespace="posts")),
     ]
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

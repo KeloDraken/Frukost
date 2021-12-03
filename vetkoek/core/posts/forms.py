@@ -9,10 +9,9 @@ class CreatePostForm(forms.ModelForm):
         label="",
         widget=forms.TextInput(
             attrs={
-                "class": "form-input",
-                "placeholder": "Give your post a short title",
+                "class": "w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white",
+                "placeholder": "Required",
                 "autocomplete": "off",
-                "autofocus": "true",
                 "autocapitalize": "off",
             }
         ),
@@ -21,10 +20,10 @@ class CreatePostForm(forms.ModelForm):
         required=False,
         widget=forms.Textarea(
             attrs={
-                "cols": 100,
-                "class": "form-input",
+                "class": "w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white",
                 "placeholder": "Write your caption...",
-                "rows": 100,
+                "autocomplete": "off",
+                "autocapitalize": "off",
             }
         ),
     )
