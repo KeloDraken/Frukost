@@ -73,7 +73,7 @@ def get_post(request: HttpRequest, post_id: str) -> HttpResponse:
     context = {
         "post": post,
     }
-    return render(request, "views/post/view_post.html", context)
+    return render(request, "public/posts/view_post.html", context)
 
 
 def frontpage(request: HttpRequest) -> HttpResponse:

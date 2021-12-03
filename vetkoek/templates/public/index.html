@@ -1,17 +1,16 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+
 {% block title %}Foxstraat{% endblock %}
 
-
 {% block body %}
-<div class="px-5 mt-10 w-full bg-white">
-    <h1 class="text-black text-2xl font-bold">A space for friends</h1>
-    <p class="text-black text-lg">
-        Foxstraat is all the things you missed most about Social Networks: <br>
-         Posts, Blogs, Forums, and customisability!
-    </p>
+<div class="w-full justify-center mx-auto px-44">
+    <h1 class="text-3xl text-center mt-16 mb-0 font-bold">A space for friends</h1>
+    <div class="flex justify-center mb-10 mx-60">
+        <p class="text-black text-lg">
+            Foxstraat is all the things you missed most about Social Networks:
+            Posts, Blogs, Forums, and customisability!
+        </p>
+    </div>
+    {% include 'components/footer.html' %}
 </div>
-{% include "components/footer.html" %}
 {% endblock %}
-
-
-
