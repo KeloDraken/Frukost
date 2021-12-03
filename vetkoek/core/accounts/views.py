@@ -57,7 +57,8 @@ def login_user_on_register(request: HttpRequest) -> HttpResponseRedirect:
 
 def user_registration(request: HttpRequest) -> HttpResponse:
     if request.user.is_authenticated:
-        return redirect("accounts:user-dashboard")
+        messages.error(request, "You can't create a new account while you're signed in.")
+        return redirect("posts:frontpage")
     else:
         captcha = FormWithCaptcha
 
