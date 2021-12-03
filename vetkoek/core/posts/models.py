@@ -20,6 +20,7 @@ class Post(models.Model):
     caption = models.TextField(null=True, blank=True)
     date_created = models.DateField(auto_now_add=True, null=True, blank=True)
     datetime_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    is_bulletin = models.BooleanField(default=True)
 
 
 class Tag(models.Model):
