@@ -168,10 +168,6 @@ def get_user_profile(request: HttpRequest, username: str):
         user = User.objects.get(username=username)
     except User.DoesNotExist:
         return render(request, "public/404.html")
-
-    
-
-
 @login_required
 def edit_user_profile(request: HttpRequest) -> HttpRequest:
     if request.method == "POST":
