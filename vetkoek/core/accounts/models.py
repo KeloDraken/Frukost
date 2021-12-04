@@ -139,6 +139,7 @@ class User(AbstractUser):
         border-radius: 50%;
         height: 200px;
         width: 200px;
+        object-fit: cover;
     }
 
     .profile-user-settings {
