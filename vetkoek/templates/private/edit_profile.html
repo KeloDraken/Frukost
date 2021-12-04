@@ -18,6 +18,8 @@
                             Display name
                         {% elif field.html_name == "profile_pic" %}
                             Profile picture
+                        {% elif field.html_name == "custom_html" %}
+                            Custom styles
                         {% else %}
                             {{ field.html_name }}
                         {% endif %}

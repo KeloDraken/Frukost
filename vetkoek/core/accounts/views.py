@@ -43,7 +43,7 @@ def login_user_on_register(request: HttpRequest) -> HttpResponseRedirect:
     """
     Logs user in on successful `User` instance creation
     """
-    username = request.POST["email"]
+    username = request.POST["username"]
     password = request.POST["password2"]
 
     user = authenticate(username=username.lower(), password=password)
@@ -115,6 +115,7 @@ def edit_user_profile(request: HttpRequest) -> HttpRequest:
         edit_profile_form = EditUserProfileForm(request.POST, request.FILES, instance=request.user)
 
         if edit_profile_form.is_valid():
+            messages.success(request, "Profile updated")
             edit_profile_form.save()
         else:
             messages.error(request, "Bad request. Profile was not updated.")
