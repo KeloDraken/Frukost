@@ -30,5 +30,5 @@ def get_community(request: HttpRequest, name: str) -> HttpResponseRedirect:
     try:
         community = Community.objects.get(title=name)
     except Community.DoesNotExist:
-        raise Http404
+        pass
     return redirect("subscribe")
