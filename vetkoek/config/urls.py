@@ -15,6 +15,7 @@ from core.views import (
     rules,
     terms,
 )
+from core.accounts.views import at_get_user_profile
 
 
 urlpatterns = (
@@ -35,6 +36,8 @@ urlpatterns = (
         path("u/", include("core.accounts.urls", namespace="accounts")),
         # Post urls
         path("f/", include("core.posts.urls", namespace="posts")),
+
+        path("@<username>/", at_get_user_profile, name="at-get-user")
     ]
     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
