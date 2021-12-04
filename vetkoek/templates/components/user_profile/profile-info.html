@@ -12,6 +12,8 @@
         <h1 class="profile-user-name">{{user.username}}</h1>
         {% if request.user.username == user.username %}
         <a href="{% url 'accounts:edit-user-profile' %}" class="btn profile-btn">Edit Profile</a>
+        {% else %}
+        <a href="#" class="btn profile-btn">Subscribe</a>
         {% endif %}
     </div>
 
