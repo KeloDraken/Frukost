@@ -28,7 +28,7 @@ def explore_users(request: HttpRequest) -> HttpResponse:
     page_obj = paginator.get_page(page_number)
 
     context = {"heading": "Cool new people", "page_obj": page_obj}
-    return render(request, "public/frontpage/explore_users.html", context)
+    return render(request, "public/explore_users.html", context)
 
 
 def request_has_valid_captcha(request: HttpRequest) -> bool:

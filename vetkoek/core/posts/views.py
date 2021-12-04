@@ -96,7 +96,7 @@ def frontpage(request: HttpRequest) -> HttpResponse:
         "heading": f"Explore {weekday}'s photos",
         "page_obj": page_obj,
     }
-    return render(request, "views/frontpage/frontpage.html", context)
+    return render(request, "public/frontpage.html", context)
 
 
 @login_required

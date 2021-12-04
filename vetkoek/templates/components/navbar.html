@@ -11,7 +11,7 @@
             Foxstraat.
         </a>
         <div class="flex flex-row justify-evenly">
-            <a title="Foxstraat Home" href="#" class="nav-link text-2xl mx-5 font-bold border-white">Frontpage</a>
+            <a title="Go to the Frontpage" href="{% url 'posts:frontpage' %}" class="nav-link text-2xl mx-5 font-bold border-white">Frontpage</a>
             <a href="#" class="nav-link text-2xl mx-5 font-bold border-white">Browse</a>
             <a href="#" class="nav-link text-2xl mx-5 font-bold border-white">Layouts</a> 
             {% if request.user.is_authenticated %}
