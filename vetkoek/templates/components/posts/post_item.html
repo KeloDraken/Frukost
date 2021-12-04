@@ -1,0 +1,13 @@
+<a href="{% url 'posts:get-post' post_id=post.object_id %}">
+    <div class="flex justify-center mb-7">
+        <div class="text-black px-3 py-5 mb-2">
+            <h5 class="text-black text-lg font-bold text-left mb-2 underline">
+                {{post.title}}
+            </h5>
+            <img src="{{ post.image.url }}" class="object-contain mb-1" alt="user submission image" />
+            <a class="font-bold text-gray-700" href="{% url 'accounts:get-user-profile' username=post.user.username %}">
+                {{post.user.username}}
+            </a>
+        </div>
+    </div>
+</a>

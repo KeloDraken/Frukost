@@ -1,3 +1,20 @@
 {% extends 'base.html' %}
 
-{% block title %}Foxstraat - Frontpage{% endblock %}
+{% block title %}Explore the Frontpage{% endblock %}
+
+{% block body %}
+<div class="w-full justify-center mx-auto px-44">
+    <h1 class="text-3xl text-center mt-16 mb-0 font-bold">The Frontpage</h1>
+    <h1 class="text-lg text-center mb-0">The latest posts from everywhere on Foxstraat</h1>
+    <div class="flex justify-center mb-10 mx-44">
+        <div class="mt-7">
+            {% include 'components/messages.html' %}
+
+            {% for post in posts %}
+            {% include 'components/posts/post_item.html' %}
+            {% endfor %}
+        </div>
+    </div>
+    {% include 'components/footer.html' %}
+</div>
+{% endblock %}
