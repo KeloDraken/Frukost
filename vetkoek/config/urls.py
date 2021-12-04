@@ -39,7 +39,8 @@ urlpatterns = (
         path("f/", include("core.posts.urls", namespace="posts")),
         # Search urls
         path("search/", include("core.search.urls", namespace="search")),
-
+        # Communities urls
+        path("b/", include("core.communities.urls", namespace="communities")),
         # Upgrade account
         path("join/", subscribe, name="subscribe"),
 

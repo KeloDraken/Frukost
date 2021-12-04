@@ -1,5 +1,3 @@
-import random
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -80,13 +78,11 @@ def frontpage(request: HttpRequest) -> HttpResponse:
     except:
         page_number = 1
 
-    post_bg_colour = "%30x"%random.randint(0, 0xFFF)
     page_obj = paginator.get_page(page_number)
 
     context = {
         "posts": qs,
         # "page_obj": page_obj,
-        "bg_colour": post_bg_colour
     }
     return render(request, "public/frontpage.html", context)
 
