@@ -23,6 +23,7 @@
         </form>
     </div>
     <div class="mx-80 justify-center mb-10">
+        <p class="font-bold mb-1">Top 20 results</p>
         {% for result in page_obj %}
         <a href="{% url 'at-get-user' username=result.username %}">
             <div class="flex border-2 border-gray-300 p-5 hover:bg-gray-200 bg-gray-100">
@@ -30,7 +31,7 @@
                 <img src="{{ result.profile_pic.url  }}" width="90" class="object-contain rounded"
                     alt="user profile pic">
                 {% else %}
-                <img src="https://ui-avatars.com/api/?size=90&name={{ result.username}}" class="object-contain rounded"
+                <img src="https://ui-avatars.com/api/?size=90&name={{ result.username}}&background=random" class="object-contain rounded"
                     alt="user profile pic">
                 {% endif %}
                 {% if result.display_name %}
