@@ -1,9 +1,11 @@
 <div class="profile">
 
     <div class="profile-image">
-        <img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces"
+        {% if user.profile_pic %}
+        <img src="{{user.profile_pic.url}}"
             alt="user profile photo" 
         />
+        {% endif %}
     </div>
 
     <div class="profile-user-settings">

@@ -137,6 +137,8 @@ class User(AbstractUser):
 
     .profile-image img {
         border-radius: 50%;
+        height: 200px;
+        width: 200px;
     }
 
     .profile-user-settings {

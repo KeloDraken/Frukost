@@ -28,11 +28,8 @@ class CreatePostForm(forms.ModelForm):
         ),
     )
     image = forms.ImageField(
-        required=False,
         widget=forms.FileInput(
             attrs={
-                "required": "false",
-                "onchange": "processImage()",
                 "id": "selected-image",
                 "required": "false",
             }

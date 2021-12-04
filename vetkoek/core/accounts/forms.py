@@ -106,6 +106,16 @@ class UserLoginForm(AuthenticationForm):
 
 
 class EditUserProfileForm(UserChangeForm):
+    profile_pic = forms.ImageField(
+        required=False,
+        widget=forms.FileInput(
+            attrs={
+                "id": "selected-image",
+                "required": "false",
+            }
+        ),
+    )
+
     display_name = forms.CharField(
         max_length=100,
         required=True,
