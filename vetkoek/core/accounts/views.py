@@ -5,11 +5,14 @@ from django.contrib.auth.decorators import login_required
 
 from django.core.paginator import Paginator
 from django.http.request import HttpRequest
-from django.http.response import HttpResponse, HttpResponseRedirect
+from django.http.response import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 
+from utils.helpers import forbidden_attributes
+
 from core.forms import FormWithCaptcha
-from core.accounts.forms import UserLoginForm, UserRegistrationForm
+from core.posts.models import Post
+from core.accounts.forms import EditUserProfileForm, UserLoginForm, UserRegistrationForm
 from core.accounts.models import User
 
 
@@ -25,7 +28,7 @@ def explore_users(request: HttpRequest) -> HttpResponse:
     page_obj = paginator.get_page(page_number)
 
     context = {"heading": "Cool new people", "page_obj": page_obj}
-    return render(request, "public/frontpage/explore_users.html", context)
+    return render(request, "public/explore_users.html", context)
 
 
 def request_has_valid_captcha(request: HttpRequest) -> bool:
@@ -42,7 +45,7 @@ def login_user_on_register(request: HttpRequest) -> HttpResponseRedirect:
     """
     Logs user in on successful `User` instance creation
     """
-    username = request.POST["email"]
+    username = request.POST["username"]
     password = request.POST["password2"]
 
     user = authenticate(username=username.lower(), password=password)
@@ -55,9 +58,12 @@ def login_user_on_register(request: HttpRequest) -> HttpResponseRedirect:
         messages.error(request, "Something went wrong")
 
 
-def user_registration(request: HttpRequest) -> HttpResponse:
+def user_registration(request: HttpRequest):
     if request.user.is_authenticated:
-        return redirect("accounts:user-dashboard")
+        messages.error(
+            request, "You can't create a new account while you're signed in."
+        )
+        return redirect("posts:frontpage")
     else:
         captcha = FormWithCaptcha
 
@@ -93,92 +99,55 @@ def user_logout(request: HttpRequest) -> HttpResponseRedirect:
     return redirect("accounts:user-login")
 
 
-def change_web_url(user: User, website: str) -> None:
-    if not len(website) <= 0 and not website == None:
-        user.website = website
-    else:
-        user.website = None
-
-
-def change_twitter_handle(user: User, twitter: str) -> None:
-    if not len(twitter) <= 0 and not twitter == None:
-        user.twitter = twitter
-    else:
-        user.twitter = None
-
-
-def change_instagram_handle(user: User, instagram: str) -> None:
-    if not len(instagram) <= 0 and not instagram == None:
-        user.instagram = instagram
-    else:
-        user.instagram = None
-
-
-def change_display_name(user: User, display_name: str) -> None:
-    if not len(display_name) <= 0 and not display_name == None:
-        user.display_name = display_name
-    else:
-        pass
-
-
-def change_bio(request: HttpRequest, user: User, bio: str) -> None:
-    if len(bio) > 220:
-        messages.error(
-            request, "Your bio is too long. Please keep it at 220 characters of less"
-        )
-    else:
-        user.bio = bio
-
-
-def update_profile_pic(request: HttpRequest, user: User) -> None:
-    if request.FILES.get("profile_pic"):
-        user.profile_pic = request.FILES.get("profile_pic")
-
-
-def save_profile(request: HttpRequest) -> None:
-    """
-    Continues to save other fields in Edit Profile
-    """
-    user = request.user
-
-    update_profile_pic(request, user)
-
-    bio = request.POST["about_me"]
-
-    change_bio(request, user, bio)
-
-    display_name = request.POST["display_name"]
-    change_display_name(user, display_name)
-
-    instagram = request.POST["instagram"]
-    change_instagram_handle(user, instagram)
-
-    twitter = request.POST["twitter"]
-    change_twitter_handle(user, twitter)
-
-    website = request.POST["website"]
-    change_web_url(user, website)
-
-    user.save()
-    messages.success(request, "Profile successfully updated")
-
-
-def get_user_profile(request: HttpRequest, username: str):
+def get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
     try:
         user = User.objects.get(username=username)
     except User.DoesNotExist:
-        return render(request, "public/404.html")
+        raise Http404
+
+    if not user.is_active:
+        raise Http404
+
+    posts = Post.objects.filter(user=user)
+
+    context = {"user": user, "posts": posts}
+    return render(request, "public/user_profile.html", context)
+
+
+def is_dirty_html(text: str):
+    forbidden_list = forbidden_attributes()
+    for i in forbidden_list:
+        if i.lower() in text.lower():
+            return True
+    return False
 
 
 @login_required
 def edit_user_profile(request: HttpRequest) -> HttpRequest:
     if request.method == "POST":
-        return save_profile(request)
+        edit_profile_form = EditUserProfileForm(
+            request.POST, request.FILES, instance=request.user
+        )
 
-    context = {
-        "user": request.user,
-    }
-    return render(request, "private/accounts/edit_profile.html", context)
+        if edit_profile_form.is_valid():
+            edit_profile_form.save(commit=False)
+
+            if not is_dirty_html(request.POST.get("custom_html")):
+                messages.success(request, "Profile updated")
+                edit_profile_form.save()
+            else:
+                messages.error(
+                    request,
+                    "Your template contains forbidden elements. \
+                    Continued use of these elements will result in a permanent ban from Foxstraat. \
+                    Please read our rules for more information about which tags and attributes are allowed.",
+                )
+        else:
+            messages.error(request, "Bad request. Profile was not updated.")
+    else:
+        edit_profile_form = EditUserProfileForm(instance=request.user)
+    context = {"user": request.user, "edit_profile_form": edit_profile_form}
+    return render(request, "private/edit_profile.html", context)
 
 
 @login_required
@@ -187,7 +156,7 @@ def delete_account(request: HttpRequest) -> HttpResponseRedirect:
         messages.error(
             request, "Admins need to use the admin site to delete their accounts"
         )
-        return redirect("accounts:user-dashboard")
+        return redirect("accounts:edit-user-profile")
     else:
         messages.success(request, "You account has been deleted")
         request.user.is_active = False

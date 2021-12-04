@@ -4,17 +4,18 @@
 
 {% block body %}
 <div class="w-full justify-center mx-auto px-60">
-    <h1 class="text-3xl text-center mt-16 mb-7 font-bold">{{post.title}}</h1>
-    {% if not post.is_bulletin %}
+    <h1 class="text-2xl text-center mt-16 mb-3 font-bold">{{post.title}}</h1>
+    
     <div class="flex justify-center mb-5">
         <img src="{{ post.image.url }}" class="object-contain" />
     </div>
-    {% endif %}
-    <h1 class="text-normal mb-4">
+    
+    <h1 class="text-normal text-center mb-4">
         submitted by 
-        <a class="font-bold underline" href="{% url 'get-user-profile' username=post.user.username %}">
+        <a class="font-bold underline" href="{% url 'accounts:get-user-profile' username=post.user.username %}">
             {{post.user.username}}
-        </a>
+        </a> |
+       <span class="text-sm font-bold text-gray-500"> {{ post.datetime_created|timesince }} ago</span>
     </h1>
     <div class="mb-10">
         <pre class="text-black text-lg font-bold whitespace-pre-wrap">{{ post.caption }}</pre>

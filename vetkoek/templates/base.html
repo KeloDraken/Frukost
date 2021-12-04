@@ -52,5 +52,13 @@
     {% block body %}{% endblock %}
     {% block scripts %}{% endblock %}
 </body>
-
+<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+<script>
+  kofiWidgetOverlay.draw('kelodraken', {
+    'type': 'floating-chat',
+    'floating-chat.donateButton.text': 'Donate',
+    'floating-chat.donateButton.background-color': '#000000',
+    'floating-chat.donateButton.text-color': '#fff'
+  });
+</script>
 </html>

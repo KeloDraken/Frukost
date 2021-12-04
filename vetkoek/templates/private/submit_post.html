@@ -43,44 +43,7 @@
                     before posting</span>
             </div>
         </form>
-        <div class="mt-14 ml-7 ">
-            <img style="display: none;" id="input" alt="Preview container" />
-            <img id="output" class="mb-3" alt="image preview" />
-        </div>
     </div>
+    {% include 'components/footer.html' %}
 </div>
-{% include 'components/footer.html' %}
-</div>
-{% endblock %}
-{% block scripts %}
-<script type="text/javascript">
-    function processImage() {
-        const selectedFile = document.querySelector('#selected-image').files[0];
-        if (!selectedFile) return;
-
-        const reader = new FileReader();
-        reader.readAsDataURL(selectedFile);
-
-        reader.onload = function (event) {
-            const imageElement = document.createElement('img');
-            imageElement.src = event.target.result;
-
-            imageElement.onload = function (e) {
-                const canvas = document.createElement('canvas');
-                const MAX_WIDTH = 300;
-                const scaleSize = MAX_WIDTH / e.target.width;
-
-                canvas.width = MAX_WIDTH;
-                canvas.height = e.target.height * scaleSize;
-                console.log(e.target);
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(e.target, 0, 0, canvas.width, canvas.height);
-
-                const sourceEncoded = ctx.canvas.toDataURL(e.target, 'image/jpeg');
-
-                document.querySelector('#output').src = sourceEncoded;
-            }
-        }
-    }
-</script>
 {% endblock %}

@@ -4,9 +4,10 @@ from core.accounts.models import User
 
 
 class UserAdmin(admin.ModelAdmin):
-    search_fields = ("email",)
+    search_fields = ("username",)
     list_display = (
-        "email",
+        "object_id",
+        "username",
         "date_joined",
     )
 

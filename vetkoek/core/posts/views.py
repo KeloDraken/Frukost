@@ -1,5 +1,4 @@
-import calendar
-from datetime import date
+import random
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -22,7 +21,7 @@ def create_post(request: HttpRequest) -> HttpResponse:
     # captcha = FormWithCaptcha()
 
     if request.method == "POST":
-        post_form = CreatePostForm(request.POST)
+        post_form = CreatePostForm(request.POST, request.FILES)
         # TODO: remove this try/catch in production
         # try:
         #     captcha_data = request.POST["g-recaptcha-response"]
@@ -33,12 +32,7 @@ def create_post(request: HttpRequest) -> HttpResponse:
         if post_form.is_valid():
             post_form = post_form.save(commit=False)
             post_form.user = request.user
-
-            if request.FILES.get("image"):
-                post_form.image = request.FILES.get("image")
-                post_form.is_bulletin = False
-            else:
-                pass
+                           
             object_id = object_id_generator(11, Post)
             post_form.object_id = object_id
 
@@ -86,16 +80,15 @@ def frontpage(request: HttpRequest) -> HttpResponse:
     except:
         page_number = 1
 
+    post_bg_colour = "%30x"%random.randint(0, 0xFFF)
     page_obj = paginator.get_page(page_number)
 
-    current_date = date.today()
-    weekday = calendar.day_name[current_date.weekday()]
-
     context = {
-        "heading": f"Explore {weekday}'s photos",
-        "page_obj": page_obj,
+        "posts": qs,
+        # "page_obj": page_obj,
+        "bg_colour": post_bg_colour
     }
-    return render(request, "views/frontpage/frontpage.html", context)
+    return render(request, "public/frontpage.html", context)
 
 
 @login_required
