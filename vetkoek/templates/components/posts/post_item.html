@@ -1,10 +1,9 @@
 <a href="{% url 'posts:get-post' post_id=post.object_id %}">
     <div class="relative cursor-pointer mb-10">
         <img src="{{ post.image.url }}" />
-        <a class="font-bold text-lg text-gray-700"
-            href="{% url 'accounts:get-user-profile' username=post.user.username %}">
+        <a href="{% url 'accounts:get-user-profile' username=post.user.username %}">
             <div class="overlay absolute bottom-0 w-full h-24 px-4 pt-6">
-                <div class="text-white font-bold text-lg">{{post.user.username}}</div>
+                <div class="text-white font-bold text-normal">{{post.user.username}}</div>
             </div>
         </a>
     </div>
