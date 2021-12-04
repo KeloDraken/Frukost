@@ -5,7 +5,7 @@
 
 {% block body %}
 <div class="w-full justify-center mx-auto px-44">
-    <h1 class="text-3xl text-center mt-16 mb-0 font-bold">Search for People on Foxstraat by their name</h1>
+    <h1 class="text-2xl text-center mt-16 mb-0 font-bold">Search for People on Foxstraat by their name</h1>
     <div class="flex justify-center mb-10">
         <form action="{% url 'search:search' %}" class="mt-7" method="get">
             {% include 'components/messages.html' %}
@@ -27,16 +27,16 @@
         <a href="{% url 'at-get-user' username=result.username %}">
             <div class="flex border-2 border-gray-300 p-5 hover:bg-gray-200 bg-gray-100">
                 {% if result.profile_pic %}
-                <img src="{{ result.profile_pic.url  }}" width="90" class="object-contain rounded"
+                <img src="{{ result.profile_pic.url  }}" width="50" class="object-contain rounded"
                     alt="user profile pic">
                 {% else %}
-                <img src="https://ui-avatars.com/api/?size=90&name={{ result.username}}&background=random" class="object-contain rounded"
+                <img src="https://ui-avatars.com/api/?size=50&name={{ result.username}}&background=random" class="object-contain rounded"
                     alt="user profile pic">
                 {% endif %}
                 {% if result.display_name %}
-                <p class="text-black font-extrabold underline text-3xl ml-3">{{result.display_name}}</p>
+                <p class="text-black font-extrabold underline text-lg ml-3">{{result.display_name}}</p>
                 {% else %}
-                <p class="text-black font-extrabold underline text-3xl ml-3">{{result.username}}</p>
+                <p class="text-black font-extrabold underline text-lg ml-3">{{result.username}}</p>
                 {% endif %}
             </div>
         </a>

@@ -29,30 +29,32 @@
             <label for="card_number" class="text-black font-bold capitalize">
                 Card number
             </label>
-            <input type="number" class="w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white"
-                required name="card_number" id="card_number" placeholder="Card number" />
+            <input type="number" maxlength="16"
+                class="w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white" required
+                name="card_number" id="card_number" placeholder="Card number" />
 
             <div class="flex">
                 <div class="mr-3">
                     <label for="expires" class="text-black font-bold capitalize">
                         Expires
                     </label>
-                    <input type="text"
+                    <input type="text" maxlength="5"
                         class="w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white" required
                         name="expires" id="expires" placeholder="MM/YY" />
                 </div>
-                
+
                 <div>
                     <label for="cvc" class="text-black font-bold capitalize">
                         CVC
                     </label>
-                    <input type="number"
+                    <input type="number" maxlength="3"
                         class="w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white" required
                         name="cvc" id="cvc" placeholder="CVC" />
                 </div>
             </div>
             <div class="flex flex-row">
-                <button class="w-full bg-black text-white text-normal rounded font-extrabold px-5 py-4 mr-1" type="submit">
+                <button class="w-full bg-black text-white text-normal rounded font-extrabold px-5 py-4 mr-1"
+                    type="submit">
                     Pay now
                 </button>
             </div>
