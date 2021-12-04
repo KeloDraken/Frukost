@@ -103,6 +103,9 @@ def get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
     except User.DoesNotExist:
         raise Http404
 
+    if not user.is_active:
+        raise Http404
+
     posts = Post.objects.filter(user=user)
 
     context = {"user": user, "posts": posts}
