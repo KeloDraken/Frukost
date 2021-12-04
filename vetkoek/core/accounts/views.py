@@ -187,7 +187,7 @@ def edit_user_profile(request: HttpRequest) -> HttpRequest:
     context = {
         "user": request.user,
     }
-    return render(request, "private/accounts/edit_profile.html", context)
+    return render(request, "private/edit_profile.html", context)
 
 
 @login_required
