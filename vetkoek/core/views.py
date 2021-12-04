@@ -21,7 +21,7 @@ def generate_random_num_once_a_day():
     d1 = datetime.now()
     delta = d1 - d0
     random.seed(delta.days)
-    return random.randint(1,20)
+    return random.randint(3,13)
 
 def subscribe(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
