@@ -17,12 +17,11 @@ def handle_404(request: HttpRequest) -> HttpResponse:
 
 
 def generate_random_num_once_a_day():
-    d0 = datetime(2008, 8, 18)  # Pick an arbitrary date in the past
+    d0 = datetime(2008, 8, 18) 
     d1 = datetime.now()
     delta = d1 - d0
-    print(delta.days)
     random.seed(delta.days)
-    return random.randint(1,40)
+    return random.randint(1,20)
 
 def subscribe(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
