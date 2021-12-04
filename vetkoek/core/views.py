@@ -1,14 +1,47 @@
+from datetime import datetime
+import random
+
 from django.contrib import messages
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 
 from utils.helpers import object_id_generator
+
+from core.forms import EmailForm
 from core.models import Feedback, News, Privacy, Rules, Terms
 
 
 def handle_404(request: HttpRequest) -> HttpResponse:
     return render(request, "public/404.html")
+
+
+def generate_random_num_once_a_day():
+    d0 = datetime(2008, 8, 18) 
+    d1 = datetime.now()
+    delta = d1 - d0
+    random.seed(delta.days)
+    return random.randint(1,20)
+
+def subscribe(request: HttpRequest) -> HttpResponse:
+    if not request.user.is_authenticated:
+        messages.error(request, "You need to be logged in to upgrade your account")
+        return redirect("accounts:user-login")
+    else:
+        if request.method == "POST":
+            if request.POST.get("email"):
+                email = request.POST.get("email")
+                request.user.email = email
+                request.user.save()
+                return redirect("accounts:upgrade")
+            else:
+                messages.error(request, "Something went wrong. Please try again.")
+                return redirect("accounts:email")
+        else:
+            form = EmailForm()
+        num_joined = generate_random_num_once_a_day()
+        context = {"form": form, "num_joined": num_joined}
+        return render(request, "private/upgrade/email_form.html", context)
 
 
 def add_feedback(request: HttpRequest) -> HttpResponseRedirect:

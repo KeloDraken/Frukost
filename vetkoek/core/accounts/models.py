@@ -144,7 +144,6 @@ class User(AbstractUser):
         border-radius: 50%;
         height: 200px;
         width: 200px;
-        object-fit: cover;
     }
 
     .profile-user-settings {
@@ -244,10 +243,6 @@ class User(AbstractUser):
         font-weight: 600;
     }
 
-    .gallery-item-likes {
-        margin-right: 2.2rem;
-    }
-
     .gallery-item-type {
         position: absolute;
         top: 1rem;
@@ -255,15 +250,10 @@ class User(AbstractUser):
         font-size: 2.5rem;
         text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
     }
-
-    .fa-clone,
-    .fa-comment {
-        transform: rotateY(180deg);
-    }
-
+    
     .gallery-image {
         width: 100%;
-        height: 100%;
+        height: 30rem;
         object-fit: cover;
     }
 
@@ -294,37 +284,6 @@ class User(AbstractUser):
         .gallery {
             width: auto;
             margin: 0;
-        }
-
-        @media (max-width: 40rem) {
-            .profile {
-                grid-template-columns: auto 1fr;
-                grid-row-gap: 1.5rem;
-            }
-
-            .profile-image {
-                grid-row: 1 / 2;
-            }
-
-            .profile-user-settings {
-                display: grid;
-                grid-template-columns: auto 1fr;
-                grid-gap: 1rem;
-            }
-
-            .profile-btn,
-            .profile-stats,
-            .profile-bio {
-                grid-column: 1 / -1;
-            }
-
-            .profile-user-settings,
-            .profile-btn,
-            .profile-settings-btn,
-            .profile-bio,
-            .profile-stats {
-                margin: 0;
-            }
         }
     }
 </style>

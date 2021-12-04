@@ -99,7 +99,13 @@ def user_logout(request: HttpRequest) -> HttpResponseRedirect:
     return redirect("accounts:user-login")
 
 
+def upgrade_user_account(request: HttpRequest) -> HttpResponse:
+    return render(request, "private/upgrade/credit_card_form.html")
+
 def get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
+    return redirect("at-get-user", username=username)
+
+def at_get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
     try:
         user = User.objects.get(username=username)
     except User.DoesNotExist:
@@ -108,7 +114,7 @@ def get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
     if not user.is_active:
         raise Http404
 
-    posts = Post.objects.filter(user=user)
+    posts = Post.objects.filter(user=user).order_by("-datetime_created")
 
     context = {"user": user, "posts": posts}
     return render(request, "public/user_profile.html", context)
