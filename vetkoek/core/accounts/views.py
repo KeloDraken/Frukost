@@ -8,6 +8,8 @@ from django.http.request import HttpRequest
 from django.http.response import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 
+from utils.helpers import forbidden_attributes
+
 from core.forms import FormWithCaptcha
 from core.posts.models import Post
 from core.accounts.forms import EditUserProfileForm, UserLoginForm, UserRegistrationForm
@@ -112,18 +114,38 @@ def get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
     return render(request, "public/user_profile.html", context)
 
 
+def is_dirty_html(text: str):
+    forbidden_list = forbidden_attributes()
+    for i in forbidden_list:
+        if i.lower() in text.lower():
+            return True
+    return False
+
+
 @login_required
 def edit_user_profile(request: HttpRequest) -> HttpRequest:
     if request.method == "POST":
-        edit_profile_form = EditUserProfileForm(request.POST, request.FILES, instance=request.user)
+        edit_profile_form = EditUserProfileForm(
+            request.POST, request.FILES, instance=request.user
+        )
 
         if edit_profile_form.is_valid():
-            messages.success(request, "Profile updated")
-            edit_profile_form.save()
+            edit_profile_form.save(commit=False)
+
+            if not is_dirty_html(request.POST.get("custom_html")):
+                messages.success(request, "Profile updated")
+                edit_profile_form.save()
+            else:
+                messages.error(
+                    request,
+                    "Your template contains forbidden elements. \
+                    Continued use of these elements will result in a permanent ban from Foxstraat. \
+                    Please read our rules for more information about which tags and attributes are allowed.",
+                )
         else:
             messages.error(request, "Bad request. Profile was not updated.")
     else:
-        edit_profile_form = EditUserProfileForm( instance=request.user)
+        edit_profile_form = EditUserProfileForm(instance=request.user)
     context = {"user": request.user, "edit_profile_form": edit_profile_form}
     return render(request, "private/edit_profile.html", context)
 

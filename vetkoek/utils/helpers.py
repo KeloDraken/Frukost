@@ -8,6 +8,9 @@ from core.posts.models import Post, PostTag, Tag
 
 def forbidden_attributes() -> list[str]:
     return [
+        "iframe",
+        "<iframe>",
+        "</iframe>",
         "script",
         "<script>",
         "</script>",
