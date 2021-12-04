@@ -69,7 +69,11 @@ def search(request: HttpRequest) -> HttpResponse:
         context = {"query": search_query, "page": "search", "page_obj": page_obj}
         return render(request, "public/search/results.html", context)
     else:
-        qs = User.objects.all().order_by("-datetime_joined").exclude(object_id=request.user.object_id)[:5]
+        qs = (
+            User.objects.all()
+            .order_by("-datetime_joined")
+            .exclude(object_id=request.user.object_id)[:5]
+        )
 
         paginator = Paginator(qs, 15)
 
@@ -77,7 +81,7 @@ def search(request: HttpRequest) -> HttpResponse:
             page_number = int(request.GET.get("sida"))
         except:
             page_number = 1
-            
+
         page_obj = paginator.get_page(page_number)
 
         context = {"page": "search", "page_obj": page_obj}

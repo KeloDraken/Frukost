@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     # Foxstraat apps
     "core",
     "core.accounts",
+    "core.communities",
     "core.posts",
     "core.search",
 ]
