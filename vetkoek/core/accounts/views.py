@@ -10,7 +10,7 @@ from django.shortcuts import redirect, render
 
 from core.forms import FormWithCaptcha
 from core.posts.models import Post
-from core.accounts.forms import UserLoginForm, UserRegistrationForm
+from core.accounts.forms import EditUserProfileForm, UserLoginForm, UserRegistrationForm
 from core.accounts.models import User
 
 
@@ -97,76 +97,6 @@ def user_logout(request: HttpRequest) -> HttpResponseRedirect:
     return redirect("accounts:user-login")
 
 
-def change_web_url(user: User, website: str) -> None:
-    if not len(website) <= 0 and not website == None:
-        user.website = website
-    else:
-        user.website = None
-
-
-def change_twitter_handle(user: User, twitter: str) -> None:
-    if not len(twitter) <= 0 and not twitter == None:
-        user.twitter = twitter
-    else:
-        user.twitter = None
-
-
-def change_instagram_handle(user: User, instagram: str) -> None:
-    if not len(instagram) <= 0 and not instagram == None:
-        user.instagram = instagram
-    else:
-        user.instagram = None
-
-
-def change_display_name(user: User, display_name: str) -> None:
-    if not len(display_name) <= 0 and not display_name == None:
-        user.display_name = display_name
-    else:
-        pass
-
-
-def change_bio(request: HttpRequest, user: User, bio: str) -> None:
-    if len(bio) > 220:
-        messages.error(
-            request, "Your bio is too long. Please keep it at 220 characters of less"
-        )
-    else:
-        user.bio = bio
-
-
-def update_profile_pic(request: HttpRequest, user: User) -> None:
-    if request.FILES.get("profile_pic"):
-        user.profile_pic = request.FILES.get("profile_pic")
-
-
-def save_profile(request: HttpRequest) -> None:
-    """
-    Continues to save other fields in Edit Profile
-    """
-    user = request.user
-
-    update_profile_pic(request, user)
-
-    bio = request.POST["about_me"]
-
-    change_bio(request, user, bio)
-
-    display_name = request.POST["display_name"]
-    change_display_name(user, display_name)
-
-    instagram = request.POST["instagram"]
-    change_instagram_handle(user, instagram)
-
-    twitter = request.POST["twitter"]
-    change_twitter_handle(user, twitter)
-
-    website = request.POST["website"]
-    change_web_url(user, website)
-
-    user.save()
-    messages.success(request, "Profile successfully updated")
-
-
 def get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
     try:
         user = User.objects.get(username=username)
@@ -182,11 +112,15 @@ def get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
 @login_required
 def edit_user_profile(request: HttpRequest) -> HttpRequest:
     if request.method == "POST":
-        return save_profile(request)
+        edit_profile_form = EditUserProfileForm(request.POST, request.FILES, instance=request.user)
 
-    context = {
-        "user": request.user,
-    }
+        if edit_profile_form.is_valid():
+            edit_profile_form.save()
+        else:
+            messages.error(request, "Bad request. Profile was not updated.")
+    else:
+        edit_profile_form = EditUserProfileForm( instance=request.user)
+    context = {"user": request.user, "edit_profile_form": edit_profile_form}
     return render(request, "private/edit_profile.html", context)
 
 
@@ -196,7 +130,7 @@ def delete_account(request: HttpRequest) -> HttpResponseRedirect:
         messages.error(
             request, "Admins need to use the admin site to delete their accounts"
         )
-        return redirect("accounts:user-dashboard")
+        return redirect("accounts:edit-user-profile")
     else:
         messages.success(request, "You account has been deleted")
         request.user.is_active = False
