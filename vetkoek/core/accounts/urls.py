@@ -8,6 +8,7 @@ from core.accounts.views import (
     user_login,
     user_logout,
     edit_user_profile,
+    upgrade_user_account,
 )
 
 app_name = "accounts"
@@ -18,6 +19,7 @@ urlpatterns = [
     path("logout/", user_logout, name="user-logout"),
     path("edit/", edit_user_profile, name="edit-user-profile"),
     path("explore/", explore_users, name="explore-users"),
+    path("upgrade/", upgrade_user_account, name="upgrade"),
     path("delete/", delete_account, name="delete-user"),
     path("<username>/", get_user_profile, name="get-user-profile"),
 ]

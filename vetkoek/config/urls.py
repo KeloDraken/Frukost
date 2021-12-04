@@ -13,6 +13,7 @@ from core.views import (
     news,
     privacy,
     rules,
+    subscribe,
     terms,
 )
 from core.accounts.views import at_get_user_profile
@@ -38,6 +39,9 @@ urlpatterns = (
         path("f/", include("core.posts.urls", namespace="posts")),
         # Search urls
         path("search/", include("core.search.urls", namespace="search")),
+
+        # Upgrade account
+        path("join/", subscribe, name="subscribe"),
 
         path("@<username>/", at_get_user_profile, name="at-get-user")
     ]

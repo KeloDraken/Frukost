@@ -99,6 +99,9 @@ def user_logout(request: HttpRequest) -> HttpResponseRedirect:
     return redirect("accounts:user-login")
 
 
+def upgrade_user_account(request: HttpRequest) -> HttpResponse:
+    return render(request, "private/upgrade/credit_card_form.html")
+
 def get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
     return redirect("at-get-user", username=username)
 
