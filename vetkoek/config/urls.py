@@ -36,6 +36,8 @@ urlpatterns = (
         path("u/", include("core.accounts.urls", namespace="accounts")),
         # Post urls
         path("f/", include("core.posts.urls", namespace="posts")),
+        # Search urls
+        path("search/", include("core.search.urls", namespace="search")),
 
         path("@<username>/", at_get_user_profile, name="at-get-user")
     ]
