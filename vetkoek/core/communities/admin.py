@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from core.communities.models import Community
+
+
+class CommunityAdmin(admin.ModelAdmin):
+    search_fields = ("object_id",)
+
+
+admin.site.register(Community, CommunityAdmin)

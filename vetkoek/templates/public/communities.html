@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Explore and join your favourite communities{% endblock %}
+
+{% block styles %}
+<style>
+    .masonry {
+        column-count: 4;
+        column-gap: 2rem;
+    }
+
+    .overlay {
+        background: linear-gradient(0deg, black, transparent);
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="w-full  mx-auto px-44">
+    <h1 class="text-3xl text-center mt-16 mb-0 italic">Foxstraat &mdash; A project of liberty</h1>
+    <div class="mt-7">
+        {% include 'components/messages.html' %}
+        <div class="masonry px-16 py-8">
+            <div class="mb-8">
+                {% for post in posts %}
+                {% include 'components/posts/post_item.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% include 'components/footer.html' %}
+</div>
+{% endblock %}
