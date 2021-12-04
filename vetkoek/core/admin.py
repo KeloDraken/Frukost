@@ -4,12 +4,15 @@ from core.models import (
     News,
     Privacy,
     Rules,
+    Subscribers,
     Terms,
 )
 
 
 admin.site.register(News)
 admin.site.register(Feedback)
+
+admin.site.register(Subscribers)
 
 # Legal
 admin.site.register(Rules)

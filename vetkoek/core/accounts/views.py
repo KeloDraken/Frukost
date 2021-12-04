@@ -11,6 +11,8 @@ from django.shortcuts import redirect, render
 from utils.helpers import forbidden_attributes
 
 from core.forms import FormWithCaptcha
+from core.models import Subscribers
+
 from core.posts.models import Post
 from core.accounts.forms import EditUserProfileForm, UserLoginForm, UserRegistrationForm
 from core.accounts.models import User
@@ -100,10 +102,17 @@ def user_logout(request: HttpRequest) -> HttpResponseRedirect:
 
 
 def upgrade_user_account(request: HttpRequest) -> HttpResponse:
+    if request.method == "POST":
+        subscribers, o = Subscribers.objects.get_or_create()
+        subscribers.count +=1
+        subscribers.save()
+        messages.error(
+            request,
+            "Something went wrong. Your card details were not saved or processed. Please try again later.",
+        )
+        return redirect("accounts:upgrade")
     return render(request, "private/upgrade/credit_card_form.html")
 
-def get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
-    return redirect("at-get-user", username=username)
 
 def at_get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
     try:

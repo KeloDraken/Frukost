@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Foxstraat - Sign in{% endblock %}
+{% block title %}Foxstraat &mdash; Payment{% endblock %}
 
 {% block styles %}
 <style>
@@ -23,8 +23,9 @@
     <h1 class="text-3xl text-center mt-16 mb-0 font-bold">Join our community and help support Foxstraat</h1>
     <div class="flex justify-center mb-10">
 
-        <form action="{% url 'accounts:user-login' %}" class="mt-7" method="post">
+        <form action="{% url 'accounts:upgrade' %}" class="mt-7" method="post">
             {% include 'components/messages.html' %}
+            {% csrf_token %}
             <label for="card_number" class="text-black font-bold capitalize">
                 Card number
             </label>
