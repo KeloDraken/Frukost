@@ -1,8 +1,8 @@
 from django.core.paginator import Paginator
 from django.http.request import HttpRequest
 
-from django.http.response import HttpResponse
-from django.shortcuts import render
+from django.http.response import Http404, HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, render
 
 from core.communities.models import Community
 
@@ -25,3 +25,10 @@ def get_communities(request: HttpRequest) -> HttpResponse:
         # "page_obj": page_obj,
     }
     return render(request, "public/communities.html", context)
+
+def get_community(request: HttpRequest, name: str) -> HttpResponseRedirect:
+    try:
+        community = Community.objects.get(title=name)
+    except Community.DoesNotExist:
+        raise Http404
+    return redirect("subscribe")
