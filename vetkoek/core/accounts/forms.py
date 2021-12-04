@@ -7,6 +7,7 @@ from django.contrib.auth.forms import (
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext, gettext_lazy as _
 
+from utils.helpers import object_id_generator
 from core.accounts.models import User
 
 
@@ -58,6 +59,7 @@ class UserRegistrationForm(UserCreationForm):
         user = super(UserRegistrationForm, self).save(commit=False)
         username = self.cleaned_data["username"]
         user.display_name = username
+        user.object_id = object_id_generator(11, User)
         if commit:
             user.save()
         return user

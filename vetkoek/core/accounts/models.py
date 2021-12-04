@@ -22,6 +22,7 @@ class LowercaseCharField(models.CharField):
         value = super(LowercaseCharField, self).to_python(value)
         # Value can be None so check that it's a string before lowercasing.
         if isinstance(value, str):
+            value = value.replace(" ", "_")
             return value.lower()
         return value
 
@@ -31,6 +32,7 @@ class User(AbstractUser):
     Users, within the ChafPozi authentication system, are represented by this
     model.
     """
+
     object_id = models.CharField(max_length=20, null=True, blank=True)
     is_fake_profile = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
@@ -70,7 +72,10 @@ class User(AbstractUser):
     website = models.URLField(max_length=300, null=True, blank=True)
 
     # custom html
-    default_html = models.TextField(null=False, blank=False, default="""
+    default_html = models.TextField(
+        null=False,
+        blank=False,
+        default="""
 <style>
     /*
         Main Foxstraat user profile Stylesheet
@@ -323,7 +328,8 @@ class User(AbstractUser):
         }
     }
 </style>
-    """)
+    """,
+    )
     custom_html = models.TextField(null=True, blank=True)
 
     date_joined = models.DateField(auto_now_add=True)
