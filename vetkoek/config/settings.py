@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     "captcha",
     "corsheaders",
     "imagekit",
-    # Foxstraat apps
+    # Msukwini apps
     "core",
     "core.accounts",
     "core.communities",

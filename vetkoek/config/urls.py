@@ -50,7 +50,7 @@ urlpatterns = (
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 )
 
-admin.site.site_header = "Foxstraat Site Admin"
-admin.site.site_title = "Foxstraat Site Admin"
+admin.site.site_header = "Msukwini Site Admin"
+admin.site.site_title = "Msukwini Site Admin"
 
 admin.site.unregister(Group)

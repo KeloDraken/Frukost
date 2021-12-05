@@ -73,7 +73,7 @@ def index(request: HttpRequest) -> HttpResponse:
 
 def news(request: HttpRequest) -> HttpResponse:
     news_ = News.objects.all().order_by("-datetime_created")
-    context = {"heading": "Foxstraat News", "news": news_}
+    context = {"heading": "Msukwini News", "news": news_}
     return render(request, "views/blog/news.html", context)
 
 
@@ -96,5 +96,5 @@ def privacy(request: HttpRequest) -> HttpResponse:
 
 def rules(request: HttpRequest) -> HttpResponse:
     news_ = Rules.objects.all()
-    context = {"heading": "Foxstraat Rules", "news": news_}
+    context = {"heading": "Msukwini Rules", "news": news_}
     return render(request, "views/blog/news.html", context)

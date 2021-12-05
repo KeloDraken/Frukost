@@ -154,7 +154,7 @@ def edit_user_profile(request: HttpRequest) -> HttpRequest:
                 messages.error(
                     request,
                     "Your template contains forbidden elements. \
-                    Continued use of these elements will result in a permanent ban from Foxstraat. \
+                    Continued use of these elements will result in a permanent ban from Msukwini. \
                     Please read our rules for more information about which tags and attributes are allowed.",
                 )
         else:

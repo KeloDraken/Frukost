@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Foxstraat &mdash; project of liberty{% endblock %}
+{% block title %}Msukwini &mdash; project of liberty{% endblock %}
 
 {% block body %}
 <div class="w-full justify-center mx-auto px-44">
@@ -8,7 +8,7 @@
     <h1 class="text-4xl text-center mt-16 mb-0 font-bold mt-44">A space for friends</h1>
     <div class="flex justify-center mb-10 mx-44">
         <p class="text-black text-center text-xl">
-            Foxstraat is a retro social network focused on privacy and customisability.
+            Msukwini is a retro social network focused on privacy and customisability.
             <br> It's a friendly place to have fun, meet friends, and be creative.
         </p>
     </div>
@@ -20,7 +20,7 @@
             Create a new submission
         </a>
         {% else %}
-        <a title="Create a Foxstraat account" href="{% url 'accounts:user-register' %}"
+        <a title="Create a Msukwini account" href="{% url 'accounts:user-register' %}"
             class="bg-black text-white text-xl rounded text-center font-bold px-4 pt-3 pb-3 mr-1 -mt-2">
             Create an account
         </a>
@@ -30,7 +30,7 @@
     <h1 class="text-4xl text-center mt-16 mb-0 font-bold mt-96">Fully customisable</h1>
     <div class="flex justify-center mb-10 mx-44 mb-96">
         <p class="text-black text-center text-xl">
-            Foxstraat allows you to add custom HTML and CSS code to your profile to
+            Msukwini allows you to add custom HTML and CSS code to your profile to
             give you all the freedom you need to make your profile truly your your Straat on the web!
         </p>
     </div>
@@ -38,16 +38,16 @@
     <h1 class="text-4xl text-center mt-16 mb-0 font-bold mt-56">Privacy friendly</h1>
     <div class="flex justify-center mb-10 mx-44">
         <p class="text-black text-center text-xl">
-            Foxstraat has no algorithms, no tracking, and no personalised ads -
-            feeds on Foxstraat are chronological and there is no suggested content begging for your attention. You
+            Msukwini has no algorithms, no tracking, and no personalised ads -
+            feeds on Msukwini are chronological and there is no suggested content begging for your attention. You
             decide what you want to share and what content you'd like to view.
         </p>
     </div>
 
     {%  if not request.user.is_authenticated %}
-    <h1 class="text-4xl text-center mt-16 mb-0 font-bold mt-56 mb-10">Join Foxstraat for free</h1>
+    <h1 class="text-4xl text-center mt-16 mb-0 font-bold mt-56 mb-10">Join Msukwini for free</h1>
     <div class="flex justify-center mb-10 mx-44 mb-96">
-        <a title="Create a Foxstraat account" href="{% url 'accounts:user-register' %}"
+        <a title="Create a Msukwini account" href="{% url 'accounts:user-register' %}"
             class="bg-black text-white text-lg rounded font-bold px-4 pt-3 pb-3 mr-1 -mt-2">
             Create an account
         </a>
