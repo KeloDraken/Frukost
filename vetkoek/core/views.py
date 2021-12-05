@@ -37,7 +37,10 @@ def subscribe(request: HttpRequest) -> HttpResponse:
             else:
                 messages.error(request, "Something went wrong. Please try again.")
                 return redirect("accounts:email")
-        else:
+        else:            
+            if request.user.email is not None and not request.user.email == "":
+                return redirect("accounts:upgrade") 
+                
             form = EmailForm()
         num_joined = generate_random_num_once_a_day()
         context = {"form": form, "num_joined": num_joined}
