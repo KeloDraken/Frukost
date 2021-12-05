@@ -36,7 +36,7 @@ def subscribe(request: HttpRequest) -> HttpResponse:
                 return redirect("accounts:upgrade")
             else:
                 messages.error(request, "Something went wrong. Please try again.")
-                return redirect("accounts:email")
+                return redirect("subscribe")
         else:            
             if request.user.email is not None and not request.user.email == "":
                 return redirect("accounts:upgrade") 
