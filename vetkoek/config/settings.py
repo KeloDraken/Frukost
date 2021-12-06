@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "captcha",
     "corsheaders",
     "imagekit",
+    "storages",
     # Msukwini apps
     "core",
     "core.accounts",
@@ -122,12 +123,6 @@ LOGIN_URL = "/u/login/"
 
 LOGIN_REDIRECT_URL = "/f/"
 
-STATIC_URL = "/static/"
-
-STATIC_ROOT = BASE_DIR / "static"
-
-STATICFILES_DIRS = [BASE_DIR / "_static"]
-
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR / "media-root"
@@ -153,3 +148,25 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.BasicAuthentication",
     ],
 }
+
+AWS_ACCESS_KEY_ID = "AKO5SR4NSE42JDWTA75I"
+
+AWS_SECRET_ACCESS_KEY = "L2Oc2iyNlahEEnqitrAyOOsglQhFQIQDtvxr2Ll2dFg"
+
+AWS_STORAGE_BUCKET_NAME = "msukwini-images"
+
+AWS_S3_ENDPOINT_URL = "https://nyc3.digitaloceanspaces.com"
+
+AWS_S3_OBJECT_PARAMETERS = {
+    "CacheControl": "max-age=86400",
+}
+
+AWS_LOCATION = "msukwini-media"
+
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+STATIC_ROOT = BASE_DIR / "static"
+
+STATICFILES_DIRS = [BASE_DIR / "_static"]
