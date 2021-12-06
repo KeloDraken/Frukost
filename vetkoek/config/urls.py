@@ -19,6 +19,8 @@ from core.views import (
 from core.accounts.views import at_get_user_profile
 
 
+handler404 = 'core.views.handle_404'
+
 urlpatterns = (
     [
         path("", index, name="index"),
