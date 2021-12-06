@@ -6,7 +6,13 @@ SECRET_KEY = "63j9UNXJW8S5Rk1nfk+OI2HtFcodiUDRAfyvVe3tdczODHpg6OTv5dzaixmNAkH9Y3
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = [
+    "msukwini.com",
+    "www.msukwini.com",
+    "127.0.0.1",
+    "localhost",
+    "134.122.24.144",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -86,8 +92,12 @@ if DEBUG:
 else:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+            "ENGINE": "django.db.backends.postgresql_psycopg2",
+            "NAME": "msukwini",
+            "USER": "samkelo",
+            "PASSWORD": "Jm218071748*",
+            "HOST": "localhost",
+            "PORT": "",
         }
     }
 
