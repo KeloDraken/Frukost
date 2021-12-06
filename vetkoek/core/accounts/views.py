@@ -187,6 +187,5 @@ def delete_account(request: HttpRequest):
         return redirect("accounts:edit-user-profile")
     else:
         messages.success(request, "You account has been deleted")
-        request.user.is_active = False
-        request.user.save()
-        return user_logout(request)
+        request.user.delete()
+        return redirect("accounts:user-login")
