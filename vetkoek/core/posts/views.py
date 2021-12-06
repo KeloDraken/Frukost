@@ -76,7 +76,7 @@ def frontpage(request: HttpRequest):
         page_number = 1
 
     qs = Post.objects.all().order_by("-datetime_created")
-    paginator = Paginator(qs, 20)
+    paginator = Paginator(qs, 15)
     page_obj = paginator.get_page(page_number)
 
     context = {
