@@ -11,7 +11,7 @@ from core.forms import EmailForm
 from core.models import Feedback, News, Privacy, Rules, Terms
 
 
-def handle_404(request: HttpRequest):
+def handle_404(request: HttpRequest, exception):
     return render(request, "public/404.html")
 
 
