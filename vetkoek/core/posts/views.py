@@ -30,7 +30,7 @@ def create_post(request: HttpRequest) -> HttpResponse:
         if post_form.is_valid():
             post_form = post_form.save(commit=False)
             post_form.user = request.user
-                           
+
             object_id = object_id_generator(11, Post)
             post_form.object_id = object_id
 
@@ -69,20 +69,17 @@ def get_post(request: HttpRequest, post_id: str) -> HttpResponse:
 
 
 def frontpage(request: HttpRequest) -> HttpResponse:
-    qs = Post.objects.all().order_by("-datetime_created")
-
-    paginator = Paginator(qs, 20)
-
     try:
         page_number = int(request.GET.get("sida"))
     except:
         page_number = 1
 
+    qs = Post.objects.all().order_by("-datetime_created")
+    paginator = Paginator(qs, 20)
     page_obj = paginator.get_page(page_number)
 
     context = {
-        "posts": qs,
-        # "page_obj": page_obj,
+        "page_obj": page_obj,
     }
     return render(request, "public/frontpage.html", context)
 

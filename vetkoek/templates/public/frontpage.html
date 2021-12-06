@@ -8,6 +8,7 @@
         column-count: 4;
         column-gap: 4rem;
     }
+
     .overlay {
         background: linear-gradient(0deg, black, transparent);
     }
@@ -20,13 +21,14 @@
     <div class="mt-7">
         {% include 'components/messages.html' %}
         <div class="masonry px-16 py-8">
-            <div class="mb-8">
-                {% for post in posts %}
+            <div class="mb-8 infinite-container">
+                {% for post in page_obj %}
                 {% include 'components/posts/post_item.html' %}
                 {% endfor %}
             </div>
         </div>
     </div>
+    {% include 'components/infinite_scroll_fetch.html' %}
     {% include 'components/footer.html' %}
 </div>
 {% endblock %}

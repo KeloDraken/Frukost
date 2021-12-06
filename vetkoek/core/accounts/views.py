@@ -123,12 +123,19 @@ def at_get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
     except User.DoesNotExist:
         raise Http404
 
-    if not user.is_active:
-        raise Http404
+    try:
+        page_number = int(request.GET.get("sida"))
+    except:
+        page_number = 1
 
-    posts = Post.objects.filter(user=user).order_by("-datetime_created")
+    qs = Post.objects.filter(user=user).order_by("-datetime_created")
+    paginator = Paginator(qs, 15)
+    page_obj = paginator.get_page(page_number)
 
-    context = {"user": user, "posts": posts}
+    context = {
+        "user": user,
+        "page_obj": page_obj,
+    }
     return render(request, "public/user_profile.html", context)
 
 

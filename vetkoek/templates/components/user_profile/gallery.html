@@ -1,6 +1,6 @@
 <div class="gallery">
 
-    {% for post in posts %}
+    {% for post in page_obj %}
     <div class="gallery-item" tabindex="0">
 
         <img src="{{post.image.url}}" class="gallery-image" alt="user submission post">
