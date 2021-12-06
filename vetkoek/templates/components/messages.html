@@ -3,12 +3,12 @@
     {% for message in messages %}
     {% if message.tags == 'error' %}
     <div class="mb-5">
-        <span class="text-red-600">{{message}}
+        <span class="text-red-600 font-bold">{{message}}
         </span>
     </div>
     {% elif message.tags == 'success' %}
-    <div class="bg-green-400 rounded px-2 py-1 font-bold text-black">
-        {{ message }}
+    <div class="mb-5">
+        <span class="text-green-600 font-bold">{{ message }}</span>
     </div>
     {% endif %}
     {% endfor %}

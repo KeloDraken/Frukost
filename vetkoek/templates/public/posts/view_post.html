@@ -22,7 +22,7 @@
     <div class="flex justify-between mt-36">
         <div>
             <span class="text-gray-400 text-normal">Share: </span>
-            <a href="https://twitter.com/intent/tweet?url=foxstraat.com%2Ff%2F{{post.object_id}}&text=Image%20by%20{{post.user.username}}%20%23Msukwini" target="_blank" class="text-gray-500 underline text-normal">
+            <a href="https://twitter.com/intent/tweet?url=msukwini.com%2Ff%2F{{post.object_id}}&text=Image%20by%20{{post.user.username}}%20%23Msukwini" target="_blank" class="text-gray-500 underline text-normal">
                 Twitter
             </a>
         </div>
@@ -31,13 +31,13 @@
                 Copyright 2021. All rights reserved.
             </p>
             {% if not request.user == post.user %}
-            <p class="text-gray-400 cursor-pointer text-normal underline">
+            <!-- <p class="text-gray-400 cursor-pointer text-normal underline">
                 Report media
-            </p>
+            </p> -->
             {% else %}
-            <p class="text-gray-400 cursor-pointer text-normal underline">
+            <a href="{% url 'posts:delete-post' post_id=post.object_id %}" class="text-gray-400 cursor-pointer text-normal underline">
                 delete post
-            </p>
+            </a>
             {% endif %}
         </div>
     </div>
