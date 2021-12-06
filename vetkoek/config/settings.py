@@ -155,7 +155,7 @@ AWS_SECRET_ACCESS_KEY = "L2Oc2iyNlahEEnqitrAyOOsglQhFQIQDtvxr2Ll2dFg"
 
 AWS_STORAGE_BUCKET_NAME = "msukwini-images"
 
-AWS_S3_ENDPOINT_URL = "https://nyc3.digitaloceanspaces.com"
+AWS_S3_ENDPOINT_URL = "https://fra1.digitaloceanspaces.com"
 
 AWS_S3_OBJECT_PARAMETERS = {
     "CacheControl": "max-age=86400",
