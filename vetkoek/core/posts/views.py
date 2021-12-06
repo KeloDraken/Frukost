@@ -2,9 +2,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from django.core.paginator import Paginator
-from django.http.request import HttpRequest
 
-from django.http.response import Http404, HttpResponse, HttpResponseRedirect
+from django.http.request import HttpRequest
+from django.http.response import Http404
+
 from django.shortcuts import get_object_or_404, redirect, render
 
 from utils.helpers import extract_hashtags, link_tags_to_post, object_id_generator
@@ -15,7 +16,7 @@ from core.posts.models import Post
 
 
 @login_required
-def create_post(request: HttpRequest) -> HttpResponse:
+def create_post(request: HttpRequest):
     # captcha = FormWithCaptcha()
 
     if request.method == "POST":
@@ -60,7 +61,7 @@ def create_post(request: HttpRequest) -> HttpResponse:
     return render(request, "private/submit_post.html", context)
 
 
-def get_post(request: HttpRequest, post_id: str) -> HttpResponse:
+def get_post(request: HttpRequest, post_id: str):
     post = get_object_or_404(Post, object_id=post_id)
     context = {
         "post": post,
@@ -68,7 +69,7 @@ def get_post(request: HttpRequest, post_id: str) -> HttpResponse:
     return render(request, "public/posts/view_post.html", context)
 
 
-def frontpage(request: HttpRequest) -> HttpResponse:
+def frontpage(request: HttpRequest):
     try:
         page_number = int(request.GET.get("sida"))
     except:
@@ -85,7 +86,7 @@ def frontpage(request: HttpRequest) -> HttpResponse:
 
 
 @login_required
-def delete_post(request: HttpRequest, post_id: str) -> HttpResponseRedirect:
+def delete_post(request: HttpRequest, post_id: str):
     try:
         post = Post.objects.get(object_id=post_id)
     except:

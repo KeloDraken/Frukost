@@ -6,7 +6,7 @@ from django.db.models.base import Model
 from core.posts.models import Post, PostTag, Tag
 
 
-def forbidden_attributes() -> list[str]:
+def forbidden_attributes():
     return [
         "iframe",
         "<iframe>",
@@ -111,7 +111,7 @@ def forbidden_attributes() -> list[str]:
     ]
 
 
-def extract_hashtags(text: str) -> list[str]:
+def extract_hashtags(text: str):
     """
     function to extract all the hashtags in a product description.
     It generates new `Tag` instance, if it does not exist, for each of
@@ -130,7 +130,7 @@ def extract_hashtags(text: str) -> list[str]:
     return hashtag_list
 
 
-def link_tags_to_post(post_id: str, tags: list) -> None:
+def link_tags_to_post(post_id, tags):
     post = Post.objects.get(object_id=post_id)
     for tag in tags:
         _tag = Tag.objects.get(name=tag.lower())
@@ -138,8 +138,8 @@ def link_tags_to_post(post_id: str, tags: list) -> None:
 
 
 def object_id_generator(
-    size: int, model: Model, chars: str = string.ascii_letters + string.digits
-) -> str:
+    size, model, chars = string.ascii_letters + string.digits
+):
     """
     Generates and returns base64 call id
     """
@@ -147,7 +147,7 @@ def object_id_generator(
     return check_object_id_exists(object_id=object_id, model=model)
 
 
-def check_object_id_exists(object_id: str, model: Model) -> str:
+def check_object_id_exists(object_id, model):
     """
     Checks if call id exists. Generates and returns new call id if exists
     """
