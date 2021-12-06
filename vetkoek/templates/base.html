@@ -12,23 +12,14 @@
         {% block title %}{% endblock %}
     </title>
 
+
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
-    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{% static 'assets/icons/apple-touch-icon.png' %}">
+    <link rel="shortcut icon" href="{% static 'assets/favicon.ico' %}" type="image/x-icon">
 
-    <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://www.foxstraat.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Msukwini">
-    <meta property="og:image" content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg">
 
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:domain" content="foxstraat.com">
-    <meta property="twitter:url" content="https://www.foxstraat.com/">
-    <meta name="twitter:title" content="Msukwini">
-    <meta name="twitter:image" content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg">
+    {% block og_tags %}{% endblock %}
 
     <!-- Google fonts begin -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +32,8 @@
         * {
             font-family: 'PT Serif Caption', serif;
         }
-        pre{
+
+        pre {
             font-family: 'Open Sans', sans-serif;
         }
     </style>
@@ -52,4 +44,5 @@
     {% block body %}{% endblock %}
     {% block scripts %}{% endblock %}
 </body>
+
 </html>

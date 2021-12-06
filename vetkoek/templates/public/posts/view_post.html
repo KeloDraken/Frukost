@@ -2,6 +2,37 @@
 
 {% block title %}{{post.title}}{% endblock %}
 
+
+{% block og_tags %}
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="https://msukwini.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{post.title}}">
+
+{% if post.caption %}
+<meta property="og:discription" content="{{post.caption}}">
+{% else %}
+<meta property="og:discription" content="{{post.title}}">
+{% endif %}
+
+<meta property="og:image" content="{{post.image.url}}">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="msukwini.com">
+<meta property="twitter:url" content="https://msukwini.com/">
+<meta name="twitter:title" content="{{post.title}}">
+<meta property="twitter:image" content="{{post.image.url}}">
+
+{% if post.caption %}
+<meta property="twitter:discription" content="{{post.caption}}">
+{% else %}
+<meta property="twitter:discription" content="{{post.title}}">
+{% endif %}
+
+{% endblock %}
+
+
 {% block body %}
 <div class="w-full justify-center mx-auto px-60">
     <h1 class="text-2xl text-center mt-10 mb-3 font-bold">{{post.title}}</h1>

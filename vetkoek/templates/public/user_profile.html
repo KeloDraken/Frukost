@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +7,49 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{user.display_name}}</title>
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" href="{% static 'assets/icons/apple-touch-icon.png' %}">
+    <link rel="shortcut icon" href="{% static 'assets/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://msukwini.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ user.username }}">
+
+    {% if user.bio %}
+    <meta property="og:discription" content="{{ user.bio }}">
+    {% else %}
+    <meta property="og:discription"
+        content="A hangout for the based. Msukwini is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression.">
+    {% endif %}
+
+    {% if user.profile_pic %}
+    <meta property="og:image" content="{{ user.profile_pic.url }}">
+    {% else %}
+    <meta property="og:image" content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg">
+    {% endif %}
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="msukwini.com">
+    <meta property="twitter:url" content="https://msukwini.com/">
+    <meta name="twitter:title" content="{{user.username}}">
+
+    {% if user.profile_pic %}
+    <meta property="twitter:image" content="{{ user.profile_pic.url }}">
+    {% else %}
+    <meta property="twitter:image" content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg">
+    {% endif %}
+
+    {% if user.bio %}
+    <meta property="twitter:discription" content="{{ user.bio }}">
+    {% else %}
+    <meta property="twitter:discription"
+        content="A hangout for the based. Msukwini is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression.">
+    {% endif %}
+
     <style>
         .flex {
             display: flex;
