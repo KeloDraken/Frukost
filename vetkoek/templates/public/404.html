@@ -1,6 +1,23 @@
 {% extends "base.html" %}
 {% block title %}Page Not Found{% endblock %}
 
+{% block og_tags %}
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="https://msukwini.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Msukwini">
+<meta property="og:discription" content="A hangout for the based. Msukwini is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression.">
+<meta property="og:image" content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="msukwini.com">
+<meta property="twitter:url" content="https://msukwini.com/">
+<meta name="twitter:title" content="Msukwini">
+<meta name="twitter:image" content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg">
+<meta property="twitter:discription" content="A hangout for the based. Msukwini is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression.">
+{% endblock %}
+
 {% block body %}
 <div class="w-full justify-center mx-auto px-44 mt-44">
     <h1 class="text-3xl text-center mt-16 mb-0 font-bold">Page not found</h1>

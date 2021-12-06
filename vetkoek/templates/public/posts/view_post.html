@@ -2,6 +2,37 @@
 
 {% block title %}{{post.title}}{% endblock %}
 
+
+{% block og_tags %}
+<!-- Facebook Meta Tags -->
+<meta property="og:url" content="https://msukwini.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{post.title}}">
+
+{% if post.caption %}
+<meta property="og:discription" content="{{post.caption}}">
+{% else %}
+<meta property="og:discription" content="{{post.title}}">
+{% endif %}
+
+<meta property="og:image" content="{{post.image.url}}">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta property="twitter:domain" content="msukwini.com">
+<meta property="twitter:url" content="https://msukwini.com/">
+<meta name="twitter:title" content="{{post.title}}">
+<meta property="twitter:image" content="{{post.image.url}}">
+
+{% if post.caption %}
+<meta property="twitter:discription" content="{{post.caption}}">
+{% else %}
+<meta property="twitter:discription" content="{{post.title}}">
+{% endif %}
+
+{% endblock %}
+
+
 {% block body %}
 <div class="w-full justify-center mx-auto px-60">
     <h1 class="text-2xl text-center mt-10 mb-3 font-bold">{{post.title}}</h1>
@@ -22,7 +53,7 @@
     <div class="flex justify-between mt-36">
         <div>
             <span class="text-gray-400 text-normal">Share: </span>
-            <a href="https://twitter.com/intent/tweet?url=foxstraat.com%2Ff%2F{{post.object_id}}&text=Image%20by%20{{post.user.username}}%20%23Msukwini" target="_blank" class="text-gray-500 underline text-normal">
+            <a href="https://twitter.com/intent/tweet?url=msukwini.com%2Ff%2F{{post.object_id}}&text=Image%20by%20{{post.user.username}}%20%23Msukwini" target="_blank" class="text-gray-500 underline text-normal">
                 Twitter
             </a>
         </div>
@@ -31,13 +62,13 @@
                 Copyright 2021. All rights reserved.
             </p>
             {% if not request.user == post.user %}
-            <p class="text-gray-400 cursor-pointer text-normal underline">
+            <!-- <p class="text-gray-400 cursor-pointer text-normal underline">
                 Report media
-            </p>
+            </p> -->
             {% else %}
-            <p class="text-gray-400 cursor-pointer text-normal underline">
+            <a href="{% url 'posts:delete-post' post_id=post.object_id %}" class="text-gray-400 cursor-pointer text-normal underline">
                 delete post
-            </p>
+            </a>
             {% endif %}
         </div>
     </div>
