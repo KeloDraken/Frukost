@@ -30,7 +30,7 @@ def hot(ups, downs, date) -> float:
     return round(sign * order + seconds / 45000, 7)
 
 
-def check_has_user_voted(model: Model, user, post) -> bool:
+def check_has_user_voted(model, user, post):
     try:
         model.objects.get(user=user, post=post)
         return True
@@ -38,7 +38,7 @@ def check_has_user_voted(model: Model, user, post) -> bool:
         return False
 
 
-def cast_vote(post, vote_value: int, vote):
+def cast_vote(post, vote_value, vote):
     vote.has_voted = True
     # Upvote
     if vote_value == 1:

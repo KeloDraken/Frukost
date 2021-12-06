@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from django.core.paginator import Paginator
 from django.http.request import HttpRequest
-from django.http.response import Http404, HttpResponse, HttpResponseRedirect
+from django.http.response import Http404
 from django.shortcuts import redirect, render
 
 from utils.helpers import forbidden_attributes
@@ -18,7 +18,7 @@ from core.accounts.forms import EditUserProfileForm, UserLoginForm, UserRegistra
 from core.accounts.models import User
 
 
-def explore_users(request: HttpRequest) -> HttpResponse:
+def explore_users(request: HttpRequest):
     user_objects = User.objects.all().order_by("-datetime_joined")
     paginator = Paginator(user_objects, 20)
 
@@ -43,7 +43,7 @@ def request_has_valid_captcha(request: HttpRequest) -> bool:
     return False
 
 
-def login_user_on_register(request: HttpRequest) -> HttpResponseRedirect:
+def login_user_on_register(request: HttpRequest):
     """
     Logs user in on successful `User` instance creation
     """
@@ -99,12 +99,12 @@ user_login = UserLoginView.as_view()
 
 
 @login_required
-def user_logout(request: HttpRequest) -> HttpResponseRedirect:
+def user_logout(request: HttpRequest):
     logout(request)
     return redirect("accounts:user-login")
 
 
-def upgrade_user_account(request: HttpRequest) -> HttpResponse:
+def upgrade_user_account(request: HttpRequest):
     if request.method == "POST":
         subscribers, o = Subscribers.objects.get_or_create()
         subscribers.count += 1
@@ -117,7 +117,7 @@ def upgrade_user_account(request: HttpRequest) -> HttpResponse:
     return render(request, "private/upgrade/credit_card_form.html")
 
 
-def at_get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
+def at_get_user_profile(request: HttpRequest, username: str):
     try:
         user = User.objects.get(username=username)
     except User.DoesNotExist:
@@ -179,7 +179,7 @@ def edit_user_profile(request: HttpRequest) -> HttpRequest:
 
 
 @login_required
-def delete_account(request: HttpRequest) -> HttpResponseRedirect:
+def delete_account(request: HttpRequest):
     if request.user.is_superuser:
         messages.error(
             request, "Admins need to use the admin site to delete their accounts"

@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http.request import HttpRequest
-from django.http.response import HttpResponse
 from django.shortcuts import render
 
 from core.accounts.models import User
@@ -11,7 +10,7 @@ from core.posts.models import Post
 
 
 @login_required
-def advanced_search(request: HttpRequest) -> HttpResponse:
+def advanced_search(request: HttpRequest):
     search_query = request.GET.get("q")
     if search_query:
         search_models = [User, Post]
@@ -44,7 +43,7 @@ def advanced_search(request: HttpRequest) -> HttpResponse:
         return render(request, "public/search/search.html")
 
 
-def search(request: HttpRequest) -> HttpResponse:
+def search(request: HttpRequest):
     search_query = request.GET.get("q")
     if search_query:
         qs = (

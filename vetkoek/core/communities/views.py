@@ -1,14 +1,13 @@
 from django.core.paginator import Paginator
 from django.http.request import HttpRequest
 
-from django.http.response import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render
 
 from core.communities.models import Community
 
 
 
-def get_communities(request: HttpRequest) -> HttpResponse:
+def get_communities(request: HttpRequest):
     qs = Community.objects.all().order_by("-datetime_created")
 
     paginator = Paginator(qs, 20)
@@ -26,7 +25,7 @@ def get_communities(request: HttpRequest) -> HttpResponse:
     }
     return render(request, "public/communities.html", context)
 
-def get_community(request: HttpRequest, name: str) -> HttpResponseRedirect:
+def get_community(request: HttpRequest, name: str):
     try:
         community = Community.objects.get(title=name)
     except Community.DoesNotExist:
