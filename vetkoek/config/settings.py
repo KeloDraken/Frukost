@@ -11,7 +11,7 @@ ALLOWED_HOSTS = [
     "www.msukwini.com",
     "127.0.0.1",
     "localhost",
-    "134.122.24.144",
+    "157.245.249.4",
 ]
 
 INSTALLED_APPS = [
