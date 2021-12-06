@@ -124,9 +124,9 @@ LOGIN_REDIRECT_URL = "/f/"
 
 STATIC_URL = "/static/"
 
-STATIC_ROOT = BASE_DIR / "static-root"
+STATIC_ROOT = BASE_DIR / "static"
 
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [BASE_DIR / "_static"]
 
 MEDIA_URL = "/media/"
 
