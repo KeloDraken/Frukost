@@ -123,10 +123,6 @@ LOGIN_URL = "/u/login/"
 
 LOGIN_REDIRECT_URL = "/f/"
 
-MEDIA_URL = "/media/"
-
-MEDIA_ROOT = BASE_DIR / "media-root"
-
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
@@ -170,3 +166,9 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATIC_ROOT = BASE_DIR / "static"
 
 STATICFILES_DIRS = [BASE_DIR / "_static"]
+
+MEDIA_URL = "/media/"
+
+PUBLIC_MEDIA_LOCATION = 'media'
+
+MEDIA_URL = f'https://{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/'
