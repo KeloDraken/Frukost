@@ -78,7 +78,7 @@ class User(AbstractUser):
         default="""
 <style>
     /*
-        Main Foxstraat user profile Stylesheet
+        Main Msukwini user profile Stylesheet
         (c) 2020-2021 Samkelo Rocks (Pty) Ltd
     */
 

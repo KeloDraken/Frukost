@@ -6,6 +6,13 @@ class News(models.Model):
     datetime_created = models.DateTimeField(auto_now_add=True)
 
 
+class Subscribers(models.Model):
+    count = models.PositiveBigIntegerField(default=0)
+    
+    def __str__(self) -> str:
+        return str(self.count)
+
+
 class Feedback(models.Model):
     object_id = models.CharField(max_length=11, null=False, blank=False)
     body = models.TextField(max_length=2000, null=False, blank=False)

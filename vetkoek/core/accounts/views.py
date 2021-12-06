@@ -11,6 +11,8 @@ from django.shortcuts import redirect, render
 from utils.helpers import forbidden_attributes
 
 from core.forms import FormWithCaptcha
+from core.models import Subscribers
+
 from core.posts.models import Post
 from core.accounts.forms import EditUserProfileForm, UserLoginForm, UserRegistrationForm
 from core.accounts.models import User
@@ -52,7 +54,10 @@ def login_user_on_register(request: HttpRequest) -> HttpResponseRedirect:
 
     if user is not None:
         login(request, user)
-        messages.success(request, "Welcome to  Feel free to explore.")
+        messages.success(
+            request,
+            "Welcome to Msukwini. You're among the first to join. So take a look around and tell me what you think.",
+        )
         return redirect("posts:frontpage")
     else:
         messages.error(request, "Something went wrong")
@@ -100,10 +105,17 @@ def user_logout(request: HttpRequest) -> HttpResponseRedirect:
 
 
 def upgrade_user_account(request: HttpRequest) -> HttpResponse:
+    if request.method == "POST":
+        subscribers, o = Subscribers.objects.get_or_create()
+        subscribers.count += 1
+        subscribers.save()
+        messages.error(
+            request,
+            "Something went wrong. Your card details were not saved or processed. Please try again later.",
+        )
+        return redirect("accounts:upgrade")
     return render(request, "private/upgrade/credit_card_form.html")
 
-def get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
-    return redirect("at-get-user", username=username)
 
 def at_get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
     try:
@@ -111,12 +123,19 @@ def at_get_user_profile(request: HttpRequest, username: str) -> HttpResponse:
     except User.DoesNotExist:
         raise Http404
 
-    if not user.is_active:
-        raise Http404
+    try:
+        page_number = int(request.GET.get("sida"))
+    except:
+        page_number = 1
 
-    posts = Post.objects.filter(user=user).order_by("-datetime_created")
+    qs = Post.objects.filter(user=user).order_by("-datetime_created")
+    paginator = Paginator(qs, 15)
+    page_obj = paginator.get_page(page_number)
 
-    context = {"user": user, "posts": posts}
+    context = {
+        "user": user,
+        "page_obj": page_obj,
+    }
     return render(request, "public/user_profile.html", context)
 
 
@@ -138,6 +157,9 @@ def edit_user_profile(request: HttpRequest) -> HttpRequest:
         if edit_profile_form.is_valid():
             edit_profile_form.save(commit=False)
 
+            if request.FILES.get("profile_pic") is None:
+                edit_profile_form.profile_pic = request.user.profile_pic
+            
             if not is_dirty_html(request.POST.get("custom_html")):
                 messages.success(request, "Profile updated")
                 edit_profile_form.save()
@@ -145,7 +167,7 @@ def edit_user_profile(request: HttpRequest) -> HttpRequest:
                 messages.error(
                     request,
                     "Your template contains forbidden elements. \
-                    Continued use of these elements will result in a permanent ban from Foxstraat. \
+                    Continued use of these elements will result in a permanent ban from Msukwini. \
                     Please read our rules for more information about which tags and attributes are allowed.",
                 )
         else:

@@ -113,7 +113,6 @@ class EditUserProfileForm(UserChangeForm):
         widget=forms.FileInput(
             attrs={
                 "id": "selected-image",
-                "required": "false",
             }
         ),
     )

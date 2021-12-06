@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Explore and join your favourite communities{% endblock %}
+
+{% block styles %}
+<style>
+    .masonry {
+        column-count: 3;
+        column-gap: 2rem;
+    }
+
+    .overlay {
+        background: linear-gradient(0deg, black, transparent);
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="w-full  mx-auto px-44">
+    <h1 class="text-3xl text-center font-bold mt-16 mb-0">How do they work?</h1>
+    <h1 class="text-lg text-center mt-2 mb-0 font-bold">
+        Communities are forums within Msukwini, dedicated to a variety of topics, from travel to videogames, music, and food.
+        Members can participate in any community. So find one that interests you and jump right in!
+    </h1>
+    <div class="mt-7">
+        {% include 'components/messages.html' %}
+        <div class="masonry px-16 py-8">
+            <div class="mb-8">
+                {% for post in posts %}
+                {% include 'components/posts/community.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="flex justify-center mt-4 mb-5">
+        <div class="flex justify-center mb-16">
+            <a href="{% url 'subscribe' %}" class="bg-black text-white text-sm rounded font-bold px-4 py-3 mr-1">
+                load more
+            </a>
+        </div>
+    </div>
+
+    {% include 'components/footer.html' %}
+</div>
+{% endblock %}

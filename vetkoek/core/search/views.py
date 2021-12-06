@@ -51,13 +51,12 @@ def search(request: HttpRequest) -> HttpResponse:
             User.objects.filter(
                 Q(username__icontains=search_query)
                 | Q(display_name__icontains=search_query)
-                | Q(bio__icontains=search_query)
             )
             .order_by("-last_login")
             .exclude(is_active=False)[:20]
         )
 
-        paginator = Paginator(qs, 15)
+        paginator = Paginator(qs,20)
 
         try:
             page_number = int(request.GET.get("sida"))
@@ -69,12 +68,14 @@ def search(request: HttpRequest) -> HttpResponse:
         context = {"query": search_query, "page": "search", "page_obj": page_obj}
         return render(request, "public/search/results.html", context)
     else:
-        qs = (
-            User.objects.all()
-            .order_by("-datetime_joined")
-            .exclude(object_id=request.user.object_id)[:5]
-        )
-
+        if request.user.is_authenticated:
+            qs = (
+                User.objects.all()
+                .order_by("-datetime_joined")
+                .exclude(object_id=request.user.object_id)[:7]
+            )
+        else:
+            qs = User.objects.all().order_by("-datetime_joined")[:7]
         paginator = Paginator(qs, 15)
 
         try:

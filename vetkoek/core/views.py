@@ -21,7 +21,7 @@ def generate_random_num_once_a_day():
     d1 = datetime.now()
     delta = d1 - d0
     random.seed(delta.days)
-    return random.randint(1,20)
+    return random.randint(3,13)
 
 def subscribe(request: HttpRequest) -> HttpResponse:
     if not request.user.is_authenticated:
@@ -36,8 +36,11 @@ def subscribe(request: HttpRequest) -> HttpResponse:
                 return redirect("accounts:upgrade")
             else:
                 messages.error(request, "Something went wrong. Please try again.")
-                return redirect("accounts:email")
-        else:
+                return redirect("subscribe")
+        else:            
+            if request.user.email is not None and not request.user.email == "":
+                return redirect("accounts:upgrade") 
+                
             form = EmailForm()
         num_joined = generate_random_num_once_a_day()
         context = {"form": form, "num_joined": num_joined}
@@ -70,7 +73,7 @@ def index(request: HttpRequest) -> HttpResponse:
 
 def news(request: HttpRequest) -> HttpResponse:
     news_ = News.objects.all().order_by("-datetime_created")
-    context = {"heading": "Foxstraat News", "news": news_}
+    context = {"heading": "Msukwini News", "news": news_}
     return render(request, "views/blog/news.html", context)
 
 
@@ -86,12 +89,12 @@ def terms(request: HttpRequest) -> HttpResponse:
 
 
 def privacy(request: HttpRequest) -> HttpResponse:
-    news_ = Privacy.objects.all()
+    news_ = Privacy.objects.first()
     context = {"heading": "Privacy Policy", "news": news_}
-    return render(request, "views/blog/news.html", context)
+    return render(request, "public/news.html", context)
 
 
 def rules(request: HttpRequest) -> HttpResponse:
-    news_ = Rules.objects.all()
-    context = {"heading": "Foxstraat Rules", "news": news_}
-    return render(request, "views/blog/news.html", context)
+    news_ = Rules.objects.first()
+    context = {"heading": "Msukwini Rules", "news": news_}
+    return render(request, "public/news.html", context)
