@@ -14,7 +14,7 @@
     <link rel="shortcut icon" href="{% static 'assets/favicon.ico' %}" type="image/x-icon">
 
     <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://msukwini.com/">
+    <meta property="og:url" content="https://msukwini.com/@{{user.username}}/">
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ user.username }}">
 
@@ -33,8 +33,8 @@
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:domain" content="msukwini.com">
-    <meta property="twitter:url" content="https://msukwini.com/">
+    <meta property="twitter:domain" content="msukwini.com/@{{user.username}}/">
+    <meta property="twitter:url" content="https://msukwini.com/@{{user.username}}/">
     <meta name="twitter:title" content="{{user.username}}">
 
     {% if user.profile_pic %}
