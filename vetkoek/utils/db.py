@@ -22,6 +22,15 @@ def score(ups: int, downs: int) -> int:
 
 
 def hot(ups, downs, date) -> float:
+    """
+    "The hot formula. It's the
+    same as the Reddit hot formula."
+
+    :param ups: the number of upvotes the post has received
+    :param downs: The number of downvotes the post has received
+    :param date: The date and time of the submission
+    :return: The hotness of a post.
+    """
     s = score(ups, downs)
     order = log(max(abs(s), 1), 10)
     sign = 1 if s > 0 else -1 if s < 0 else 0
@@ -30,6 +39,14 @@ def hot(ups, downs, date) -> float:
 
 
 def check_has_user_voted(model, user, post):
+    """
+    If the user has voted on the post, return True, otherwise return False
+
+    :param model: The model that you want to check if the user has voted on
+    :param user: The user who is voting
+    :param post: The post object
+    :return: True or False
+    """
     try:
         model.objects.get(user=user, post=post)
         return True
@@ -38,6 +55,16 @@ def check_has_user_voted(model, user, post):
 
 
 def cast_vote(post, vote_value, vote):
+    """
+    If the user upvotes, add 1 to the upvotes, add the score to the post score, and save the vote. If the user downvotes,
+    add 1 to the downvotes, subtract the score from the post score, and save the vote. If the user cancels their vote,
+    subtract 1 from the upvotes or downvotes, subtract the score from the post score, and save the vote
+
+    :param post: The post that the user is voting on
+    :param vote_value: 1 for upvote, -1 for downvote, 0 for cancel vote
+    :param vote: The vote object
+    :return: the HttpResponseBadRequest()
+    """
     vote.has_voted = True
     # Upvote
     if vote_value == 1:
