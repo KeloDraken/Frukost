@@ -42,4 +42,4 @@ class PostTag(models.Model):
     )
 
     def __str__(self):
-        return self.hashtag
+        return self.tag.name
