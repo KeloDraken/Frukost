@@ -5,10 +5,10 @@ from django.contrib.auth.forms import (
     UserCreationForm,
 )
 from django.core.exceptions import ValidationError
-from django.utils.translation import gettext, gettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
-from utils.helpers import object_id_generator
-from core.accounts.models import User
+from vetkoek.core.accounts.models import User
+from vetkoek.utils.helpers import object_id_generator
 
 
 class UserRegistrationForm(UserCreationForm):

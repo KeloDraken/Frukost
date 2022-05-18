@@ -8,7 +8,11 @@ from django.shortcuts import get_object_or_404, redirect, render
 # from core.forms import FormWithCaptcha
 from vetkoek.core.posts.forms import CreatePostForm
 from vetkoek.core.posts.models import Post
-from vetkoek.utils.helpers import extract_hashtags, link_tags_to_post, object_id_generator
+from vetkoek.utils.helpers import (
+    extract_hashtags,
+    link_tags_to_post,
+    object_id_generator,
+)
 
 
 @login_required

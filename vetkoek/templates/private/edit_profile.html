@@ -6,37 +6,40 @@
 <div class="w-full justify-center mx-auto px-44">
     <h1 class="text-3xl text-center mt-16 mb-0 font-bold">Update your ViSpace profile</h1>
     <div class="flex justify-center mb-10">
-        <form action="{% url 'accounts:edit-user-profile' %}" class="mt-7" method="post"  enctype="multipart/form-data">
+        <form action="{% url 'accounts:edit-user-profile' %}" class="mt-7" enctype="multipart/form-data" method="post">
             {% include 'components/messages.html' %}
 
             {% csrf_token %}
 
             {% for field in edit_profile_form %}
-                {% if  not field.html_name == "password" %}
-                    <label for="{{field.auto_id}}" class="text-black font-bold capitalize">
-                        {% if field.html_name == "display_name" %}
-                            Display name
-                        {% elif field.html_name == "profile_pic" %}
-                            Profile picture
-                        {% elif field.html_name == "custom_html" %}
-                            Custom styles
-                        {% else %}
-                            {{ field.html_name }}
-                        {% endif %}
-                    </label>
+            {% if not field.html_name == "password" %}
+            <label class="text-black font-bold capitalize" for="{{field.auto_id}}">
+                {% if field.html_name == "display_name" %}
+                Display name
+                {% elif field.html_name == "profile_pic" %}
+                Profile picture
+                {% elif field.html_name == "custom_html" %}
+                Custom styles
+                {% else %}
+                {{ field.html_name }}
                 {% endif %}
+            </label>
+            {% endif %}
 
-                <span class="text-red-600">{{field.errors}}</span>
-                
-                {% if not field.html_name == "password" %}
-                    <p>{{field}}</p>
-                {% endif %}
+            <span class="text-red-600">{{field.errors}}</span>
+
+            {% if not field.html_name == "password" %}
+            <p>{{field}}</p>
+            {% endif %}
             {% endfor %}
 
             <div class="flex">
-                <button class="bg-black text-white text-normal rounded font-extrabold px-5 py-2 mr-1 mt-3" type="submit">Save
-                    changes</button>
-                <a href="{% url 'accounts:user-logout' %}" class="text-black text-normal px-2 py-2 mr-1  mt-3 underline">or
+                <button class="bg-black text-white text-normal rounded font-extrabold px-5 py-2 mr-1 mt-3"
+                        type="submit">Save
+                    changes
+                </button>
+                <a class="text-black text-normal px-2 py-2 mr-1  mt-3 underline"
+                   href="{% url 'accounts:user-logout' %}">or
                     sign out</a>
             </div>
         </form>
@@ -60,8 +63,8 @@
                 </li>
             </ul>
 
-            <a id="delete-account" class="bg-black text-white text-lg rounded font-bold px-4 py-3 mr-1 mb-3"
-                href="{% url 'accounts:delete-user' %}">
+            <a class="bg-black text-white text-lg rounded font-bold px-4 py-3 mr-1 mb-3" href="{% url 'accounts:delete-user' %}"
+               id="delete-account">
                 delete account
             </a>
         </div>

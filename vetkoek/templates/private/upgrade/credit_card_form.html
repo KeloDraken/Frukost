@@ -15,47 +15,49 @@
     input[type=number] {
         -moz-appearance: textfield;
     }
+
 </style>
 {% endblock %}
 
 {% block body %}
 <div class="w-full justify-center mx-auto px-44">
     <h1 class="text-3xl text-center mt-16 mb-0 font-bold">Join our community and help support ViSpace</h1>
-    <h1 class="text-lg text-center mt-2 mb-0 font-bold">Only $2.99 a month, that's less than 10 cents a day. It's damn near free!</h1>
+    <h1 class="text-lg text-center mt-2 mb-0 font-bold">Only $2.99 a month, that's less than 10 cents a day. It's damn
+        near free!</h1>
     <div class="flex justify-center mb-10">
 
         <form action="{% url 'accounts:upgrade' %}" class="mt-7" method="post">
             {% include 'components/messages.html' %}
             {% csrf_token %}
-            <label for="card_number" class="text-black font-bold capitalize">
+            <label class="text-black font-bold capitalize" for="card_number">
                 Card number
             </label>
-            <input type="number" maxlength="16"
-                class="w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white" required
-                name="card_number" id="card_number" placeholder="Card number" />
+            <input class="w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white" id="card_number"
+                   maxlength="16" name="card_number"
+                   placeholder="Card number" required type="number"/>
 
             <div class="flex">
                 <div class="mr-3">
-                    <label for="expires" class="text-black font-bold capitalize">
+                    <label class="text-black font-bold capitalize" for="expires">
                         Expires
                     </label>
-                    <input type="text" maxlength="5"
-                        class="w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white" required
-                        name="expires" id="expires" placeholder="MM/YY" />
+                    <input class="w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white" id="expires"
+                           maxlength="5" name="expires"
+                           placeholder="MM/YY" required type="text"/>
                 </div>
 
                 <div>
-                    <label for="cvc" class="text-black font-bold capitalize">
+                    <label class="text-black font-bold capitalize" for="cvc">
                         CVC
                     </label>
-                    <input type="number" maxlength="3"
-                        class="w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white" required
-                        name="cvc" id="cvc" placeholder="CVC" />
+                    <input class="w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white" id="cvc"
+                           maxlength="3" name="cvc"
+                           placeholder="CVC" required type="number"/>
                 </div>
             </div>
             <div class="flex flex-row">
                 <button class="w-full bg-black text-white text-normal rounded font-extrabold px-5 py-4 mr-1"
-                    type="submit">
+                        type="submit">
                     Pay now
                 </button>
             </div>

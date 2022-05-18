@@ -51,8 +51,8 @@ def search(request: HttpRequest):
                 Q(username__icontains=search_query)
                 | Q(display_name__icontains=search_query)
             )
-                .order_by("-last_login")
-                .exclude(is_active=False)[:20]
+            .order_by("-last_login")
+            .exclude(is_active=False)[:20]
         )
 
         paginator = Paginator(qs, 20)
@@ -70,8 +70,8 @@ def search(request: HttpRequest):
         if request.user.is_authenticated:
             qs = (
                 User.objects.all()
-                    .order_by("-datetime_joined")
-                    .exclude(object_id=request.user.object_id)[:7]
+                .order_by("-datetime_joined")
+                .exclude(object_id=request.user.object_id)[:7]
             )
         else:
             qs = User.objects.all().order_by("-datetime_joined")[:7]
