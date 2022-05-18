@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 
-{% block title %}Msukwini &mdash; project of liberty{% endblock %}
+{% block title %}ViSpace &mdash; project of liberty{% endblock %}
 
 
 {% block og_tags %}
 <!-- Facebook Meta Tags -->
 <meta property="og:url" content="https://msukwini.com/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Msukwini">
-<meta property="og:discription" content="A hangout for the based. Msukwini is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression.">
+<meta property="og:title" content="ViSpace">
+<meta property="og:discription" content="A hangout for the based. ViSpace is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression.">
 <meta property="og:image" content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg">
 
 <!-- Twitter Meta Tags -->
 <meta name="twitter:card" content="summary_large_image">
 <meta property="twitter:domain" content="msukwini.com">
 <meta property="twitter:url" content="https://msukwini.com/">
-<meta name="twitter:title" content="Msukwini">
+<meta name="twitter:title" content="ViSpace">
 <meta name="twitter:image" content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg">
-<meta property="twitter:discription" content="A hangout for the based. Msukwini is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression.">
+<meta property="twitter:discription" content="A hangout for the based. ViSpace is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression.">
 {% endblock %}
 
 
@@ -27,7 +27,7 @@
     <h1 class="text-4xl text-center mt-16 mb-0 font-bold mt-44">A hangout for the based</h1>
     <div class="flex justify-center mb-10 mx-44">
         <p class="text-black text-center text-xl">
-            Msukwini is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression.
+            ViSpace is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression.
             <br> 
         </p> 
     </div>
@@ -39,7 +39,7 @@
             Create a new submission
         </a>
         {% else %}
-        <a title="Create a Msukwini account" href="{% url 'accounts:user-register' %}"
+        <a title="Create a ViSpace account" href="{% url 'accounts:user-register' %}"
             class="bg-black text-white text-xl rounded text-center font-bold px-4 pt-3 pb-3 mr-1 -mt-2">
             Create an account
         </a>
@@ -49,24 +49,24 @@
     <h1 class="text-4xl text-center mb-0 font-bold mt-96">Fully customisable</h1>
     <div class="flex justify-center mb-10 mx-44 mb-96">
         <p class="text-black text-center text-xl">
-            Msukwini allows you to add custom HTML and CSS code to your profile to
-            give you all the freedom you need to make your profile truly your your Pozi on the web!
+            ViSpace allows you to add custom HTML and CSS code to your profile to
+            give you all the freedom you need to make your profile truly your your Space on the web!
         </p>
     </div>
 
     <h1 class="text-4xl text-center mb-0 font-bold mt-56">Privacy friendly</h1>
     <div class="flex justify-center mb-10 mx-44">
         <p class="text-black text-center text-xl">
-            Msukwini has no algorithms, no tracking, and no personalised ads -
+            ViSpace has no algorithms, no tracking, and no personalised ads -
             feeds are chronological and there is no suggested content begging for your attention. You
             decide what you want to share and what content you'd like to view.
         </p>
     </div>
 
     {%  if not request.user.is_authenticated %}
-    <h1 class="text-4xl text-center font-bold mt-56 mb-10">Join Msukwini for free</h1>
+    <h1 class="text-4xl text-center font-bold mt-56 mb-10">Join ViSpace for free</h1>
     <div class="flex justify-center mx-44 mb-96">
-        <a title="Create a Msukwini account" href="{% url 'accounts:user-register' %}"
+        <a title="Create a ViSpace account" href="{% url 'accounts:user-register' %}"
             class="bg-black text-white text-lg rounded font-bold px-4 pt-3 pb-3 mr-1 -mt-2">
             Create an account
         </a>

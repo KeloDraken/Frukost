@@ -1,7 +1,6 @@
 from django.urls import path
 
-from core.search.views import search
-
+from vetkoek.core.search.views import search
 
 app_name = "search"
 

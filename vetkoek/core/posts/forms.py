@@ -1,6 +1,6 @@
 from django import forms
 
-from core.posts.models import Post
+from vetkoek.core.posts.models import Post
 
 
 class CreatePostForm(forms.ModelForm):

@@ -4,7 +4,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "63j9UNXJW8S5Rk1nfk+OI2HtFcodiUDRAfyvVe3tdczODHpg6OTv5dzaixmNAkH9Y3KeEPi/HCmZnEKTact/7wZL4aN//RzY"
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "msukwini.com",
@@ -27,12 +27,12 @@ INSTALLED_APPS = [
     "corsheaders",
     "imagekit",
     "storages",
-    # Msukwini apps
-    "core",
-    "core.accounts",
-    "core.communities",
-    "core.posts",
-    "core.search",
+    # ViSpace apps
+    "vetkoek.core",
+    "vetkoek.core.accounts",
+    "vetkoek.core.communities",
+    "vetkoek.core.posts",
+    "vetkoek.core.search",
 ]
 
 MIDDLEWARE = [
@@ -48,7 +48,7 @@ MIDDLEWARE = [
     "htmlmin.middleware.MarkRequestMiddleware",
 ]
 
-ROOT_URLCONF = "config.urls"
+ROOT_URLCONF = "vetkoek.config.urls"
 
 TEMPLATES = [
     {
@@ -66,7 +66,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "config.wsgi.application"
+WSGI_APPLICATION = "vetkoek.config.wsgi.application"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -102,10 +102,9 @@ else:
         }
     }
 
-
 AUTH_USER_MODEL = "accounts.User"
 
-AUTHENTICATION_BACKENDS = ["core.accounts.backends.EmailBackend"]
+AUTHENTICATION_BACKENDS = ["vetkoek.core.accounts.backends.EmailBackend"]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -145,32 +144,32 @@ REST_FRAMEWORK = {
     ],
 }
 
-AWS_ACCESS_KEY_ID = "AKO5SR4NSE42JDWTA75I"
+if not DEBUG:
+    AWS_ACCESS_KEY_ID = "AKO5SR4NSE42JDWTA75I"
 
-AWS_SECRET_ACCESS_KEY = "L2Oc2iyNlahEEnqitrAyOOsglQhFQIQDtvxr2Ll2dFg"
+    AWS_SECRET_ACCESS_KEY = "L2Oc2iyNlahEEnqitrAyOOsglQhFQIQDtvxr2Ll2dFg"
 
-AWS_STORAGE_BUCKET_NAME = "msukwini-images"
+    AWS_STORAGE_BUCKET_NAME = "msukwini-images"
 
-AWS_S3_ENDPOINT_URL = "https://fra1.digitaloceanspaces.com"
+    AWS_S3_ENDPOINT_URL = "https://fra1.digitaloceanspaces.com"
 
-AWS_S3_OBJECT_PARAMETERS = {
-    "CacheControl": "max-age=86400",
-}
+    AWS_S3_OBJECT_PARAMETERS = {
+        "CacheControl": "max-age=86400",
+    }
 
-AWS_LOCATION = "msukwini-media"
+    AWS_LOCATION = "msukwini-media"
 
-STATIC_URL = "https://%s/%s/" % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
 
-STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
+    PUBLIC_MEDIA_LOCATION = "media"
+    MEDIA_URL = f"https://{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/"
+    DEFAULT_FILE_STORAGE = "config.storage_backends.PublicMediaStorage"
+
+else:
+    STATIC_URL = "static/"
+    STATICFILES_DIRS = [BASE_DIR / "_static"]
+    MEDIA_URL = "/media/"
 
 STATIC_ROOT = BASE_DIR / "static"
-
-STATICFILES_DIRS = [BASE_DIR / "_static"]
-
-MEDIA_URL = "/media/"
-
-PUBLIC_MEDIA_LOCATION = "media"
-
-MEDIA_URL = f"https://{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/"
-
-DEFAULT_FILE_STORAGE = "config.storage_backends.PublicMediaStorage"

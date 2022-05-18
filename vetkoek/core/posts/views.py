@@ -1,18 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
 from django.core.paginator import Paginator
-
 from django.http.request import HttpRequest
 from django.http.response import Http404
-
 from django.shortcuts import get_object_or_404, redirect, render
 
-from utils.helpers import extract_hashtags, link_tags_to_post, object_id_generator
-
 # from core.forms import FormWithCaptcha
-from core.posts.forms import CreatePostForm
-from core.posts.models import Post
+from vetkoek.core.posts.forms import CreatePostForm
+from vetkoek.core.posts.models import Post
+from vetkoek.utils.helpers import extract_hashtags, link_tags_to_post, object_id_generator
 
 
 @login_required

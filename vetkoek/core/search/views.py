@@ -5,8 +5,8 @@ from django.db.models import Q
 from django.http.request import HttpRequest
 from django.shortcuts import render
 
-from core.accounts.models import User
-from core.posts.models import Post
+from vetkoek.core.accounts.models import User
+from vetkoek.core.posts.models import Post
 
 
 @login_required
@@ -51,11 +51,11 @@ def search(request: HttpRequest):
                 Q(username__icontains=search_query)
                 | Q(display_name__icontains=search_query)
             )
-            .order_by("-last_login")
-            .exclude(is_active=False)[:20]
+                .order_by("-last_login")
+                .exclude(is_active=False)[:20]
         )
 
-        paginator = Paginator(qs,20)
+        paginator = Paginator(qs, 20)
 
         try:
             page_number = int(request.GET.get("sida"))
@@ -70,8 +70,8 @@ def search(request: HttpRequest):
         if request.user.is_authenticated:
             qs = (
                 User.objects.all()
-                .order_by("-datetime_joined")
-                .exclude(object_id=request.user.object_id)[:7]
+                    .order_by("-datetime_joined")
+                    .exclude(object_id=request.user.object_id)[:7]
             )
         else:
             qs = User.objects.all().order_by("-datetime_joined")[:7]

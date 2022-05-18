@@ -1,21 +1,18 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth.views import LoginView
 from django.core.paginator import Paginator
 from django.http.request import HttpRequest
 from django.http.response import Http404
 from django.shortcuts import redirect, render
 
-from utils.helpers import forbidden_attributes
-
-from core.forms import FormWithCaptcha
-from core.models import Subscribers
-
-from core.posts.models import Post
-from core.accounts.forms import EditUserProfileForm, UserLoginForm, UserRegistrationForm
-from core.accounts.models import User
+from vetkoek.core.accounts.forms import EditUserProfileForm, UserLoginForm, UserRegistrationForm
+from vetkoek.core.accounts.models import User
+from vetkoek.core.forms import FormWithCaptcha
+from vetkoek.core.models import Subscribers
+from vetkoek.core.posts.models import Post
+from vetkoek.utils.helpers import forbidden_attributes
 
 
 def explore_users(request: HttpRequest):
@@ -56,7 +53,7 @@ def login_user_on_register(request: HttpRequest):
         login(request, user)
         messages.success(
             request,
-            "Welcome to Msukwini. You're among the first to join. So take a look around and tell me what you think.",
+            "Welcome to ViSpace. You're among the first to join. So take a look around and tell me what you think.",
         )
         return redirect("posts:frontpage")
     else:
@@ -159,7 +156,7 @@ def edit_user_profile(request: HttpRequest) -> HttpRequest:
 
             if request.FILES.get("profile_pic") is None:
                 edit_profile_form.profile_pic = request.user.profile_pic
-            
+
             if not is_dirty_html(request.POST.get("custom_html")):
                 messages.success(request, "Profile updated")
                 edit_profile_form.save()
@@ -167,7 +164,7 @@ def edit_user_profile(request: HttpRequest) -> HttpRequest:
                 messages.error(
                     request,
                     "Your template contains forbidden elements. \
-                    Continued use of these elements will result in a permanent ban from Msukwini. \
+                    Continued use of these elements will result in a permanent ban from ViSpace. \
                     Please read our rules for more information about which tags and attributes are allowed.",
                 )
         else:

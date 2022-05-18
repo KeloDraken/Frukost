@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.communities.models import Community
+from vetkoek.core.communities.models import Community
 
 
 class CommunityAdmin(admin.ModelAdmin):

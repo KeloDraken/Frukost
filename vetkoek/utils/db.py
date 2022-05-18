@@ -1,7 +1,6 @@
 from datetime import datetime
 from math import log
 
-from django.db.models import Model
 from django.http import HttpResponseBadRequest
 
 

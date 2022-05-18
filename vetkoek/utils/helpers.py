@@ -1,9 +1,7 @@
 import random
 import string
 
-from django.db.models.base import Model
-
-from core.posts.models import Post, PostTag, Tag
+from vetkoek.core.posts.models import Post, PostTag, Tag
 
 
 def forbidden_attributes():
@@ -137,9 +135,7 @@ def link_tags_to_post(post_id, tags):
         PostTag.objects.create(post=post, tag=_tag)
 
 
-def object_id_generator(
-    size, model, chars = string.ascii_letters + string.digits
-):
+def object_id_generator(size, model, chars=string.ascii_letters + string.digits):
     """
     Generates and returns base64 call id
     """
