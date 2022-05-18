@@ -7,8 +7,6 @@ from django.utils.translation import gettext_lazy as _
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
 
-from core.accounts.validators import UnicodeEmailValidator
-
 
 class LowercaseCharField(models.CharField):
     """
@@ -78,7 +76,7 @@ class User(AbstractUser):
         default="""
 <style>
     /*
-        Main Msukwini user profile Stylesheet
+        Main ViSpace user profile Stylesheet
         (c) 2020-2021 Samkelo Rocks (Pty) Ltd
     */
 

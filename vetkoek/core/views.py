@@ -1,14 +1,13 @@
-from datetime import datetime
 import random
+from datetime import datetime
 
 from django.contrib import messages
 from django.http.request import HttpRequest
 from django.shortcuts import redirect, render
 
-from utils.helpers import object_id_generator
-
-from core.forms import EmailForm
-from core.models import Feedback, News, Privacy, Rules, Terms
+from vetkoek.core.forms import EmailForm
+from vetkoek.core.models import Feedback, News, Privacy, Rules, Terms
+from vetkoek.utils.helpers import object_id_generator
 
 
 def handle_404(request: HttpRequest, exception):
@@ -16,13 +15,14 @@ def handle_404(request: HttpRequest, exception):
 
 
 def generate_random_num_once_a_day():
-    d0 = datetime(2008, 8, 18) 
+    d0 = datetime(2008, 8, 18)
     d1 = datetime.now()
     delta = d1 - d0
     random.seed(delta.days)
-    return random.randint(3,13)
+    return random.randint(3, 13)
 
-def subscribe(request: HttpRequest):
+
+def subscribe(request):
     if not request.user.is_authenticated:
         messages.error(request, "You need to be logged in to upgrade your account")
         return redirect("accounts:user-login")
@@ -36,10 +36,10 @@ def subscribe(request: HttpRequest):
             else:
                 messages.error(request, "Something went wrong. Please try again.")
                 return redirect("subscribe")
-        else:            
+        else:
             if request.user.email is not None and not request.user.email == "":
-                return redirect("accounts:upgrade") 
-                
+                return redirect("accounts:upgrade")
+
             form = EmailForm()
         num_joined = generate_random_num_once_a_day()
         context = {"form": form, "num_joined": num_joined}
@@ -72,7 +72,7 @@ def index(request: HttpRequest):
 
 def news(request: HttpRequest):
     news_ = News.objects.all().order_by("-datetime_created")
-    context = {"heading": "Msukwini News", "news": news_}
+    context = {"heading": "ViSpace News", "news": news_}
     return render(request, "views/blog/news.html", context)
 
 
@@ -95,5 +95,5 @@ def privacy(request: HttpRequest):
 
 def rules(request: HttpRequest):
     news_ = Rules.objects.first()
-    context = {"heading": "Msukwini Rules", "news": news_}
+    context = {"heading": "ViSpace Rules", "news": news_}
     return render(request, "public/news.html", context)

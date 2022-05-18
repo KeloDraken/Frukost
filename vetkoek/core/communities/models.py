@@ -1,9 +1,8 @@
 from django.db import models
-
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFit
 
-from core.accounts.models import User
+from vetkoek.core.accounts.models import User
 
 
 class Community(models.Model):
@@ -19,6 +18,3 @@ class Community(models.Model):
     )
     date_created = models.DateField(auto_now_add=True, null=True, blank=True)
     datetime_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
-    
-    
-

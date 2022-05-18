@@ -1,6 +1,6 @@
 from django.urls import path
 
-from core.accounts.views import (
+from vetkoek.core.accounts.views import (
     delete_account,
     explore_users,
     user_registration,

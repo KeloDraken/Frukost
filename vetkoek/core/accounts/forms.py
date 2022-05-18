@@ -131,7 +131,7 @@ class EditUserProfileForm(UserChangeForm):
             }
         ),
     )
-    
+
     bio = forms.CharField(
         required=False,
         widget=forms.Textarea(

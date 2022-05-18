@@ -1,12 +1,13 @@
+from captcha.fields import ReCaptchaField
 from django import forms
 from django.contrib.auth.forms import UserChangeForm
-from captcha.fields import ReCaptchaField
 
-from core.accounts.models import User
+from vetkoek.core.accounts.models import User
 
 
 class FormWithCaptcha(forms.Form):
     captcha = ReCaptchaField(label="", required=True)
+
 
 class EmailForm(UserChangeForm):
     email = forms.EmailField(
@@ -22,8 +23,7 @@ class EmailForm(UserChangeForm):
             }
         ),
     )
+
     class Meta:
         model = User
-        fields = (
-            'email',
-        )
+        fields = ("email",)

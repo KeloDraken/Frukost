@@ -1,6 +1,6 @@
 from django.urls import path
-from core.communities.views import get_communities, get_community
 
+from vetkoek.core.communities.views import get_communities, get_community
 
 app_name = "communities"
 

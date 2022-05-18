@@ -1,5 +1,6 @@
 from django.contrib import admin
-from core.models import (
+
+from vetkoek.core.models import (
     Feedback,
     News,
     Privacy,
@@ -7,7 +8,6 @@ from core.models import (
     Subscribers,
     Terms,
 )
-
 
 admin.site.register(News)
 admin.site.register(Feedback)

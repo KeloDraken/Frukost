@@ -1,7 +1,6 @@
 from django.urls import path
 
-from core.posts.views import create_post, get_post, frontpage, delete_post
-
+from vetkoek.core.posts.views import create_post, get_post, frontpage, delete_post
 
 app_name = "posts"
 

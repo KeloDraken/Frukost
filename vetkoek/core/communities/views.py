@@ -1,10 +1,8 @@
 from django.core.paginator import Paginator
 from django.http.request import HttpRequest
-
 from django.shortcuts import redirect, render
 
-from core.communities.models import Community
-
+from vetkoek.core.communities.models import Community
 
 
 def get_communities(request: HttpRequest):
@@ -24,6 +22,7 @@ def get_communities(request: HttpRequest):
         # "page_obj": page_obj,
     }
     return render(request, "public/communities.html", context)
+
 
 def get_community(request: HttpRequest, name: str):
     try:
