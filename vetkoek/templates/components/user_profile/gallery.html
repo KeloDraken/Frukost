@@ -3,9 +3,9 @@
     {% for post in page_obj %}
     <div class="gallery-item" tabindex="0">
 
-        <img src="{{post.image.url}}" class="gallery-image" alt="user submission post">
+        <img alt="user submission post" class="gallery-image" src="{{post.image.url}}">
 
-        <a href="{% url 'posts:get-post' post_id=post.object_id %}" class="gallery-item-link">
+        <a class="gallery-item-link" href="{% url 'posts:get-post' post_id=post.object_id %}">
             <div class="gallery-item-info">
                 <ul>
                     <li class="gallery-item-likes">{{post.title}}</li>

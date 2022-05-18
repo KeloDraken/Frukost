@@ -7,7 +7,11 @@ from django.http.request import HttpRequest
 from django.http.response import Http404
 from django.shortcuts import redirect, render
 
-from vetkoek.core.accounts.forms import EditUserProfileForm, UserLoginForm, UserRegistrationForm
+from vetkoek.core.accounts.forms import (
+    EditUserProfileForm,
+    UserLoginForm,
+    UserRegistrationForm,
+)
 from vetkoek.core.accounts.models import User
 from vetkoek.core.forms import FormWithCaptcha
 from vetkoek.core.models import Subscribers

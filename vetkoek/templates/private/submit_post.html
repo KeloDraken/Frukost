@@ -7,7 +7,7 @@
     <h1 class="text-3xl text-center mt-10 mb-0 font-bold">Create new submission</h1>
     <div class="flex justify-center mb-10">
 
-        <form action="{% url 'posts:create-post' %}" class="mt-7" method="post" enctype="multipart/form-data">
+        <form action="{% url 'posts:create-post' %}" class="mt-7" enctype="multipart/form-data" method="post">
             {% csrf_token %}
             {% include 'components/messages.html' %}
 
@@ -24,7 +24,7 @@
 
             {% for field in post_form %}
 
-            <label for="{{field.auto_id}}" class="text-black font-bold capitalize">
+            <label class="text-black font-bold capitalize" for="{{field.auto_id}}">
                 {% if not field.html_name == "image" %}
                 {{ field.html_name }}
                 {% else %}
@@ -38,7 +38,8 @@
 
             <div class="flex flex-row mt-10">
                 <button class="bg-black text-white text-normal rounded font-extrabold px-5 py-2 mr-1"
-                    type="submit">Submit this post</button>
+                        type="submit">Submit this post
+                </button>
                 <span class="text-black text-normal px-2 py-2 mr-1">make sure you've read and understood the rules
                     before posting</span>
             </div>
