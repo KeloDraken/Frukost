@@ -6,6 +6,8 @@ from django.http.response import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 
 # from core.forms import FormWithCaptcha
+from typing import List
+
 from vetkoek.core.posts.forms import CreatePostForm
 from vetkoek.core.posts.models import Post
 from vetkoek.utils.helpers import (
@@ -46,11 +48,11 @@ def create_post(request: HttpRequest):
             post_form = post_form.save(commit=False)
             post_form.user = request.user
 
-            object_id = object_id_generator(11, Post)
+            object_id: str = object_id_generator(11, Post)
             post_form.object_id = object_id
 
             caption = request.POST["caption"]
-            hashtags = extract_hashtags(text=caption)
+            hashtags: List[str] = extract_hashtags(text=caption)
 
             request.user.num_posts = request.user.num_posts + 1
             request.user.save()
