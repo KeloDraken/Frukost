@@ -21,6 +21,8 @@ def get_communities(request: HttpRequest):
         page_number = int(request.GET.get("sida"))
     except ValueError:
         page_number = 1
+    except TypeError:
+        page_number = 1
 
     page_obj = paginator.get_page(page_number)
 
