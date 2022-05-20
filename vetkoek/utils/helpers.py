@@ -1,5 +1,6 @@
 import random
 import string
+from typing import List
 
 from vetkoek.core.posts.models import Post, PostTag, Tag
 
@@ -119,7 +120,7 @@ def extract_hashtags(text: str):
     It generates new `Tag` instance, if it does not exist, for each of
     of the tags
     """
-    hashtag_list = []
+    hashtag_list: List[str] = list()
 
     for word in text.split():
         if word[0] == "#":

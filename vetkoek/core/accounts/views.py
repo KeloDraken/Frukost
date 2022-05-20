@@ -38,6 +38,8 @@ def explore_users(request: HttpRequest):
         page_number = int(request.GET.get("sida"))
     except ValueError:
         page_number = 1
+    except TypeError:
+        page_number = 1
 
     page_obj = paginator.get_page(page_number)
 
@@ -177,6 +179,8 @@ def at_get_user_profile(request: HttpRequest, username: str):
     try:
         page_number = int(request.GET.get("sida"))
     except ValueError:
+        page_number = 1
+    except TypeError:
         page_number = 1
 
     qs = Post.objects.filter(user=user).order_by("-datetime_created")
