@@ -10,7 +10,7 @@ class Community(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.DO_NOTHING)
     title = models.CharField(max_length=140, null=False, blank=False)
     image = ProcessedImageField(
-        upload_to="uploads/communities/banners/",
+        upload_to="posts/images/",
         processors=[ResizeToFit(480, 600)],
         format="JPEG",
         options={"quality": 90},
