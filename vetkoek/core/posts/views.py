@@ -40,7 +40,7 @@ def create_post(request: HttpRequest):
         # if captcha_data == "" or captcha_data is None:
         #     messages.error(request, "Please confirm that you're not a robot")
 
-        if post_form.is_valid():
+        if not post_form.is_valid():
             messages.error(request, "Post creation failed")
         else:
             post_form = post_form.save(commit=False)
@@ -103,7 +103,6 @@ def frontpage(request: HttpRequest):
         page_number = 1
     except TypeError:
         page_number = 1
-
 
     qs = Post.objects.all().order_by("-datetime_created")
     paginator = Paginator(qs, 15)
