@@ -6,13 +6,7 @@ SECRET_KEY = "63j9UNXJW8S5Rk1nfk+OI2HtFcodiUDRAfyvVe3tdczODHpg6OTv5dzaixmNAkH9Y3
 
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    "msukwini.com",
-    "www.msukwini.com",
-    "127.0.0.1",
-    "localhost",
-    "157.245.249.4",
-]
+ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
