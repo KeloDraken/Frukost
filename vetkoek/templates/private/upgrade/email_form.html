@@ -13,7 +13,7 @@
 
             {% for field in form %}
             {% if not field.html_name == "password" %}
-            <label for="{{field.auto_id}}" class="text-black font-bold capitalize">
+            <label class="text-black font-bold capitalize" for="{{field.auto_id}}">
                 {% if field.html_name == "email" %}
                 email address
                 {% endif %}
@@ -29,12 +29,12 @@
 
             <div>
                 <button class="bg-black w-full text-white text-normal rounded font-extrabold px-5 py-3 mr-1 mb-3"
-                    type="submit">
+                        type="submit">
                     Join the ViSpace community
                 </button>
                 <span class="text-black">
                     Why isn't ViSpace free?
-                    <a href="https://nomadlist.com/faq#free" target="_blank" class="font-bold underline">See...</a>
+                    <a class="font-bold underline" href="https://nomadlist.com/faq#free" target="_blank">See...</a>
                 </span>
             </div>
         </form>
@@ -54,10 +54,11 @@
                 focused topics and themes)
             </p>
         </div>
-        
+
         <div class="flex border-2 border-gray-300 p-5 hover:bg-gray-200 bg-gray-100">
             <p class="text-black font-extrabold text-xl ml-3">
-                You will be able to subscribe to your favourite accounts and be kept up-to-date with all their latest submissions
+                You will be able to subscribe to your favourite accounts and be kept up-to-date with all their latest
+                submissions
             </p>
         </div>
 

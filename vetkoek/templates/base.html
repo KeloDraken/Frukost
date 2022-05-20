@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="author" value="Samkelo Kgosiemang-Drakensberg">
     <!-- <link href="{% static 'css/tailwind.min.css' %}" rel="stylesheet"> -->
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
@@ -14,20 +14,20 @@
     </title>
 
 
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="apple-touch-icon" href="{% static 'assets/icons/apple-touch-icon.png' %}">
-    <link rel="shortcut icon" href="{% static 'assets/favicon.ico' %}" type="image/x-icon">
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <link href="{% static 'assets/icons/apple-touch-icon.png' %}" rel="apple-touch-icon">
+    <link href="{% static 'assets/favicon.ico' %}" rel="shortcut icon" type="image/x-icon">
 
 
     {% block og_tags %}{% endblock %}
 
     <!-- Google fonts begin -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif+Caption&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
     {% block styles %}{% endblock %}
     <style>
         * {
@@ -37,6 +37,7 @@
         pre {
             font-family: 'Open Sans', sans-serif;
         }
+
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-X1CBV76F1P"></script>
     <script>
@@ -45,13 +46,14 @@
       gtag('js', new Date());
     
       gtag('config', 'G-X1CBV76F1P');
+
     </script>
 </head>
 
 <body>
-    {% include 'components/navbar.html' %}
-    {% block body %}{% endblock %}
-    {% block scripts %}{% endblock %}
+{% include 'components/navbar.html' %}
+{% block body %}{% endblock %}
+{% block scripts %}{% endblock %}
 </body>
 
 </html>

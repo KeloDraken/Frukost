@@ -2,8 +2,8 @@
 
     <div class="profile-image">
         {% if user.profile_pic %}
-        <img src="{{user.profile_pic.url}}"
-            alt="user profile photo" 
+        <img alt="user profile photo"
+             src="{{user.profile_pic.url}}"
         />
         {% endif %}
     </div>
@@ -11,9 +11,9 @@
     <div class="profile-user-settings">
         <h1 class="profile-user-name">{{user.username}}</h1>
         {% if request.user.username == user.username %}
-        <a href="{% url 'accounts:edit-user-profile' %}" class="btn profile-btn">Edit Profile</a>
+        <a class="btn profile-btn" href="{% url 'accounts:edit-user-profile' %}">Edit Profile</a>
         {% else %}
-        <a href="{% url 'subscribe' %}" class="btn profile-btn">Subscribe</a>
+        <a class="btn profile-btn" href="{% url 'subscribe' %}">Subscribe</a>
         {% endif %}
     </div>
 
@@ -21,7 +21,9 @@
     <div class="profile-stats">
         <ul>
             <li><span class="profile-stat-count">{{user.num_posts}}</span> post{{user.num_posts|pluralize}}</li>
-            <li><span class="profile-stat-count">{{ user.subscribers }}</span> subscriber{{ user.subscribers|pluralize }}</li>
+            <li>
+                <span class="profile-stat-count">{{ user.subscribers }}</span> subscriber{{ user.subscribers|pluralize }}
+            </li>
         </ul>
     </div>
     {% endif %}

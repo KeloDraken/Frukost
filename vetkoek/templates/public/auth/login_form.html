@@ -20,7 +20,7 @@
 
             {% csrf_token %}
             {% for field in form %}
-            <label for="{{field.auto_id}}" class="text-black font-bold capitalize">
+            <label class="text-black font-bold capitalize" for="{{field.auto_id}}">
                 {{ field.html_name }}
             </label>
 
@@ -28,8 +28,9 @@
             {% endfor %}
             <div class="flex flex-row">
                 <button class="bg-black text-white text-normal rounded font-extrabold px-5 py-2 mr-1" type="submit">Sign
-                    in</button>
-                <a href="{% url 'accounts:user-register' %}" class="text-black text-normal px-2 py-2 mr-1 underline">or
+                    in
+                </button>
+                <a class="text-black text-normal px-2 py-2 mr-1 underline" href="{% url 'accounts:user-register' %}">or
                     create
                     account instead</a>
             </div>

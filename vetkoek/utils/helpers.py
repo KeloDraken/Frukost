@@ -1,10 +1,15 @@
 import random
 import string
+from typing import List
 
 from vetkoek.core.posts.models import Post, PostTag, Tag
 
 
 def forbidden_attributes():
+    """
+    It returns a list of all the attributes that are forbidden in HTML
+    :return: A list of forbidden attributes.
+    """
     return [
         "iframe",
         "<iframe>",
@@ -115,7 +120,7 @@ def extract_hashtags(text: str):
     It generates new `Tag` instance, if it does not exist, for each of
     of the tags
     """
-    hashtag_list = []
+    hashtag_list: List[str] = list()
 
     for word in text.split():
         if word[0] == "#":
@@ -129,6 +134,12 @@ def extract_hashtags(text: str):
 
 
 def link_tags_to_post(post_id, tags):
+    """
+    It takes a post id and a list of tags, and links the tags to the post
+
+    :param post_id: The id of the post you want to link the tags to
+    :param tags: a list of strings
+    """
     post = Post.objects.get(object_id=post_id)
     for tag in tags:
         _tag = Tag.objects.get(name=tag.lower())

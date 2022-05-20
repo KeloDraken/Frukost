@@ -10,28 +10,31 @@
         <form action="{% url 'search:search' %}" class="mt-7" method="get">
             {% include 'components/messages.html' %}
 
-            <input class="w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white" autofocus autocapitalize="off" autocomplete="off" required type="text" name="q"
-            placeholder="Search users" />
-            <input type="hidden" name="ref" value="search">
+            <input autocapitalize="off" autocomplete="off"
+                   autofocus class="w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white" name="q" placeholder="Search users" required
+                   type="text"/>
+            <input name="ref" type="hidden" value="search">
             {% csrf_token %}
             <div class="flex">
                 <button class="bg-black w-full text-white text-normal rounded font-extrabold px-5 py-2 mr-1"
-                type="submit">Search</button>
+                        type="submit">Search
+                </button>
             </div>
         </form>
     </div>
-    
+
     <div class="mx-80 justify-center mb-10">
         <p class="font-bold mb-1">Cool New People</p>
         {% for result in page_obj %}
         <a href="{% url 'at-get-user' username=result.username %}">
             <div class="flex border-2 border-gray-300 p-5 hover:bg-gray-200 bg-gray-100">
                 {% if result.profile_pic %}
-                <img src="{{ result.profile_pic.url  }}" width="50" class="object-contain rounded"
-                    alt="user profile pic">
+                <img alt="user profile pic" class="object-contain rounded" src="{{ result.profile_pic.url  }}"
+                     width="50">
                 {% else %}
-                <img src="https://ui-avatars.com/api/?size=50&name={{ result.username}}&background=random" class="object-contain rounded"
-                    alt="user profile pic">
+                <img alt="user profile pic"
+                     class="object-contain rounded"
+                     src="https://ui-avatars.com/api/?size=50&name={{ result.username}}&background=random">
                 {% endif %}
                 {% if result.display_name %}
                 <p class="text-black font-extrabold underline text-lg ml-3">{{result.display_name}}</p>
