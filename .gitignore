@@ -12,6 +12,8 @@ Icon
 media-root/
 static-root/
 uploads/
+accounts/profile_pics/
+posts/images/
 
 # Thumbnails
 ._*
