@@ -146,7 +146,7 @@ def link_tags_to_post(post_id, tags):
         PostTag.objects.create(post=post, tag=_tag)
 
 
-def object_id_generator(size, model, chars=string.ascii_letters + string.digits) -> str:
+def object_id_generator(size, model, chars=string.ascii_letters + string.digits):
     """
     Generates and returns base64 call id
     """
@@ -154,7 +154,7 @@ def object_id_generator(size, model, chars=string.ascii_letters + string.digits)
     return check_object_id_exists(object_id=object_id, model=model)
 
 
-def check_object_id_exists(object_id, model) -> str:
+def check_object_id_exists(object_id, model):
     """
     Checks if call id exists. Generates and returns new call id if exists
     """

@@ -53,7 +53,7 @@ class User(AbstractUser):
     )
     display_name = models.CharField(max_length=100, null=True, blank=True)
     profile_pic = ProcessedImageField(
-        upload_to="uploads/accounts/profile_pics/",
+        upload_to="accounts/profile_pics/",
         processors=[ResizeToFit(320, 440)],
         format="JPEG",
         options={"quality": 90},
