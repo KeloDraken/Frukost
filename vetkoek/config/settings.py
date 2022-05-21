@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "vetkoek.core.communities",
     "vetkoek.core.posts",
     "vetkoek.core.search",
+    "vetkoek.core.themes",
 ]
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
