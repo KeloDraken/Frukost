@@ -8,7 +8,6 @@ from vetkoek.core.accounts.views import (
     user_logout,
     edit_user_profile,
     upgrade_user_account,
-    user_themes,
 )
 
 app_name = "accounts"
@@ -21,5 +20,4 @@ urlpatterns = [
     path("explore/", explore_users, name="explore-users"),
     path("upgrade/", upgrade_user_account, name="upgrade"),
     path("delete/", delete_account, name="delete-user"),
-    path("themes/", user_themes, name="user-themes"),
 ]

@@ -6,7 +6,7 @@ from imagekit.models.fields import ProcessedImageFieldFile
 from vetkoek.core.accounts.models import User
 
 
-class TestViews(TestCase):
+class TestAccountsViews(TestCase):
     def setUp(self):
         """
         It creates a user with the username "test" and password "kgosiemang100" and then creates a client object
@@ -25,12 +25,6 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "public/auth/registration_form.html")
         self.assertContains(response, "Create an account on ViSpace")
-
-    def test_themes_page(self):
-        url = reverse("accounts:user-themes")
-        response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "private/themes.html")
 
     def test_username_taken(self):
         """

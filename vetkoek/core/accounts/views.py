@@ -270,7 +270,3 @@ def delete_account(request: HttpRequest):
         messages.success(request, "You account has been deleted")
         request.user.delete()
         return redirect("accounts:user-login")
-
-
-def user_themes(request: HttpRequest) -> HttpResponse:
-    return render(request, "private/themes.html")

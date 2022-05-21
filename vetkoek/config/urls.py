@@ -41,6 +41,8 @@ urlpatterns = (
         path("search/", include("vetkoek.core.search.urls", namespace="search")),
         # Communities urls
         path("b/", include("vetkoek.core.communities.urls", namespace="communities")),
+        # Themes urls
+        path("t/", include("vetkoek.core.themes.urls", namespace="themes")),
         # Upgrade account
         path("join/", subscribe, name="subscribe"),
         path("@<username>/", at_get_user_profile, name="at-get-user"),

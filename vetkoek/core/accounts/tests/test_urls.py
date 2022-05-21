@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 
-class TestUrls(TestCase):
+class TestAccountsUrls(TestCase):
     def test_register_route(self):
         """
         It asserts that the url for the user-register view is equal to /u/register/
@@ -45,7 +45,3 @@ class TestUrls(TestCase):
     def test_delete_route(self):
         url = reverse("accounts:delete-user")
         self.assertEqual(url, "/u/delete/")
-
-    def test_themes_route(self):
-        url = reverse("accounts:user-themes")
-        self.assertEqual(url, "/u/themes/")
