@@ -6,7 +6,9 @@ SECRET_KEY = "63j9UNXJW8S5Rk1nfk+OI2HtFcodiUDRAfyvVe3tdczODHpg6OTv5dzaixmNAkH9Y3
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+
+INTERNAL_IPS = ("127.0.0.1",)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -19,6 +21,7 @@ INSTALLED_APPS = [
     # Third-party apps
     "captcha",
     "corsheaders",
+    "debug_toolbar",
     "imagekit",
     "storages",
     # ViSpace apps
@@ -28,8 +31,8 @@ INSTALLED_APPS = [
     "vetkoek.core.posts",
     "vetkoek.core.search",
 ]
-
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",

@@ -20,6 +20,7 @@ handler404 = "vetkoek.core.views.handle_404"
 
 urlpatterns = (
     [
+        path("__debug__/", include("debug_toolbar.urls")),
         path("", index, name="index"),
         path("u/admin/", admin.site.urls, name="admin"),
         path("about/", about, name="about"),
