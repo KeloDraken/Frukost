@@ -1,5 +1,6 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=PT+Serif+Caption&display=swap');
 
     .logo {
         font-family: 'Lobster', cursive;
@@ -8,9 +9,22 @@
         color: black;
         padding: 2rem;
     }
-
+    .themes {
+        font-family: 'PT Serif Caption', serif;
+        float: right;
+        font-size: 1.2em;
+        text-decoration: none;
+        color: #fff;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        font-weight: 600;
+        background-color: #000;
+    }
 </style>
 
 <a class="logo text-3xl" href="{% url 'index' %}" title="Ett projekt av Samkelo Drakensberg">
     ViSpace.
+</a>
+<a class="themes text-3xl" href="{% url 'accounts:themes' %}" title="Ett projekt av Samkelo Drakensberg">
+    Themes
 </a>
