@@ -33,6 +33,7 @@
             {% endif %}
             {% endfor %}
 
+
             <div class="flex">
                 <button class="bg-black text-white text-normal rounded font-extrabold px-5 py-2 mr-1 mt-3"
                         type="submit">Save
@@ -44,6 +45,7 @@
             </div>
         </form>
     </div>
+
     <div class="flex justify-center mb-10">
         <div class="w-full text-black px-3 py-5 mb-3 border-4 border-red-500 rounded bg-red-300">
             <h5 class="text-black text-2xl font-bold text-center">Dangerzone</h5>
@@ -63,7 +65,8 @@
                 </li>
             </ul>
 
-            <a class="bg-black text-white text-lg rounded font-bold px-4 py-3 mr-1 mb-3" href="{% url 'accounts:delete-user' %}"
+            <a class="bg-black text-white text-lg rounded font-bold px-4 py-3 mr-1 mb-3"
+               href="{% url 'accounts:delete-user' %}"
                id="delete-account">
                 delete account
             </a>
