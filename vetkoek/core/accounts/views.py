@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.core.paginator import Paginator
 from django.http.request import HttpRequest
-from django.http.response import Http404
+from django.http.response import Http404, HttpResponse
 from django.shortcuts import redirect, render
 
 from vetkoek.core.accounts.forms import (
@@ -270,3 +270,7 @@ def delete_account(request: HttpRequest):
         messages.success(request, "You account has been deleted")
         request.user.delete()
         return redirect("accounts:user-login")
+
+
+def user_themes(request: HttpRequest) -> HttpResponse:
+    return render(request, "private/themes.html")

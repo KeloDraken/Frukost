@@ -22,9 +22,12 @@
     }
 </style>
 
-<a class="logo text-3xl" href="{% url 'index' %}" title="Ett projekt av Samkelo Drakensberg">
+<a class="logo text-3xl" href="{% url 'posts:frontpage' %}" title="Ett projekt av Samkelo Drakensberg">
     ViSpace.
 </a>
-<a class="themes text-3xl" href="{% url 'accounts:themes' %}" title="Ett projekt av Samkelo Drakensberg">
+
+{% if request.user.is_authenticated and request.user.username == user.username %}
+<a class="themes text-3xl" href="{% url 'accounts:user-themes' %}" title="Ett projekt av Samkelo Drakensberg">
     Themes
 </a>
+{% endif %}

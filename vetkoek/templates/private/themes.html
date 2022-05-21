@@ -1,1 +1,48 @@
-<h1>THEMES</h1>
+{% extends 'base.html' %}
+{% block title %}
+ViSpace &mdash; Theme Selekt
+{% endblock %}
+
+{% block styles %}
+<style>
+    .masonry {
+        column-count: 3;
+        column-gap: 4rem;
+    }
+
+    .overlay {
+        background: linear-gradient(0deg, black, transparent);
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="w-full  mx-auto px-24">
+    <h1 class="text-lg font-bold text-center mt-20 mb-0 italic">You're unique, your profile should be too</h1>
+    <h1 class="text-center mb-0">Find your stil</h1>
+    <div class="mt-7">
+        {% include 'components/messages.html' %}
+        <div class="masonry px-16 py-8">
+            <div class="mb-8 bg-red-400 infinite-container">
+                test 1
+            </div>
+             <div class="mb-8 bg-green-400 infinite-container">
+                test 1
+            </div>
+             <div class="mb-8 bg-yellow-400 infinite-container">
+                test 1
+            </div>
+             <div class="mb-8 bg-pink-500 infinite-container">
+                test 1
+            </div>
+             <div class="mb-8 bg-gray-500 infinite-container">
+                test 1
+            </div>
+        </div>
+
+
+    {% include 'components/infinite_scroll_fetch.html' %}
+    {% include 'components/footer.html' %}
+</div>
+{% endblock %}
