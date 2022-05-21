@@ -45,3 +45,7 @@ class TestUrls(TestCase):
     def test_delete_route(self):
         url = reverse("accounts:delete-user")
         self.assertEqual(url, "/u/delete/")
+
+    def test_themes_route(self):
+        url = reverse("accounts:user-themes")
+        self.assertEqual(url, "/u/themes/")

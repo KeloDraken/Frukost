@@ -26,6 +26,12 @@ class TestViews(TestCase):
         self.assertTemplateUsed(response, "public/auth/registration_form.html")
         self.assertContains(response, "Create an account on ViSpace")
 
+    def test_themes_page(self):
+        url = reverse("accounts:user-themes")
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "private/themes.html")
+
     def test_username_taken(self):
         """
         We are testing that when a user tries to register with a username that is already taken, they are redirected to the
