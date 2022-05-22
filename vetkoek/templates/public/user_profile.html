@@ -1,86 +1,65 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-ZA">
 
 <head>
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>{{user.display_name}}</title>
+    <meta name="author" value="Samkelo Kgosiemang-Drakensberg">
+    <link href="{% static 'css/tailwind.min.css' %}" rel="stylesheet">
+    <!--    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">-->
+    <title>
+        #ViSpace &mdash; {{ user.username }}
+    </title>
+
 
     <meta content="yes" name="mobile-web-app-capable">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <link href="{% static 'assets/icons/apple-touch-icon.png' %}" rel="apple-touch-icon">
     <link href="{% static 'assets/favicon.ico' %}" rel="shortcut icon" type="image/x-icon">
-
-    <!-- Facebook Meta Tags -->
-    <meta content="https://msukwini.com/@{{user.username}}/" property="og:url">
-    <meta content="website" property="og:type">
-    <meta content="{{ user.username }}" property="og:title">
-
-    {% if user.bio %}
-    <meta content="{{ user.bio }}" property="og:discription">
-    {% else %}
-    <meta content="A hangout for the based. ViSpace is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression."
-          property="og:discription">
-    {% endif %}
-
-    {% if user.profile_pic %}
-    <meta content="{{ user.profile_pic.url }}" property="og:image">
-    {% else %}
-    <meta content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg" property="og:image">
-    {% endif %}
-
-    <!-- Twitter Meta Tags -->
-    <meta content="summary_large_image" name="twitter:card">
-    <meta content="msukwini.com/@{{user.username}}/" property="twitter:domain">
-    <meta content="https://msukwini.com/@{{user.username}}/" property="twitter:url">
-    <meta content="{{user.username}}" name="twitter:title">
-
-    {% if user.profile_pic %}
-    <meta content="{{ user.profile_pic.url }}" property="twitter:image">
-    {% else %}
-    <meta content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg"
-          property="twitter:image">
-    {% endif %}
-
-    {% if user.bio %}
-    <meta content="{{ user.bio }}" property="twitter:discription">
-    {% else %}
-    <meta content="A hangout for the based. ViSpace is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression."
-          property="twitter:discription">
-    {% endif %}
-
+    <!-- Google fonts begin -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif+Caption&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
     <style>
-        .flex {
-            display: flex;
+        * {
+            font-family: 'PT Serif Caption', serif;
         }
-
-        .justify-center {
-            justify-content: center;
+        pre {
+            font-family: 'Open Sans', sans-serif;
         }
-
-        .mb-10 {
-            margin-bottom: 6rem;
+        .masonry {
+            column-count: 4;
+            column-gap: 4rem;
         }
-
-        .mr-5 {
-            margin-right: 10px;
+        .overlay {
+            background: linear-gradient(0deg, black, transparent);
         }
-
-        .my-12 {
-            margin-top: 12px;
-            margin-bottom: 12px;
+        .logo, h1, a, p {
+            color: {{ user.profile_text_colour }} !important;
         }
-
-        .mx-7 {
-            margin-top: 10px;
-            margin-bottom: 10px;
+        body {
+            background-color: {{ user.profile_bg_colour }} !important;
         }
-
-
+        .navbar {
+            background-color: {{ user.profile_bg_colour }} !important;
+        }
+        .button {
+            color: {{ user.profile_bg_colour }} !important;
+            background-color: {{ user.profile_text_colour }} !important;
+        }
+        .profile-pic {
+            margin-left: 33%;
+            width: calc(33.333%);
+            border-radius: 50%;
+            border: 3px solid {{ user.profile_text_colour }};
+        }
+        .post-image {
+            border: 3px solid {{ user.profile_text_colour }};
+        }
     </style>
     <!--    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X1CBV76F1P"></script>-->
     <!--    <script>-->
@@ -91,230 +70,57 @@
     <!--      gtag('config', 'G-X1CBV76F1P');-->
 
     <!--    </script>-->
-
-    <style>
-    /*
-        Main ViSpace user profile Stylesheet
-        (c) 2020-2021 Samkelo Rocks (Pty) Ltd
-    */
-
-    :root {
-        font-size: .8em;
-        font-weight: 600;
-    }
-
-    *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: 'PT Serif Caption', serif;
-        font-weight: 600;
-        min-height: 100vh;
-        background-color: #fafafa;
-        color: #000;
-        padding-bottom: 3rem;
-    }
-
-    img {
-        display: block;
-    }
-
-    .container {
-        max-width: 93.5rem;
-        margin: 0 auto;
-        padding: 0 2rem;
-    }
-
-    /* Profile Section */
-    .profile {
-        padding: 5rem 0;
-    }
-
-    .profile::after {
-        content: "";
-        display: block;
-        clear: both;
-    }
-
-    .profile-image {
-        float: left;
-        width: calc(33.333% - 1rem);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 3rem;
-    }
-
-    .profile-image img {
-        border-radius: 50%;
-        height: 200px;
-        width: 200px;
-        border: 0.5em solid {{ user.profile_text_colour }} !important;
-    }
-
-    .profile-user-settings {
-        margin-top: 1.1rem;
-    }
-
-    .profile-user-name {
-        display: inline-block;
-        font-size: 2rem;
-    }
-
-    .profile-settings-btn {
-        font-size: 2rem;
-        margin-left: 1rem;
-    }
-
-    .profile-stats {
-        margin-top: 2.3rem;
-    }
-
-    .profile-stats li {
-        display: inline-block;
-        font-size: 1.6rem;
-        line-height: 1.5;
-        margin-right: 4rem;
-        cursor: pointer;
-    }
-
-    .profile-stats li:last-of-type {
-        margin-right: 0;
-    }
-
-    .profile-bio {
-        font-size: 1.6rem;
-        font-weight: 400;
-        line-height: 1.5;
-        margin-top: 2.3rem;
-    }
-
-    .profile-real-name,
-    .profile-stat-count,
-    .profile-btn {
-        font-weight: 600;
-    }
-
-    /* Gallery Section */
-
-    .gallery {
-        display: flex;
-        flex-wrap: wrap;
-        margin: -1rem -1rem;
-        padding-bottom: 3rem;
-    }
-
-    .gallery-item {
-        position: relative;
-        flex: 1 0 22rem;
-        margin: 1rem;
-        color: #fff;
-        cursor: pointer;
-    }
-    .gallery-item-link {
-        color: #fff;
-        text-decoration: none;
-    }
-
-    .gallery-item-info {
-        display: none;
-    }
-
-    .gallery-item-info li {
-        display: inline-block;
-        font-size: 1.7rem;
-        font-weight: 600;
-    }
-
-    .gallery-item-type {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        font-size: 2.5rem;
-        text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
-    }
-
-    .gallery-image {
-        width: 100%;
-        height: 30rem;
-        object-fit: cover;
-    }
-
-    @supports (display: grid) {
-        .profile {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            grid-template-rows: repeat(3, auto);
-            grid-column-gap: 3rem;
-            align-items: center;
-        }
-
-        .profile-image {
-            grid-row: 1 / -1;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
-            grid-gap: 2rem;
-        }
-
-        .profile-image,
-        .profile-user-settings,
-        .profile-stats,
-        .profile-bio,
-        .gallery-item,
-        .gallery {
-            width: auto;
-            margin: 0;
-        }
-    }
-
-    </style>
-    <style>
-        * {
-           color: {{ user.profile_text_colour }} !important;
-           background-color: {{ user.profile_bg_colour }} !important;
-        }
-        .btn {
-            display: inline-block;
-            font: inherit;
-            background-color: {{ user.profile_text_colour }} !important;
-            border: none;
-            color: {{ user.profile_bg_colour }} !important;
-            padding: 0;
-            cursor: pointer;
-        }
-        .profile-btn {
-            text-decoration: none;
-            font-size: 1.4rem;
-            line-height: 1.8;
-            border-radius: 0.3rem;
-            padding: 0 2.4rem;
-            margin-left: 2rem;
-        }
-
-    </style>
 </head>
 
 <body>
 {% include 'components/logo.html' %}
-<header>
-
-    <div class="container">
-        {% include 'components/user_profile/profile-info.html' %}
+<div class="w-full mx-auto px-24">
+    <div class="flex items-center justify-center mt-16">
+        <div class="justify-center">
+            <div class="flex items-center justify-between h-24 mb-4">
+                <img class="profile-pic" src="{{ user.profile_pic.url }}">
+            </div>
+            <div class="text-center">
+                {% if user.display_name %}
+                <h1 class="text-lg font-bold mt-2 mb-2">{{ user.display_name }}</h1>
+                {% else %}
+                <h1 class="text-lg font-bold mt-2 mb-2">{{ user.username }}</h1>
+                {% endif %}
+            </div>
+            {% if user.bio %}
+            <div class="text-center">
+                <p class="text-normal">{{ user.bio }}</p>
+            </div>
+            {% endif %}
+            <div class="text-center mt-5">
+                {% if request.user.is_authenticated and request.user.username == user.username %}
+                <a class="button shadow-lg text-normal rounded font-bold px-2 py-1 mb-10"
+                   href="{% url 'accounts:edit-user-profile' %}"
+                   title="Edit profile">
+                    Edit profile
+                </a>
+                {% else %}
+                <a class="button shadow-lg text-normal rounded font-bold px-2 py-1 mb-10"
+                   href="{% url 'accounts:upgrade' %}"
+                   title="Subscribe to user">
+                    Subscribe
+                </a>
+                {% endif %}
+            </div>
+        </div>
     </div>
-</header>
-
-<main>
-    <div class="container">
-        {% include 'components/user_profile/gallery.html' %}
+    <div class="mt-7">
+        {% include 'components/messages.html' %}
+        <div class="masonry px-16 py-8">
+            <div class="mb-8 infinite-container">
+                {% for post in page_obj %}
+                {% include 'components/posts/post_item.html' %}
+                {% endfor %}
+            </div>
+        </div>
     </div>
     {% include 'components/infinite_scroll_fetch.html' %}
-</main>
+</div>
 </body>
 
 </html>

@@ -3,13 +3,14 @@
 
     .logo {
         font-family: 'Lobster', cursive;
-        font-size: 2em;
-        text-decoration: none;
-        color: black;
-        padding: 2rem;
     }
-</style>
 
-<a class="logo text-3xl" href="{% url 'posts:frontpage' %}" title="Ett projekt av Samkelo Drakensberg">
-    ViSpace.
-</a>
+
+</style>
+<div class="navbar">
+    <div class="flex flex-row justify-between py-4 px-4 w-full">
+        <a class="logo text-3xl" href="{% url 'posts:frontpage' %}" title="Ett projekt av Samkelo Drakensberg">
+            ViSpace.
+        </a>
+    </div>
+</div>
