@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Edit profile{% endblock %}
 
@@ -33,6 +34,23 @@
             {% endif %}
             {% endfor %}
 
+            <label class="text-black font-bold capitalize" for="text-colour">Profile text colour</label>
+            <input type="hidden" name="text-colour" id="text-field" value="{{ user.profile_text_colour }}">
+            <div class="bg-gray-200 w-full px-3 py-2 cursor-pointer rounded" id="text-colour">
+                {{ user.profile_text_colour }}
+            </div>
+
+            <label class="text-black font-bold capitalize" for="bg-colour">Profile background colour</label>
+            <input type="hidden" name="bg-colour" id="bg-field" value="{{ user.profile_bg_colour }}">
+            <div class="bg-gray-200 w-full px-3 py-2 mb-7 cursor-pointer rounded" id="bg-colour">
+                {{ user.profile_bg_colour }}
+            </div>
+
+            <label class="text-black font-bold capitalize" for="profile-preview">This is how your profile will
+                look</label>
+            <div class="font-bold px-4 py-4 mb-6 text-xl rounded" id="profile-preview">
+                Text preview
+            </div>
 
             <div class="flex">
                 <button class="bg-black text-white text-normal rounded font-extrabold px-5 py-2 mr-1 mt-3"
@@ -74,4 +92,45 @@
     </div>
     {% include 'components/footer.html' %}
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/vanilla-picker.min.js' %}"></script>
+<script>
+    var previewText = document.getElementById("profile-preview");
+    previewText.style.color = document.getElementById("text-field").value;
+    previewText.style.background = document.getElementById("bg-field").value;
+
+    //////////////////////////////////
+
+    var text = document.querySelector('#text-colour');
+    var textPicker = new Picker(text);
+
+    textPicker.onChange = function(color) {
+        text.style.color = color.hex;
+        previewText.style.color = color.hex;
+    };
+
+    textPicker.onDone = function(color) {
+        text.innerHTML = color.hex;
+        document.getElementById("text-field").value = color.hex;
+        previewText.style.color = color.hex;
+    }
+
+    ///////////////////////////////////////////
+
+    var bg = document.querySelector('#bg-colour');
+    var bgPicker = new Picker(bg);
+
+    bgPicker.onChange = function(color) {
+        bg.style.color = color.hex;
+        previewText.style.background = color.hex;
+    };
+
+    bgPicker.onDone = function(color) {
+        bg.innerHTML = color.hex;
+        document.getElementById("bg-field").value = color.hex;
+        previewText.style.background = color.hex;
+    }
+</script>
 {% endblock %}

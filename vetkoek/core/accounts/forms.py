@@ -143,17 +143,6 @@ class EditUserProfileForm(UserChangeForm):
             }
         ),
     )
-    # custom_html = forms.CharField(
-    #     required=False,
-    #     widget=forms.Textarea(
-    #         attrs={
-    #             "class": "w-full text-black px-3 py-2 mb-3 border-2 border-gray-300 rounded bg-white",
-    #             "placeholder": "Paste your custom styles here...",
-    #             "autocomplete": "off",
-    #             "autocapitalize": "off",
-    #         }
-    #     ),
-    # )
 
     class Meta:
         model = User
@@ -161,5 +150,4 @@ class EditUserProfileForm(UserChangeForm):
             "profile_pic",
             "display_name",
             "bio",
-            # "custom_html",
         )

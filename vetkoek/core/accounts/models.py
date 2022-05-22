@@ -1,7 +1,5 @@
 from django.contrib.auth.models import AbstractUser
-
 from django.db import models
-
 from django.utils.translation import gettext_lazy as _
 
 from imagekit.models import ProcessedImageField
@@ -63,6 +61,7 @@ class User(AbstractUser):
     bio = models.TextField(null=True, blank=True, max_length=300)
     subscribers = models.PositiveBigIntegerField(default=1)
     upvotes = models.PositiveBigIntegerField(default=0)
+
     # User social media links
     instagram = models.CharField(max_length=60, null=True, blank=True)
     vsco = models.CharField(max_length=60, null=True, blank=True)
@@ -219,18 +218,6 @@ class User(AbstractUser):
         text-decoration: none;
     }
 
-    .gallery-item:hover .gallery-item-info,
-    .gallery-item:focus .gallery-item-info {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-    }
-
     .gallery-item-info {
         display: none;
     }
@@ -287,7 +274,8 @@ class User(AbstractUser):
 </style>
     """,
     )
-    custom_html = models.TextField(null=True, blank=True)
+    profile_text_colour = models.CharField(max_length=10, null=False, blank=False, default="#000000")
+    profile_bg_colour = models.CharField(max_length=10, null=False, blank=False, default="#ffffff")
 
     date_joined = models.DateField(auto_now_add=True)
     datetime_joined = models.DateTimeField(auto_now_add=True)

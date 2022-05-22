@@ -1,7 +1,11 @@
 from datetime import datetime
 from math import log
 
+from django.db.models import Model
 from django.http import HttpResponseBadRequest
+
+from vetkoek.core.accounts.models import User
+from vetkoek.core.posts.models import Post
 
 
 def epoch_seconds(date) -> float:
@@ -21,7 +25,7 @@ def score(ups: int, downs: int) -> int:
     return ups + downs
 
 
-def hot(ups, downs, date) -> float:
+def hot(ups: int, downs: int, date) -> float:
     """
     "The hot formula. It's the
     same as the Reddit hot formula."
@@ -38,7 +42,7 @@ def hot(ups, downs, date) -> float:
     return round(sign * order + seconds / 45000, 7)
 
 
-def check_has_user_voted(model, user, post):
+def check_has_user_voted(model: Model, user: User, post: Post):
     """
     If the user has voted on the post, return True, otherwise return False
 

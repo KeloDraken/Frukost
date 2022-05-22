@@ -88,15 +88,16 @@
 <!--      gtag('config', 'G-X1CBV76F1P');-->
 
 <!--    </script>-->
+    {{user.default_html|safe}}
+    <style>
+        * {
+           color: {{ user.profile_text_colour }} !important;
+           background-color: {{ user.profile_bg_colour }} !important;
+        }
+    </style>
 </head>
 
 <body>
-{% if user.custom_html %}
-{{user.custom_html|safe}}
-{% else %}
-{{user.default_html|safe}}
-{% endif %}
-
 {% include 'components/logo.html' %}
 <header>
 
