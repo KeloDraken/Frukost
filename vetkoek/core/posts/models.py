@@ -8,7 +8,6 @@ from vetkoek.core.accounts.models import User
 class Post(models.Model):
     object_id = models.CharField(max_length=11, null=False, blank=False)
     user = models.ForeignKey(User, null=True, on_delete=models.DO_NOTHING)
-    title = models.CharField(max_length=140, null=False, blank=False)
     image = ProcessedImageField(
         upload_to="uploads/posts/images/",
         processors=[ResizeToFit(480, 600)],
