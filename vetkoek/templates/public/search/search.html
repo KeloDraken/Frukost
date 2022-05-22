@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}ViSpace &mdash; Search{% endblock %}
+{% block title %}Frukost &mdash; Search{% endblock %}
 
 {% block body %}
 <div class="w-full justify-center mx-auto px-44">
-    <h1 class="text-2xl text-center mt-16 mb-0 font-bold">Search for People on ViSpace by their name</h1>
+    <h1 class="text-2xl text-center mt-16 mb-0 font-bold">Search for People on Frukost by their name</h1>
     <div class="flex justify-center mb-10">
         <form action="{% url 'search:search' %}" class="mt-7" method="get">
             {% include 'components/messages.html' %}

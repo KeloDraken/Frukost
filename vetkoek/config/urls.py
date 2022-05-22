@@ -51,7 +51,7 @@ urlpatterns = (
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 )
 
-admin.site.site_header = "ViSpace Site Admin"
-admin.site.site_title = "ViSpace Site Admin"
+admin.site.site_header = "Frukost Site Admin"
+admin.site.site_title = "Frukost Site Admin"
 
 admin.site.unregister(Group)

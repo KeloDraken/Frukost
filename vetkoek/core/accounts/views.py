@@ -74,7 +74,7 @@ def login_user_on_register(request: HttpRequest):
         login(request, user)
         messages.success(
             request,
-            "Welcome to ViSpace. You're among the first to join. So take a look around and tell me what you think.",
+            "Welcome to Frukost. You're among the first to join. So take a look around and tell me what you think.",
         )
         return redirect("posts:frontpage")
     else:
