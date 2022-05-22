@@ -241,6 +241,7 @@ def edit_user_profile(request: HttpRequest) -> HttpRequest:
                 request.user.save()
 
             edit_profile_form.save(commit=False)
+            messages.success(request, "Your profile has been updated.")
 
             if request.FILES.get("profile_pic") is None:
                 edit_profile_form.profile_pic = request.user.profile_pic
