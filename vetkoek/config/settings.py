@@ -6,6 +6,8 @@ SECRET_KEY = "63j9UNXJW8S5Rk1nfk+OI2HtFcodiUDRAfyvVe3tdczODHpg6OTv5dzaixmNAkH9Y3
 
 DEBUG = True
 
+CSRF_COOKIE_NAME= 'vispacetoken'
+
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 INTERNAL_IPS = ("127.0.0.1",)
