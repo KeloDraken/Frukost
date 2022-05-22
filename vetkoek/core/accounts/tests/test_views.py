@@ -6,7 +6,7 @@ from imagekit.models.fields import ProcessedImageFieldFile
 from vetkoek.core.accounts.models import User
 
 
-class TestViews(TestCase):
+class TestAccountsViews(TestCase):
     def setUp(self):
         """
         It creates a user with the username "test" and password "kgosiemang100" and then creates a client object

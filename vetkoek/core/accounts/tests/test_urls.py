@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 
-class TestUrls(TestCase):
+class TestAccountsUrls(TestCase):
     def test_register_route(self):
         """
         It asserts that the url for the user-register view is equal to /u/register/

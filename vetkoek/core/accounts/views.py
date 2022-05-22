@@ -230,21 +230,22 @@ def edit_user_profile(request: HttpRequest) -> HttpRequest:
         if not edit_profile_form.is_valid():
             messages.error(request, "Bad request. Profile was not updated.")
         else:
+            if request.POST.get("bg-colour"):
+                bg_colour = request.POST.get("bg-colour")
+                request.user.profile_bg_colour = bg_colour
+                request.user.save()
+
+            if request.POST.get("text-colour"):
+                text_colour = request.POST.get("text-colour")
+                request.user.profile_text_colour = text_colour
+                request.user.save()
+
             edit_profile_form.save(commit=False)
+            messages.success(request, "Your profile has been updated.")
 
             if request.FILES.get("profile_pic") is None:
                 edit_profile_form.profile_pic = request.user.profile_pic
 
-            if not is_dirty_html(request.POST.get("custom_html")):
-                messages.success(request, "Profile updated")
-                edit_profile_form.save()
-            else:
-                messages.error(
-                    request,
-                    "Your template contains forbidden elements. \
-                    Continued use of these elements will result in a permanent ban from ViSpace. \
-                    Please read our rules for more information about which tags and attributes are allowed.",
-                )
     context = {"user": request.user, "edit_profile_form": edit_profile_form}
     return render(request, "private/edit_profile.html", context)
 

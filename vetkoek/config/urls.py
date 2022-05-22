@@ -20,6 +20,7 @@ handler404 = "vetkoek.core.views.handle_404"
 
 urlpatterns = (
     [
+        path("__debug__/", include("debug_toolbar.urls")),
         path("", index, name="index"),
         path("u/admin/", admin.site.urls, name="admin"),
         path("about/", about, name="about"),
@@ -40,6 +41,8 @@ urlpatterns = (
         path("search/", include("vetkoek.core.search.urls", namespace="search")),
         # Communities urls
         path("b/", include("vetkoek.core.communities.urls", namespace="communities")),
+        # Themes urls
+        path("t/", include("vetkoek.core.themes.urls", namespace="themes")),
         # Upgrade account
         path("join/", subscribe, name="subscribe"),
         path("@<username>/", at_get_user_profile, name="at-get-user"),

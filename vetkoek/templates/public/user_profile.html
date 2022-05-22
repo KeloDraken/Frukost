@@ -1,116 +1,126 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-ZA">
 
 <head>
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>{{user.display_name}}</title>
+    <meta name="author" value="Samkelo Kgosiemang-Drakensberg">
+    <link href="{% static 'css/tailwind.min.css' %}" rel="stylesheet">
+    <!--    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">-->
+    <title>
+        #ViSpace &mdash; {{ user.username }}
+    </title>
+
 
     <meta content="yes" name="mobile-web-app-capable">
     <meta content="yes" name="apple-mobile-web-app-capable">
     <link href="{% static 'assets/icons/apple-touch-icon.png' %}" rel="apple-touch-icon">
     <link href="{% static 'assets/favicon.ico' %}" rel="shortcut icon" type="image/x-icon">
-
-    <!-- Facebook Meta Tags -->
-    <meta content="https://msukwini.com/@{{user.username}}/" property="og:url">
-    <meta content="website" property="og:type">
-    <meta content="{{ user.username }}" property="og:title">
-
-    {% if user.bio %}
-    <meta content="{{ user.bio }}" property="og:discription">
-    {% else %}
-    <meta content="A hangout for the based. ViSpace is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression."
-          property="og:discription">
-    {% endif %}
-
-    {% if user.profile_pic %}
-    <meta content="{{ user.profile_pic.url }}" property="og:image">
-    {% else %}
-    <meta content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg" property="og:image">
-    {% endif %}
-
-    <!-- Twitter Meta Tags -->
-    <meta content="summary_large_image" name="twitter:card">
-    <meta content="msukwini.com/@{{user.username}}/" property="twitter:domain">
-    <meta content="https://msukwini.com/@{{user.username}}/" property="twitter:url">
-    <meta content="{{user.username}}" name="twitter:title">
-
-    {% if user.profile_pic %}
-    <meta content="{{ user.profile_pic.url }}" property="twitter:image">
-    {% else %}
-    <meta content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg"
-          property="twitter:image">
-    {% endif %}
-
-    {% if user.bio %}
-    <meta content="{{ user.bio }}" property="twitter:discription">
-    {% else %}
-    <meta content="A hangout for the based. ViSpace is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression."
-          property="twitter:discription">
-    {% endif %}
-
+    <!-- Google fonts begin -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif+Caption&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
     <style>
-        .flex {
-            display: flex;
+        * {
+            font-family: 'PT Serif Caption', serif;
         }
-
-        .justify-center {
-            justify-content: center;
+        pre {
+            font-family: 'Open Sans', sans-serif;
         }
-
-        .mb-10 {
-            margin-bottom: 6rem;
+        .masonry {
+            column-count: 4;
+            column-gap: 4rem;
         }
-
-        .mr-5 {
-            margin-right: 10px;
+        .overlay {
+            background: linear-gradient(0deg, black, transparent);
         }
-
-        .my-12 {
-            margin-top: 12px;
-            margin-bottom: 12px;
+        .logo, h1, a, p {
+            color: {{ user.profile_text_colour }} !important;
         }
-
-        .mx-7 {
-            margin-top: 10px;
-            margin-bottom: 10px;
+        body {
+            background-color: {{ user.profile_bg_colour }} !important;
         }
-
+        .navbar {
+            background-color: {{ user.profile_bg_colour }} !important;
+        }
+        .button {
+            color: {{ user.profile_bg_colour }} !important;
+            background-color: {{ user.profile_text_colour }} !important;
+        }
+        .profile-pic {
+            margin-left: 33%;
+            width: calc(33.333%);
+            border-radius: 50%;
+            border: 3px solid {{ user.profile_text_colour }};
+        }
+        .post-image {
+            border: 3px solid {{ user.profile_text_colour }};
+        }
     </style>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X1CBV76F1P"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-X1CBV76F1P');
+    <!--    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X1CBV76F1P"></script>-->
+    <!--    <script>-->
+    <!--      window.dataLayer = window.dataLayer || [];-->
+    <!--      function gtag(){dataLayer.push(arguments);}-->
+    <!--      gtag('js', new Date());-->
+    <!--    -->
+    <!--      gtag('config', 'G-X1CBV76F1P');-->
 
-    </script>
+    <!--    </script>-->
 </head>
 
 <body>
-{% if user.custom_html %}
-{{user.custom_html|safe}}
-{% else %}
-{{user.default_html|safe}}
-{% endif %}
-
 {% include 'components/logo.html' %}
-<header>
-
-    <div class="container">
-        {% include 'components/user_profile/profile-info.html' %}
+<div class="w-full mx-auto px-24">
+    <div class="flex items-center justify-center mt-16">
+        <div class="justify-center">
+            <div class="flex items-center justify-between h-24 mb-4">
+                <img class="profile-pic" src="{{ user.profile_pic.url }}">
+            </div>
+            <div class="text-center">
+                {% if user.display_name %}
+                <h1 class="text-lg font-bold mt-2 mb-2">{{ user.display_name }}</h1>
+                {% else %}
+                <h1 class="text-lg font-bold mt-2 mb-2">{{ user.username }}</h1>
+                {% endif %}
+            </div>
+            {% if user.bio %}
+            <div class="text-center">
+                <p class="text-normal">{{ user.bio }}</p>
+            </div>
+            {% endif %}
+            <div class="text-center mt-5">
+                {% if request.user.is_authenticated and request.user.username == user.username %}
+                <a class="button shadow-lg text-normal rounded font-bold px-2 py-1 mb-10"
+                   href="{% url 'accounts:edit-user-profile' %}"
+                   title="Edit profile">
+                    Edit profile
+                </a>
+                {% else %}
+                <a class="button shadow-lg text-normal rounded font-bold px-2 py-1 mb-10"
+                   href="{% url 'accounts:upgrade' %}"
+                   title="Subscribe to user">
+                    Subscribe
+                </a>
+                {% endif %}
+            </div>
+        </div>
     </div>
-</header>
-
-<main>
-    <div class="container">
-        {% include 'components/user_profile/gallery.html' %}
+    <div class="mt-7">
+        {% include 'components/messages.html' %}
+        <div class="masonry px-16 py-8">
+            <div class="mb-8 infinite-container">
+                {% for post in page_obj %}
+                {% include 'components/posts/post_item.html' %}
+                {% endfor %}
+            </div>
+        </div>
     </div>
     {% include 'components/infinite_scroll_fetch.html' %}
-</main>
+</div>
 </body>
 
 </html>
