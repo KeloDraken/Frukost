@@ -46,5 +46,5 @@ def get_community(request: HttpRequest, name: str):
     try:
         community = Community.objects.get(title=name)
     except Community.DoesNotExist:
-        pass
+        return render(request, "public/404.html")
     return redirect("subscribe")

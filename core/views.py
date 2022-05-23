@@ -10,7 +10,7 @@ from core.models import Feedback, News, Privacy, Rules, Terms
 from utils.helpers import object_id_generator
 
 
-def handle_404(request: HttpRequest, exception):
+def handle_404(request: HttpRequest):
     """
     "When a 404 error occurs, render the public/404.html template."
 
