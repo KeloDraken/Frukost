@@ -110,7 +110,8 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{% static 'js/vanilla-picker.min.js' %}"></script>
+<!--<script src="{% static 'js/vanilla-picker.min.js' %}"></script>-->
+<script src="https://unpkg.com/vanilla-picker@2"></script>
 <script>
     function imageSelected(){
         document.getElementById("image-selector").innerHTML = "Your image has been selected";

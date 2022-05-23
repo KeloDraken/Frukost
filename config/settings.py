@@ -4,9 +4,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "63j9UNXJW8S5Rk1nfk+OI2HtFcodiUDRAfyvVe3tdczODHpg6OTv5dzaixmNAkH9Y3KeEPi/HCmZnEKTact/7wZL4aN//RzY"
 
-DEBUG = True
+DEBUG = False
 
-CSRF_COOKIE_NAME = "vispacetoken"
+CSRF_COOKIE_NAME = "SSID"
 
 ALLOWED_HOSTS = ["*"]
 
@@ -23,9 +23,7 @@ INSTALLED_APPS = [
     # Third-party apps
     "captcha",
     "corsheaders",
-    "debug_toolbar",
     "imagekit",
-    "storages",
     # Frukost apps
     "core",
     "core.accounts",
@@ -34,8 +32,8 @@ INSTALLED_APPS = [
     "core.search",
     "core.themes",
 ]
+
 MIDDLEWARE = [
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -47,6 +45,10 @@ MIDDLEWARE = [
     "htmlmin.middleware.HtmlMinifyMiddleware",
     "htmlmin.middleware.MarkRequestMiddleware",
 ]
+
+if DEBUG:
+    INSTALLED_APPS.append("debug_toolbar")
+    MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
 
 ROOT_URLCONF = "config.urls"
 
@@ -83,24 +85,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-if DEBUG:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": "msukwini",
-            "USER": "samkelo",
-            "PASSWORD": "Jm218071748*",
-            "HOST": "localhost",
-            "PORT": "",
-        }
-    }
+}
 
 AUTH_USER_MODEL = "accounts.User"
 
@@ -144,33 +134,9 @@ REST_FRAMEWORK = {
     ],
 }
 
-if not DEBUG:
-    AWS_ACCESS_KEY_ID = "AKO5SR4NSE42JDWTA75I"
-
-    AWS_SECRET_ACCESS_KEY = "L2Oc2iyNlahEEnqitrAyOOsglQhFQIQDtvxr2Ll2dFg"
-
-    AWS_STORAGE_BUCKET_NAME = "msukwini-images"
-
-    AWS_S3_ENDPOINT_URL = "https://fra1.digitaloceanspaces.com"
-
-    AWS_S3_OBJECT_PARAMETERS = {
-        "CacheControl": "max-age=86400",
-    }
-
-    AWS_LOCATION = "msukwini-media"
-
-    STATIC_URL = "https://%s/%s/" % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
-
-    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-
-    PUBLIC_MEDIA_LOCATION = "media"
-    MEDIA_URL = f"https://{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/"
-    DEFAULT_FILE_STORAGE = "config.storage_backends.PublicMediaStorage"
-
-else:
-    STATIC_URL = "static/"
-    STATICFILES_DIRS = [BASE_DIR / "_static"]
-    MEDIA_URL = "/media/"
+STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "_static"]
+MEDIA_URL = "/media/"
 
 STATIC_ROOT = BASE_DIR / "static"
 MEDIA_ROOT = BASE_DIR / "uploads"
