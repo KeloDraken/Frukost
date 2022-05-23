@@ -8,7 +8,7 @@ DEBUG = True
 
 CSRF_COOKIE_NAME = "vispacetoken"
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["*"]
 
 INTERNAL_IPS = ("127.0.0.1",)
 
@@ -173,3 +173,4 @@ else:
     MEDIA_URL = "/media/"
 
 STATIC_ROOT = BASE_DIR / "static"
+MEDIA_ROOT = BASE_DIR / "uploads"
