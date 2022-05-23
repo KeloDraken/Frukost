@@ -10,7 +10,7 @@
     <link href="{% static 'css/tailwind.min.css' %}" rel="stylesheet">
     <!--    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">-->
     <title>
-        #ViSpace &mdash; {{ user.username }}
+        #Frukost &mdash; {{ user.username }}
     </title>
 
 
@@ -52,9 +52,8 @@
             background-color: {{ user.profile_text_colour }} !important;
         }
         .profile-pic {
-            margin-left: 33%;
-            width: calc(33.333%);
-            border-radius: 50%;
+            width: 100%;
+            height: 100%;
             border: 3px solid {{ user.profile_text_colour }};
         }
         .post-image {
@@ -78,14 +77,12 @@
     <div class="flex items-center justify-center mt-16">
         <div class="justify-center">
             <div class="flex items-center justify-between h-24 mb-4">
-                <img class="profile-pic" src="{{ user.profile_pic.url }}">
+                {% if user.profile_pic %}
+                <img class="profile-pic mx-10 rounded" src="{{ user.profile_pic.url }}">
+                {% endif %}
             </div>
             <div class="text-center">
-                {% if user.display_name %}
                 <h1 class="text-lg font-bold mt-2 mb-2">{{ user.display_name }}</h1>
-                {% else %}
-                <h1 class="text-lg font-bold mt-2 mb-2">{{ user.username }}</h1>
-                {% endif %}
             </div>
             {% if user.bio %}
             <div class="text-center">
@@ -100,9 +97,7 @@
                     Edit profile
                 </a>
                 {% else %}
-                <a class="button shadow-lg text-normal rounded font-bold px-2 py-1 mb-10"
-                   href="{% url 'accounts:upgrade' %}"
-                   title="Subscribe to user">
+                <a class="button shadow-lg text-normal rounded font-bold px-2 py-1 mb-10" href="{% url 'subscribe' %}">
                     Subscribe
                 </a>
                 {% endif %}

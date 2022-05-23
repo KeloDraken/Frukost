@@ -113,7 +113,7 @@ def news(request: HttpRequest):
     :return: A list of all the news objects in the database.
     """
     news_ = News.objects.all().order_by("-datetime_created")
-    context = {"heading": "ViSpace News", "news": news_}
+    context = {"heading": "Frukost News", "news": news_}
     return render(request, "views/blog/news.html", context)
 
 
@@ -159,12 +159,12 @@ def privacy(request: HttpRequest):
 def rules(request: HttpRequest):
     """
     It takes a request, gets the first object from the Rules model, and then renders the news.html template with the heading
-    "ViSpace Rules" and the news object.
+    "Frukost Rules" and the news object.
 
     :param request: This is the request object that is sent to the view
     :type request: HttpRequest
     :return: A HttpResponse object with the rendered template passed to the constructor.
     """
     news_ = Rules.objects.first()
-    context = {"heading": "ViSpace Rules", "news": news_}
+    context = {"heading": "Frukost Rules", "news": news_}
     return render(request, "public/news.html", context)

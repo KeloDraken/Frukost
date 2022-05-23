@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "imagekit",
     "storages",
-    # ViSpace apps
+    # Frukost apps
     "vetkoek.core",
     "vetkoek.core.accounts",
     "vetkoek.core.communities",
