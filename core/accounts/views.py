@@ -174,7 +174,7 @@ def at_get_user_profile(request: HttpRequest, username: str):
     try:
         user = User.objects.get(username=username)
     except User.DoesNotExist:
-        raise Http404
+        return render(request, "public/404.html")
 
     try:
         page_number = int(request.GET.get("sida"))

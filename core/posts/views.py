@@ -130,10 +130,10 @@ def delete_post(request: HttpRequest, post_id: str):
     try:
         post = Post.objects.get(object_id=post_id)
     except Post.DoesNotExist:
-        raise Http404
+        return render(request, "public/404.html")
 
     if not post.user == request.user:
-        raise Http404
+        return render(request, "public/404.html")
 
     else:
         post.delete()
