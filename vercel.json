@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "vetkoek/config/wsgi.py",
+      "src": "ChafPozi/vetkoek/config/wsgi.py",
       "use": "@vercel/python",
       "config": {
         "maxLambdaSize": "15mb",
@@ -28,7 +28,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "vetkoek/config/wsgi.py"
+      "dest": "ChafPozi/vetkoek/config/wsgi.py"
     }
   ]
 }
