@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}#ViSpace &mdash; Image submitted by {{post.user.username }}{% endblock %}
+{% block title %}#Frukost &mdash; Image submitted by {{post.user.username }}{% endblock %}
 
 
 {% block og_tags %}
@@ -45,8 +45,8 @@
 {% block body %}
 <div class="w-full justify-center mx-auto px-60">
 
-    <div class="flex justify-center mt-10 mb-5">
-        <img class="post-image" src="{{ post.image.url }}"/>
+    <div class="flex justify-center mt-10 rounded mb-5">
+        <img class="post-image border-4 rounded border-black" src="{{ post.image.url }}"/>
     </div>
 
     <div class="mb-10 mt-24">

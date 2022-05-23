@@ -6,10 +6,10 @@
     }
 
 </style>
-<div class="sticky navbar top-0 z-50">
+<div class="navbar">
     <div class="flex flex-row justify-between py-4 px-4 w-full bg-white">
-        <a class="logo text-3xl" href="{% url 'index' %}" title="Ett projekt av Samkelo Drakensberg">
-            ViSpace.
+        <a class="logo text-3xl font-bold" href="{% url 'index' %}" title="Ett projekt av Samkelo Drakensberg">
+            Frukost.
         </a>
         <div class="flex flex-row justify-evenly">
             <a class="nav-link text-2xl mx-5 font-bold border-white" href="{% url 'posts:frontpage' %}"
@@ -35,7 +35,7 @@
             </a>
             {% else %}
             <a class="bg-black text-white text-sm rounded font-bold px-4 pt-3 mr-1 -mt-2" href="{% url 'accounts:user-register' %}"
-               title="Create a ViSpace account">
+               title="Create a Frukost account">
                 Create account
             </a>
             {% endif %}

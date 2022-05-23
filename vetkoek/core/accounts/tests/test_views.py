@@ -18,13 +18,13 @@ class TestAccountsViews(TestCase):
         """
         We are testing the register page, which is the url "accounts:user-register" and we are checking that the response is
         200, that the template used is "public/auth/registration_form.html" and that the response contains the text "Create
-        an account on ViSpace"
+        an account on Frukost"
         """
         url = reverse("accounts:user-register")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "public/auth/registration_form.html")
-        self.assertContains(response, "Create an account on ViSpace")
+        self.assertContains(response, "Create an account on Frukost")
 
     def test_username_taken(self):
         """
