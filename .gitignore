@@ -15,6 +15,9 @@ uploads/
 accounts/profile_pics/
 posts/images/
 
+node_modules/
+package.json
+yarn.lock
 # Thumbnails
 ._*
 
