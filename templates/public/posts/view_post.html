@@ -70,13 +70,11 @@
         </div>
 
         <div>
-            <p class="text-gray-300 text-normal">
-                Copyright 2021. All rights reserved.
-            </p>
+            <p id="copyright" class="text-gray-300 text-normal"></p>
             {% if not request.user == post.user %}
-            <!-- <p class="text-gray-400 cursor-pointer text-normal underline">
+            <p class="text-gray-400 cursor-pointer text-normal underline">
                 Report media
-            </p> -->
+            </p>
             {% else %}
             <a class="text-gray-400 cursor-pointer text-normal underline"
                href="{% url 'posts:delete-post' post_id=post.object_id %}">
@@ -88,4 +86,11 @@
     </div>
     {% include 'components/footer.html' %}
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const date = new Date();
+    document.querySelector("#copyright").innerHTML = `Copyright ${date.getFullYear()}. All rights reserved.`;
+</script>
 {% endblock %}

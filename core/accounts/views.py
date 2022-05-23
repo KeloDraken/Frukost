@@ -2,9 +2,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 from django.http.request import HttpRequest
-from django.http.response import Http404
 from django.shortcuts import redirect, render
 
 from core.accounts.forms import (
@@ -173,7 +173,7 @@ def at_get_user_profile(request: HttpRequest, username: str):
     """
     try:
         user = User.objects.get(username=username)
-    except User.DoesNotExist:
+    except ObjectDoesNotExist:
         return render(request, "public/404.html")
 
     try:

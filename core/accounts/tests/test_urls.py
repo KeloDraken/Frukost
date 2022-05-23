@@ -45,3 +45,7 @@ class TestAccountsUrls(TestCase):
     def test_delete_route(self):
         url = reverse("accounts:delete-user")
         self.assertEqual(url, "/u/delete/")
+
+    def test_get_profile_route(self):
+        url = reverse("at-get-user", kwargs={"username": "dion"})
+        self.assertEqual(url, "/@dion/")
