@@ -1,9 +1,10 @@
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase
 from django.urls import reverse
-from django.core.files.uploadedfile import SimpleUploadedFile
 from imagekit.models.fields import ProcessedImageFieldFile
 
 from core.accounts.models import User
+from core.accounts.views import is_dirty_html
 
 
 class TestAccountsViews(TestCase):
@@ -13,6 +14,23 @@ class TestAccountsViews(TestCase):
         """
         self.user = User.objects.create_user(username="test", password="kgosiemang100")
         self.client = Client()
+
+    def test_dirty_html(self):
+        html: str = "<script>alert('test');</script>"
+        result: bool = is_dirty_html(html)
+        self.assertTrue(result)
+
+    def test_get_user_profile(self):
+        response = self.client.get(reverse("at-get-user", kwargs={"username": "test"}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "public/user_profile.html")
+        self.assertContains(response, "test")
+
+    def test_get_no_such_user(self):
+        response = self.client.get(reverse("at-get-user", kwargs={"username": "test1"}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "public/404.html")
+        self.assertContains(response, "Page Not Found")
 
     def test_register_page(self):
         """

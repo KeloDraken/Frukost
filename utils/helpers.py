@@ -2,6 +2,8 @@ import random
 import string
 from typing import List
 
+from django.core.exceptions import ObjectDoesNotExist
+
 from core.posts.models import Post, PostTag, Tag
 
 
@@ -162,5 +164,5 @@ def check_object_id_exists(object_id, model) -> str:
         model.objects.get(object_id=object_id)
         new_object_id = object_id_generator()
         check_object_id_exists(object_id=new_object_id, model=model)
-    except model.DoesNotExist:
+    except ObjectDoesNotExist:
         return object_id
