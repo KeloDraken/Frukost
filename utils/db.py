@@ -1,6 +1,7 @@
 from datetime import datetime
 from math import log
 
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Model
 from django.http import HttpResponseBadRequest
 
@@ -54,7 +55,7 @@ def check_has_user_voted(model: Model, user: User, post: Post):
     try:
         model.objects.get(user=user, post=post)
         return True
-    except model.DoesNotExist:
+    except ObjectDoesNotExist:
         return False
 
 

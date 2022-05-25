@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 from django.http.request import HttpRequest
 from django.shortcuts import redirect, render
@@ -45,6 +46,6 @@ def get_community(request: HttpRequest, name: str):
     """
     try:
         community = Community.objects.get(title=name)
-    except Community.DoesNotExist:
+    except ObjectDoesNotExist:
         return render(request, "public/404.html")
     return redirect("subscribe")

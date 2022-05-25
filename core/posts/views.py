@@ -2,6 +2,7 @@ from typing import List
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 from django.http.request import HttpRequest
 from django.http.response import Http404
@@ -129,7 +130,7 @@ def delete_post(request: HttpRequest, post_id: str):
     """
     try:
         post = Post.objects.get(object_id=post_id)
-    except Post.DoesNotExist:
+    except ObjectDoesNotExist:
         return render(request, "public/404.html")
 
     if not post.user == request.user:
