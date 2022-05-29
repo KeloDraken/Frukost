@@ -5,9 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator
 from django.http.request import HttpRequest
-from django.http.response import Http404
 from django.shortcuts import get_object_or_404, redirect, render
-# from core.forms import FormWithCaptcha
 
 from core.posts.forms import CreatePostForm
 from core.posts.models import Post
@@ -16,6 +14,9 @@ from utils.helpers import (
     link_tags_to_post,
     object_id_generator,
 )
+
+
+# from core.forms import FormWithCaptcha
 
 
 @login_required
