@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="author" value="Samkelo Kgosiemang-Drakensberg">
+    <link href="{% static 'css/tailwind.min.css' %}" rel="stylesheet">
+    <title>{% block title %}{% endblock %}</title>
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <link href="{% static 'assets/icons/apple-touch-icon.png' %}" rel="apple-touch-icon">
+    <link href="{% static 'assets/favicon.ico' %}" rel="shortcut icon" type="image/x-icon">
+    <meta content="https://msukwini.com/" property="og:url">
+    <meta content="website" property="og:type">
+    <meta content="Frukost" property="og:title">
+    <meta content="A hangout for the based. Frukost is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression."
+          property="og:discription">
+    <meta content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg" property="og:image">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="msukwini.com" property="twitter:domain">
+    <meta content="https://msukwini.com/" property="twitter:url">
+    <meta content="Frukost" name="twitter:title">
+    <meta content="https://i.pinimg.com/originals/4a/f2/53/4af253df2280a455bf306d762f4be08e.jpg" name="twitter:image">
+    <meta content="A hangout for the based. Frukost is photo sharing website inspired by early 2000s level of customisability, creativity, and authentic freedom of expression."
+          property="twitter:discription">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif+Caption&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <style>* { font-family: 'PT Serif Caption', serif; } pre { font-family: 'Open Sans', sans-serif; }</style>
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    {% block body %}{% endblock %}
+    {% block scripts %}{% endblock %}
+</body>
+</html>
