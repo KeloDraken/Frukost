@@ -15,6 +15,7 @@ class Post(models.Model):
         options={"quality": 90},
         null=True,
     )
+    title = models.CharField(null=False, blank=False, max_length=200)
     caption = models.TextField(null=True, blank=True)
     date_created = models.DateField(auto_now_add=True, null=True, blank=True)
     datetime_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
