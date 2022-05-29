@@ -31,21 +31,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
     <style>* { font-family: 'PT Serif Caption', serif; } pre { font-family: 'Open Sans', sans-serif; }</style>
-
-    {% if request.user.is_authenticated %}
-    <style>
-        * {
-        color: {{ user.profile_text_colour }} !important;
-        background-color: {{ user.profile_bg_colour }} !important;
-        }
-
-    </style>
-    {% endif %}
-
     {% block styles %}{% endblock %}
 </head>
 <body>
-{% block body %}{% endblock %}
-{% block scripts %}{% endblock %}
+    {% include 'components/navbar.html' %}
+    <div class="relative">
+        {% block body %}{% endblock %}
+        {% include 'components/fab.html' %}
+    </div>
+    {% block scripts %}{% endblock %}
 </body>
 </html>
