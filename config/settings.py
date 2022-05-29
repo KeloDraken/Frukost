@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     # Frukost apps
     "core",
     "core.accounts",
-    "core.communities",
     "core.posts",
     "core.search",
     "core.themes",
