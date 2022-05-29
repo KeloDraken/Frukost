@@ -1,8 +1,0 @@
-User-Agent: *
-Disallow: /media/
-Disallow: /admin/
-Disallow: /static/
-Disallow: /u/
-Allow: /u/login/
-Allow: /u/register/
-Crawl-delay: 1
